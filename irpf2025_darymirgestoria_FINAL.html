@@ -1,0 +1,1992 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IRPF 2025 — Опросник | Gestoría Asesoría DaryMir</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Barlow:wght@300;400;500;600&display=swap');
+
+  :root {
+    --navy:        #0d1b2e;
+    --navy-mid:    #152338;
+    --navy-light:  #1e3050;
+    --orange:      #e85d0a;
+    --orange-hot:  #ff6a14;
+    --off-white:   #f5f3ef;
+    --white:       #ffffff;
+    --smoke:       #edeae4;
+    --gray-300:    #c8c4bc;
+    --gray-500:    #8a8680;
+    --gray-700:    #4a4844;
+    --text:        #0d1b2e;
+    --success:     #1d6b46;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Barlow', sans-serif;
+    background: var(--off-white);
+    color: var(--text);
+    line-height: 1.55;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: var(--navy);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 2px solid var(--orange);
+  }
+  .header-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 14px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  .logo { display: flex; align-items: center; gap: 14px; }
+  .logo-mark {
+    width: 36px; height: 36px;
+    background: var(--orange);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900; font-size: 16px;
+    color: white; letter-spacing: -0.5px; flex-shrink: 0;
+  }
+  .logo-text {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800; font-size: 20px;
+    color: white; letter-spacing: 1px;
+    text-transform: uppercase; line-height: 1;
+  }
+  .logo-sub {
+    font-size: 10px; font-weight: 400;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 2px; text-transform: uppercase; margin-top: 3px;
+  }
+  .progress-bar-wrap { flex: 1; max-width: 280px; }
+  .progress-label {
+    font-size: 10px; font-weight: 500;
+    letter-spacing: 1px; text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 7px;
+    display: flex; justify-content: space-between;
+  }
+  .progress-label span:last-child { color: var(--orange); font-weight: 700; }
+  .progress-track { height: 3px; background: rgba(255,255,255,0.1); }
+  .progress-fill {
+    height: 100%; background: var(--orange);
+    transition: width 0.4s ease; width: 0%;
+  }
+
+  /* ── HERO ── */
+  .hero { background: var(--navy); position: relative; overflow: hidden; }
+  .hero-inner {
+    max-width: 900px; margin: 0 auto;
+    padding: 40px 28px 38px;
+    position: relative; z-index: 2;
+  }
+  .hero-eyebrow {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 3px; text-transform: uppercase;
+    color: var(--orange); margin-bottom: 12px;
+  }
+  .hero h1 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: clamp(36px, 6vw, 58px);
+    line-height: 0.92; color: white;
+    text-transform: uppercase; letter-spacing: -1px;
+    margin-bottom: 18px;
+  }
+  .hero h1 span { color: var(--orange); display: block; }
+  .hero-body {
+    font-size: 13px; font-weight: 400;
+    color: rgba(255,255,255,0.52);
+    max-width: 560px; line-height: 1.7;
+  }
+  .hero-body strong { color: rgba(255,255,255,0.82); font-weight: 600; }
+  .hero-bg-text {
+    position: absolute; right: -10px; bottom: -24px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900; font-size: 150px;
+    color: rgba(255,255,255,0.03);
+    text-transform: uppercase; letter-spacing: -8px;
+    line-height: 1; user-select: none; z-index: 1;
+  }
+  @media (max-width: 640px) {
+    .hero-bg-text { display: none; }
+  }
+
+  /* ── MAIN ── */
+  .main { max-width: 900px; margin: 0 auto; padding: 24px 16px 80px; }
+
+  /* ── PROVINCE SELECTOR ── */
+  .province-select-section {
+    background: var(--navy);
+    padding: 28px 32px; margin-bottom: 16px;
+  }
+  .section-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800; font-size: 22px;
+    color: white; letter-spacing: 0.5px;
+    text-transform: uppercase; margin-bottom: 4px;
+  }
+  .section-subtitle {
+    font-size: 11px; color: rgba(255,255,255,0.35);
+    letter-spacing: 1px; text-transform: uppercase; margin-bottom: 20px;
+  }
+  .province-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 6px;
+  }
+  .province-btn {
+    padding: 16px 12px;
+    border: 1.5px solid rgba(255,255,255,0.12);
+    background: transparent; cursor: pointer;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px; font-weight: 700;
+    letter-spacing: 1px; text-transform: uppercase;
+    color: rgba(255,255,255,0.4); text-align: center;
+    transition: all 0.15s;
+  }
+  .province-btn:hover { border-color: rgba(255,255,255,0.4); color: white; }
+  .province-btn.active { border-color: var(--orange); background: var(--orange); color: white; }
+  .step-indicator {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: var(--orange); margin-bottom: 10px;
+  }
+  .province-hint {
+    margin-top: 14px;
+    font-size: 11px; color: rgba(255,255,255,0.28);
+    letter-spacing: 0.5px; text-align: center;
+    transition: opacity 0.3s;
+  }
+  .province-hint.hidden { opacity: 0; }
+
+  /* ── FORM SECTIONS ── */
+  .form-section { background: white; margin-bottom: 12px; display: none; }
+  .form-section.visible { display: block; }
+
+  /* Province selector overrides form-section white bg */
+  .province-select-section {
+    background: var(--navy) !important;
+    display: block !important;
+  }
+
+  .section-header {
+    padding: 18px 28px 16px; background: var(--navy);
+    display: flex; align-items: center; gap: 16px;
+  }
+  .section-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900; font-size: 12px;
+    letter-spacing: 1px; color: var(--orange);
+    border: 2px solid var(--orange);
+    width: 30px; height: 30px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .section-num.orange { background: var(--orange); color: white; border-color: var(--orange); }
+  .section-header h2 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800; font-size: 17px;
+    color: white; text-transform: uppercase;
+    letter-spacing: 0.5px; line-height: 1.1;
+  }
+  .section-header p {
+    font-size: 10px; color: rgba(255,255,255,0.32);
+    letter-spacing: 0.8px; margin-top: 3px; text-transform: uppercase;
+  }
+
+  .questions-wrap {
+    padding: 24px 28px 28px;
+    display: flex; flex-direction: column; gap: 22px;
+  }
+
+  /* ── QUESTION ── */
+  .question { display: flex; flex-direction: column; gap: 8px; }
+  .q-label {
+    font-size: 13px; font-weight: 600;
+    color: var(--navy); line-height: 1.4; letter-spacing: 0.1px;
+  }
+  .q-hint {
+    font-size: 11px; font-weight: 400;
+    color: var(--gray-500); line-height: 1.45; margin-top: -3px;
+  }
+  .q-tip {
+    font-size: 11px; font-weight: 500;
+    color: var(--orange); background: rgba(232,93,10,0.06);
+    border-left: 2px solid var(--orange);
+    padding: 6px 10px; line-height: 1.45; margin-top: 2px;
+  }
+
+  /* ── INPUTS ── */
+  .radio-group, .checkbox-group { display: flex; flex-direction: column; gap: 6px; }
+  .radio-group.inline, .checkbox-group.inline { flex-direction: row; flex-wrap: wrap; gap: 6px; }
+  .radio-option, .check-option {
+    display: flex; align-items: center; gap: 9px;
+    cursor: pointer; font-size: 13px; font-weight: 400; color: var(--gray-700);
+  }
+  .radio-option:hover, .check-option:hover { color: var(--navy); }
+  .radio-option input[type="radio"],
+  .check-option input[type="checkbox"] {
+    width: 15px; height: 15px; accent-color: var(--orange);
+    cursor: pointer; flex-shrink: 0;
+  }
+  input[type="text"], input[type="number"], input[type="email"], select, textarea {
+    width: 100%; max-width: 380px;
+    padding: 9px 12px;
+    border: 0; border-bottom: 2px solid var(--gray-300);
+    font-family: 'Barlow', sans-serif;
+    font-size: 14px; font-weight: 400;
+    color: var(--navy); background: var(--off-white);
+    transition: border-color 0.15s, background 0.15s;
+    outline: none; -webkit-appearance: none; border-radius: 0;
+  }
+  input:focus, select:focus, textarea:focus {
+    border-bottom-color: var(--orange); background: white;
+  }
+  textarea { max-width: 100%; resize: vertical; min-height: 80px; }
+  select { cursor: pointer; }
+  .input-euro { position: relative; max-width: 200px; }
+  .input-euro input { max-width: 100%; padding-right: 28px; }
+  .input-euro::after {
+    content: '€'; position: absolute; right: 10px; top: 50%;
+    transform: translateY(-50%); color: var(--gray-500);
+    font-size: 13px; font-weight: 600; pointer-events: none;
+  }
+
+  /* ── DIVIDER ── */
+  .q-divider { border: none; border-top: 1px solid var(--smoke); margin: 4px 0 0; }
+
+  /* ── SUBMIT ── */
+  .submit-wrap { text-align: center; padding: 16px 0 8px; }
+  .btn-submit {
+    background: var(--orange); color: white; border: none;
+    padding: 18px 56px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 17px; font-weight: 800;
+    letter-spacing: 2px; text-transform: uppercase;
+    cursor: pointer; transition: background 0.15s, transform 0.1s;
+  }
+  .btn-submit:hover { background: var(--orange-hot); transform: translateY(-1px); }
+  .btn-submit:active { transform: translateY(0); }
+  .submit-note { font-size: 11px; color: var(--gray-500); margin-top: 10px; letter-spacing: 0.3px; }
+
+  /* ── SUCCESS ── */
+  .success-screen { display: none; text-align: center; padding: 80px 24px; }
+  .success-screen.visible { display: block; }
+  .success-icon {
+    width: 64px; height: 64px; background: var(--navy);
+    margin: 0 auto 28px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px; color: var(--orange);
+    border: 3px solid var(--orange);
+  }
+  .success-screen h2 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900; font-size: 38px;
+    letter-spacing: -0.5px; text-transform: uppercase;
+    color: var(--navy); margin-bottom: 14px;
+  }
+  .success-screen p { font-size: 14px; color: var(--gray-700); max-width: 420px; margin: 0 auto; line-height: 1.65; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    .header-inner { flex-wrap: wrap; }
+    .progress-bar-wrap { max-width: 100%; width: 100%; }
+    .questions-wrap { padding: 18px 18px 22px; }
+    .section-header { padding: 16px 18px 14px; }
+    .province-select-section { padding: 20px 18px; }
+    .radio-group.inline { flex-direction: column; }
+  }
+
+  /* ── PROVINCE SECTIONS ── */
+  .province-section { display: none; }
+  .province-section.active { display: block; }
+
+  /* ── INFO TAG ── */
+  .info-tag {
+    display: inline-block; background: var(--navy); color: white;
+    font-size: 9px; font-weight: 700; padding: 2px 6px;
+    letter-spacing: 1px; text-transform: uppercase; margin-left: 6px; vertical-align: middle;
+  }
+  .info-tag.new { background: var(--orange); }
+
+  /* ── CONDITIONAL FIELD ── */
+  .cond-field {
+    display: none; padding: 16px 18px;
+    background: var(--off-white); border-left: 3px solid var(--orange); margin-top: 4px;
+  }
+  .cond-field.open { display: block; }
+  .cond-field .q-label { font-size: 12.5px; }
+
+  /* ── BLOCK0 GROUP TITLES ── */
+  .block0-group-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px; font-weight: 800;
+    color: var(--navy); letter-spacing: 2.5px;
+    text-transform: uppercase;
+    padding-bottom: 8px; border-bottom: 2px solid var(--navy); margin-bottom: 4px;
+  }
+
+  /* ── KID BLOCKS ── */
+  .kid-block {
+    background: var(--off-white);
+    border-left: 3px solid var(--orange);
+    padding: 16px 18px; margin-bottom: 10px;
+  }
+  .kid-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px; font-weight: 800;
+    color: var(--orange); letter-spacing: 2px;
+    text-transform: uppercase; margin-bottom: 12px;
+  }
+  .kids-count-row {
+    display: flex; flex-wrap: wrap; gap: 16px; margin-top: 10px;
+  }
+  .kids-count-item {
+    display: flex; flex-direction: column; gap: 6px;
+    min-width: 120px;
+  }
+  .kids-count-label {
+    font-size: 12px; font-weight: 600;
+    color: var(--navy); line-height: 1.35;
+  }
+  .kids-cards-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px; font-weight: 800;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: var(--gray-500); margin-bottom: 10px;
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-inner">
+    <div class="logo">
+      <div class="logo-mark">DM</div>
+      <div>
+        <div class="logo-text">DaryMir</div>
+        <div class="logo-sub">Gestoría · Asesoría</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Gestoría · Asesoría DaryMir · IRPF 2025</div>
+    <h1>Опросник для<br><span>налоговой оптимизации</span></h1>
+    <p class="hero-body">
+      Ваши ответы помогут применить <strong>все вычеты и льготы</strong>, на которые вы имеете право — государственные и региональные. Чем точнее данные — тем больше мы <strong>вернём или сэкономим</strong>.
+    </p>
+  </div>
+  <div class="hero-bg-text">2025</div>
+</div>
+
+<div class="main">
+
+<!-- PROVINCE SELECTOR -->
+<div class="province-select-section form-section visible">
+  <div class="step-indicator">Шаг 1 из 2 — выберите провинцию</div>
+  <div class="section-title">Где вы проживаете?</div>
+  <div class="section-subtitle">От этого зависят региональные вычеты в вашей декларации</div>
+  <div class="province-grid">
+    <button class="province-btn" onclick="selectProvince('madrid', this)">Мадрид</button>
+    <button class="province-btn" onclick="selectProvince('valencia', this)">Валенсия / Аликанте</button>
+    <button class="province-btn" onclick="selectProvince('andalucia', this)">Андалусия</button>
+    <button class="province-btn" onclick="selectProvince('cataluna', this)">Каталония</button>
+  </div>
+  <div class="province-hint" id="provinceHint">После выбора провинции откроется полный опросник</div>
+</div>
+
+<!-- ==========================================
+     БЛОК 0: БАЗОВЫЕ ДАННЫЕ (все провинции)
+     ========================================== -->
+<div class="form-section" id="block0">
+  <div class="section-header">
+    <div class="section-num">0</div>
+    <div>
+      <h2>Ваши основные данные</h2>
+      <p>Базовый блок — одинаков для всех провинций</p>
+    </div>
+  </div>
+  <div class="questions-wrap">
+
+    <div class="block0-group-title">Данные клиента</div>
+
+    <div class="question">
+      <div class="q-label">1. Фамилия и имя на испанском <span class="info-tag">Обязательно</span></div>
+      <input type="text" name="client_name" placeholder="Apellidos Nombre" style="max-width:100%" />
+    </div>
+
+    <div class="question">
+      <div class="q-label">2. NIE / NIF</div>
+      <input type="text" name="nie_nif" placeholder="X1234567A" />
+    </div>
+
+    <div class="question">
+      <div class="q-label">3. Дата рождения</div>
+      <input type="text" name="fecha_nacimiento" placeholder="дд / мм / гггг" />
+    </div>
+
+    <div class="question">
+      <div class="q-label">Контактный телефон</div>
+      <input type="text" name="phone" placeholder="+34 600 000 000" />
+    </div>
+
+    <div class="question">
+      <div class="q-label">Email</div>
+      <input type="email" name="email" placeholder="email@ejemplo.com" />
+    </div>
+
+    <div class="question">
+      <div class="q-label">4. Семейное положение</div>
+      <div class="radio-group">
+        <label class="radio-option"><input type="radio" name="estado_civil" value="soltero" onchange="closeCond('conyuge_datos')"> Холост / не замужем</label>
+        <label class="radio-option"><input type="radio" name="estado_civil" value="casado" onchange="toggleCond('conyuge_datos')"> Женат / замужем (официальный брак)</label>
+        <label class="radio-option"><input type="radio" name="estado_civil" value="divorciado" onchange="closeCond('conyuge_datos')"> Разведён(а)</label>
+        <label class="radio-option"><input type="radio" name="estado_civil" value="viudo" onchange="closeCond('conyuge_datos')"> Вдовец / вдова</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Есть ли у вас Número de referencia IRPF?</div>
+      <div class="q-hint">При совместной декларации код нужен и у супруга/супруги.</div>
+      <div class="radio-group">
+        <label class="radio-option"><input type="radio" name="tiene_referencia" value="certificado" onchange="closeCond('referencia_det')"> Сертификат уже передан / передам gestora</label>
+        <label class="radio-option"><input type="radio" name="tiene_referencia" value="si" onchange="toggleCond('referencia_det')"> Есть код — укажу ниже</label>
+        <label class="radio-option"><input type="radio" name="tiene_referencia" value="no" onchange="closeCond('referencia_det')"> Нет</label>
+      </div>
+      <div class="cond-field" id="referencia_det">
+        <div class="q-label">Número de referencia</div>
+        <input type="text" name="numero_referencia" placeholder="123456789" />
+      </div>
+    </div>
+
+    <hr class="q-divider">
+
+    <!-- СУПРУГ -->
+    <div class="cond-field" id="conyuge_datos" style="display:none">
+      <div class="block0-group-title" style="margin-bottom:14px">Данные супруга / супруги</div>
+
+      <div class="question">
+        <div class="q-label">5. Фамилия и имя супруга/супруги на испанском</div>
+        <input type="text" name="conyuge_nombre" placeholder="Apellidos Nombre" style="max-width:100%" />
+      </div>
+      <div class="question">
+        <div class="q-label">NIE супруга/супруги</div>
+        <input type="text" name="conyuge_nie" placeholder="X1234567A" />
+      </div>
+      <div class="question">
+        <div class="q-label">Дата рождения супруга/супруги</div>
+        <input type="text" name="conyuge_nacimiento" placeholder="дд / мм / гггг" />
+      </div>
+      <div class="question" style="margin-top:14px">
+        <div class="q-label">Есть ли Número de referencia у супруга/супруги?</div>
+        <div class="radio-group inline">
+          <label class="radio-option"><input type="radio" name="conyuge_tiene_referencia" value="si" onchange="toggleCond('conyuge_ref_det')"> Да</label>
+          <label class="radio-option"><input type="radio" name="conyuge_tiene_referencia" value="no" onchange="closeCond('conyuge_ref_det')"> Нет</label>
+        </div>
+        <div class="cond-field" id="conyuge_ref_det">
+          <div class="q-label">Número de referencia супруга/супруги</div>
+          <input type="text" name="conyuge_referencia" placeholder="123456789" />
+        </div>
+      </div>
+      <div class="question" style="margin-top:14px">
+        <div class="q-label">7. Согласны ли супруг(а) и дети подавать совместную декларацию, если так налог будет меньше?</div>
+        <div class="radio-group inline">
+          <label class="radio-option"><input type="radio" name="acepta_conjunta" value="si"> Да, согласны</label>
+          <label class="radio-option"><input type="radio" name="acepta_conjunta" value="no"> Нет, отдельно</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Как планируете подавать декларацию?</div>
+      <div class="radio-group">
+        <label class="radio-option"><input type="radio" name="tipo_declaracion" value="individual"> Индивидуально</label>
+        <label class="radio-option"><input type="radio" name="tipo_declaracion" value="conjunta"> Совместно (conjunta)</label>
+        <label class="radio-option"><input type="radio" name="tipo_declaracion" value="no_se"> Не знаю — нужна консультация</label>
+      </div>
+    </div>
+
+    <hr class="q-divider">
+
+    <!-- ДЕТИ -->
+    <div class="block0-group-title">Дети</div>
+
+    <div class="question">
+      <div class="q-label">9. Есть ли у вас дети?</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="tiene_hijos_b0" value="si" onchange="toggleCond('hijos_b0_det')"> Да</label>
+        <label class="radio-option"><input type="radio" name="tiene_hijos_b0" value="no" onchange="closeCond('hijos_b0_det')"> Нет</label>
+      </div>
+    </div>
+
+    <div class="cond-field" id="hijos_b0_det">
+
+      <!-- Общее количество -->
+      <div class="question">
+        <div class="q-label">10. Укажите общее количество детей</div>
+        <div class="kids-count-row">
+          <div class="kids-count-item">
+            <div class="kids-count-label">Всего детей</div>
+            <input type="number" name="num_hijos_total" min="1" max="10" placeholder="0"
+              style="max-width:80px"
+              oninput="updateKidsFromInputs()">
+          </div>
+          <div class="kids-count-item">
+            <div class="kids-count-label">Из них несовершеннолетних<br><span style="font-weight:400;color:var(--gray-500)">(до 18 лет)</span></div>
+            <input type="number" name="num_hijos_menores" min="0" max="10" placeholder="0"
+              style="max-width:80px"
+              oninput="updateKidsFromInputs()">
+          </div>
+          <div class="kids-count-item">
+            <div class="kids-count-label">Из них совершеннолетних<br>на иждивении<br><span style="font-weight:400;color:var(--gray-500)">(18–25 лет, без дохода, учится)</span></div>
+            <input type="number" name="num_hijos_mayores_dep" min="0" max="10" placeholder="0"
+              style="max-width:80px"
+              oninput="updateKidsFromInputs()">
+          </div>
+        </div>
+        <div class="q-hint" style="margin-top:8px">Совершеннолетний ребёнок учитывается для вычетов, если: возраст до 25 лет, проживает с вами, доход не превышает 8 000 € в год, не подаёт декларацию самостоятельно</div>
+      </div>
+
+      <div class="question" style="margin-top:16px">
+        <div class="q-label">Если вы в разводе и есть совместная опека — с кем подаются дети в этом году?</div>
+        <div class="radio-group inline">
+          <label class="radio-option"><input type="radio" name="custodia_hijos" value="conmigo"> Со мной</label>
+          <label class="radio-option"><input type="radio" name="custodia_hijos" value="expareja"> С бывшим супругом/супругой</label>
+          <label class="radio-option"><input type="radio" name="custodia_hijos" value="compartida"> Совместная опека (50/50)</label>
+          <label class="radio-option"><input type="radio" name="custodia_hijos" value="na"> Не применимо</label>
+        </div>
+      </div>
+
+      <div style="height:16px"></div>
+      <div class="kids-cards-label">Данные каждого ребёнка</div>
+
+      <div class="kid-block" id="kid_1">
+        <div class="kid-title">Ребёнок 1</div>
+        <div class="question"><div class="q-label">Фамилия и имя на испанском</div><input type="text" name="hijo1_nombre" placeholder="Apellidos Nombre" style="max-width:100%" /></div>
+        <div class="question" style="margin-top:10px"><div class="q-label">NIE</div><input type="text" name="hijo1_nie" placeholder="X1234567A" /></div>
+        <div class="question" style="margin-top:10px"><div class="q-label">Дата рождения</div><input type="text" name="hijo1_nacimiento" placeholder="дд / мм / гггг" /></div>
+        <div class="question" style="margin-top:10px">
+          <div class="q-label">Статус</div>
+          <div class="radio-group inline">
+            <label class="radio-option"><input type="radio" name="hijo1_status" value="menor"> Несовершеннолетний (до 18 лет)</label>
+            <label class="radio-option"><input type="radio" name="hijo1_status" value="mayor_dep"> Совершеннолетний на иждивении (18–25 лет)</label>
+            <label class="radio-option"><input type="radio" name="hijo1_status" value="mayor_indep"> Совершеннолетний, независимый</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="kid-block" id="kid_2" style="display:none">
+        <div class="kid-title">Ребёнок 2</div>
+        <div class="question"><div class="q-label">Фамилия и имя на испанском</div><input type="text" name="hijo2_nombre" placeholder="Apellidos Nombre" style="max-width:100%" /></div>
+        <div class="question" style="margin-top:10px"><div class="q-label">NIE</div><input type="text" name="hijo2_nie" placeholder="X1234567A" /></div>
+        <div class="question" style="margin-top:10px"><div class="q-label">Дата рождения</div><input type="text" name="hijo2_nacimiento" placeholder="дд / мм / гггг" /></div>
+        <div class="question" style="margin-top:10px">
+          <div class="q-label">Статус</div>
+          <div class="radio-group inline">
+            <label class="radio-option"><input type="radio" name="hijo2_status" value="menor"> Несовершеннолетний (до 18 лет)</label>
+            <label class="radio-option"><input type="radio" name="hijo2_status" value="mayor_dep"> Совершеннолетний на иждивении (18–25 лет)</label>
+            <label class="radio-option"><input type="radio" name="hijo2_status" value="mayor_indep"> Совершеннолетний, независимый</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="kid-block" id="kid_3" style="display:none">
+        <div class="kid-title">Ребёнок 3</div>
+        <div class="question"><div class="q-label">Фамилия и имя на испанском</div><input type="text" name="hijo3_nombre" placeholder="Apellidos Nombre" style="max-width:100%" /></div>
+        <div class="question" style="margin-top:10px"><div class="q-label">NIE</div><input type="text" name="hijo3_nie" placeholder="X1234567A" /></div>
+        <div class="question" style="margin-top:10px"><div class="q-label">Дата рождения</div><input type="text" name="hijo3_nacimiento" placeholder="дд / мм / гггг" /></div>
+        <div class="question" style="margin-top:10px">
+          <div class="q-label">Статус</div>
+          <div class="radio-group inline">
+            <label class="radio-option"><input type="radio" name="hijo3_status" value="menor"> Несовершеннолетний (до 18 лет)</label>
+            <label class="radio-option"><input type="radio" name="hijo3_status" value="mayor_dep"> Совершеннолетний на иждивении (18–25 лет)</label>
+            <label class="radio-option"><input type="radio" name="hijo3_status" value="mayor_indep"> Совершеннолетний, независимый</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="kid-block" id="kid_4" style="display:none">
+        <div class="kid-title">Ребёнок 4</div>
+        <div class="question"><div class="q-label">Фамилия и имя на испанском</div><input type="text" name="hijo4_nombre" placeholder="Apellidos Nombre" style="max-width:100%" /></div>
+        <div class="question" style="margin-top:10px"><div class="q-label">NIE</div><input type="text" name="hijo4_nie" placeholder="X1234567A" /></div>
+        <div class="question" style="margin-top:10px"><div class="q-label">Дата рождения</div><input type="text" name="hijo4_nacimiento" placeholder="дд / мм / гггг" /></div>
+        <div class="question" style="margin-top:10px">
+          <div class="q-label">Статус</div>
+          <div class="radio-group inline">
+            <label class="radio-option"><input type="radio" name="hijo4_status" value="menor"> Несовершеннолетний (до 18 лет)</label>
+            <label class="radio-option"><input type="radio" name="hijo4_status" value="mayor_dep"> Совершеннолетний на иждивении (18–25 лет)</label>
+            <label class="radio-option"><input type="radio" name="hijo4_status" value="mayor_indep"> Совершеннолетний, независимый</label>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="question">
+      <div class="q-label">16. Проживают ли с вами родители старше 65 лет (или с инвалидностью)?</div>
+      <div class="q-hint">Условия: проживают с вами не менее 183 дней/год, доход не более 8 000 €/год, не подают собственную декларацию</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="padres_conviven" value="si"> Да</label>
+        <label class="radio-option"><input type="radio" name="padres_conviven" value="no"> Нет</label>
+      </div>
+    </div>
+
+    <hr class="q-divider">
+
+    <!-- ИНВАЛИДНОСТЬ -->
+    <div class="block0-group-title">Инвалидность</div>
+    <div class="q-hint" style="margin-bottom:14px">Учитывается только инвалидность, официально подтверждённая автономным сообществом по месту жительства</div>
+
+    <div class="question">
+      <div class="q-label">17. Есть ли у вас официально подтверждённая инвалидность?</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="discap_titular" value="si" onchange="toggleCond('discap_titular_pct')"> Да</label>
+        <label class="radio-option"><input type="radio" name="discap_titular" value="no" onchange="closeCond('discap_titular_pct')"> Нет</label>
+      </div>
+      <div class="cond-field" id="discap_titular_pct">
+        <div class="q-label">18. Процент инвалидности (%)</div>
+        <input type="text" name="discap_titular_pct" placeholder="Например: 45" style="max-width:120px" />
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">19. Есть ли у вашего супруга/супруги инвалидность?</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="discap_conyuge" value="si" onchange="toggleCond('discap_conyuge_pct')"> Да</label>
+        <label class="radio-option"><input type="radio" name="discap_conyuge" value="no" onchange="closeCond('discap_conyuge_pct')"> Нет</label>
+      </div>
+      <div class="cond-field" id="discap_conyuge_pct">
+        <div class="q-label">Процент инвалидности супруга/супруги (%)</div>
+        <input type="text" name="discap_conyuge_pct" placeholder="Например: 65" style="max-width:120px" />
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">20. Есть ли у ваших детей инвалидность?</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="discap_hijo" value="si" onchange="toggleCond('discap_hijo_pct')"> Да</label>
+        <label class="radio-option"><input type="radio" name="discap_hijo" value="no" onchange="closeCond('discap_hijo_pct')"> Нет</label>
+      </div>
+      <div class="cond-field" id="discap_hijo_pct">
+        <div class="q-label">Процент инвалидности ребёнка (%)</div>
+        <input type="text" name="discap_hijo_pct" placeholder="Например: 33" style="max-width:120px" />
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">21. Несёте ли вы расходы на уход за человеком с инвалидностью?</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="gastos_discapacidad" value="si"> Да</label>
+        <label class="radio-option"><input type="radio" name="gastos_discapacidad" value="no"> Нет</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">22. Нанимаете ли вы официально домашнего работника (empleada de hogar)?</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="empleada_hogar_b0" value="si" onchange="toggleCond('emp_b0_det')"> Да</label>
+        <label class="radio-option"><input type="radio" name="empleada_hogar_b0" value="no" onchange="closeCond('emp_b0_det')"> Нет</label>
+      </div>
+      <div class="cond-field" id="emp_b0_det">
+        <div class="q-label">Сумма взносов в соцстрах за домашнего работника в 2025 году</div>
+        <div class="input-euro"><input type="number" name="empleada_hogar_importe" placeholder="0"></div>
+      </div>
+    </div>
+
+    <hr class="q-divider">
+
+    <!-- ДОХОДЫ -->
+    <div class="block0-group-title">Источники дохода</div>
+
+    <div class="question">
+      <div class="q-label">Вы являетесь autónomo (самозанятым)?</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="es_autonomo" value="si" onchange="toggleCond('autonomo_detail')"> Да</label>
+        <label class="radio-option"><input type="radio" name="es_autonomo" value="no" onchange="closeCond('autonomo_detail')"> Нет</label>
+      </div>
+      <div class="cond-field" id="autonomo_detail">
+        <div class="q-label">Направление деятельности</div>
+        <input type="text" name="autonomo_actividad" placeholder="Например: diseño, gestoría, informática…" style="max-width:100%">
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Работаете по найму (asalariado)?</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="es_asalariado" value="si" onchange="toggleCond('asalariado_detail')"> Да</label>
+        <label class="radio-option"><input type="radio" name="es_asalariado" value="no" onchange="closeCond('asalariado_detail')"> Нет</label>
+      </div>
+      <div class="cond-field" id="asalariado_detail">
+        <div class="q-label">Сколько работодателей (pagadores) было в 2025 году?</div>
+        <div class="radio-group inline">
+          <label class="radio-option"><input type="radio" name="num_pagadores" value="1"> 1</label>
+          <label class="radio-option"><input type="radio" name="num_pagadores" value="2+"> 2 и более</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Примерный общий доход за 2025 год (до налогов)</div>
+      <div class="radio-group">
+        <label class="radio-option"><input type="radio" name="ingresos_aprox" value="<15000"> До 15 000 €</label>
+        <label class="radio-option"><input type="radio" name="ingresos_aprox" value="15-22000"> 15 000 — 22 000 €</label>
+        <label class="radio-option"><input type="radio" name="ingresos_aprox" value="22-30000"> 22 000 — 30 000 €</label>
+        <label class="radio-option"><input type="radio" name="ingresos_aprox" value="30-50000"> 30 000 — 50 000 €</label>
+        <label class="radio-option"><input type="radio" name="ingresos_aprox" value=">50000"> Свыше 50 000 €</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Есть ли у вас доходы от аренды недвижимости?</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="ingresos_alquiler" value="si" onchange="toggleCond('alquiler_ingreso_det')"> Да</label>
+        <label class="radio-option"><input type="radio" name="ingresos_alquiler" value="no" onchange="closeCond('alquiler_ingreso_det')"> Нет</label>
+      </div>
+      <div class="cond-field" id="alquiler_ingreso_det">
+        <div class="q-label">Примерная сумма дохода от аренды за 2025 год</div>
+        <div class="input-euro"><input type="number" name="alquiler_ingreso_importe" placeholder="0"></div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Есть ли доходы от продажи акций, криптовалюты, недвижимости или других активов?</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="ganancias_capital" value="si"> Да</label>
+        <label class="radio-option"><input type="radio" name="ganancias_capital" value="no"> Нет</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Получали ли пенсию или пособие по безработице (paro) в 2025 году?</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="pension_paro" value="pension"> Пенсию</label>
+        <label class="radio-option"><input type="radio" name="pension_paro" value="paro"> Paro</label>
+        <label class="radio-option"><input type="radio" name="pension_paro" value="ambos"> Оба</label>
+        <label class="radio-option"><input type="radio" name="pension_paro" value="no"> Нет</label>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ==========================================
+     БЛОК 1: СЕМЬЯ И ИЖДИВЕНЦЫ
+     ========================================== -->
+<div class="form-section" id="block1">
+  <div class="section-header">
+    <div class="section-num">1</div>
+    <div>
+      <h2>Семья и иждивенцы</h2>
+      <p>Дополнительные семейные вычеты и ситуации</p>
+    </div>
+  </div>
+  <div class="questions-wrap">
+
+    <div class="question">
+      <div class="q-label">Есть ли дети МЛАДШЕ 3 лет на 31.12.2025?</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="hijos_menores_3" value="si"> Да</label>
+        <label class="radio-option"><input type="radio" name="hijos_menores_3" value="no"> Нет</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Есть ли дети в возрасте от 3 до 5 лет?</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="hijos_menores_5" value="si"> Да</label>
+        <label class="radio-option"><input type="radio" name="hijos_menores_5" value="no"> Нет</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Родился или усыновлён ребёнок в 2025 году?</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="nacimiento_2025" value="si"> Да</label>
+        <label class="radio-option"><input type="radio" name="nacimiento_2025" value="no"> Нет</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Многоплодные роды или усыновление двух и более детей одновременно?</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="parto_multiple" value="si"> Да</label>
+        <label class="radio-option"><input type="radio" name="parto_multiple" value="no"> Нет</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Есть ли у вас статус многодетной семьи (familia numerosa)?</div>
+      <div class="radio-group">
+        <label class="radio-option"><input type="radio" name="familia_numerosa" value="general"> Общая категория (3–4 ребёнка)</label>
+        <label class="radio-option"><input type="radio" name="familia_numerosa" value="especial"> Особая категория (5+)</label>
+        <label class="radio-option"><input type="radio" name="familia_numerosa" value="no"> Нет</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Вы мать-одиночка / отец-одиночка (familia monoparental)?</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="monoparental" value="si"> Да</label>
+        <label class="radio-option"><input type="radio" name="monoparental" value="no"> Нет</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Вы мать с ребёнком до 3 лет и работаете (autónomo или по найму)?</div>
+      <div class="q-tip">Возможен вычет за материнство до 1 200 €/год</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="maternidad_vychet" value="si"> Да</label>
+        <label class="radio-option"><input type="radio" name="maternidad_vychet" value="no"> Нет</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Оплачиваете ли детский сад (guardería) для ребёнка до 3 лет?</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="guarderia" value="si" onchange="toggleCond('guarderia_det')"> Да</label>
+        <label class="radio-option"><input type="radio" name="guarderia" value="no" onchange="closeCond('guarderia_det')"> Нет</label>
+      </div>
+      <div class="cond-field" id="guarderia_det">
+        <div class="q-label">Сумма, уплаченная за детский сад в 2025 году</div>
+        <div class="input-euro"><input type="number" name="guarderia_importe" placeholder="0"></div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Усыновляли ли ребёнка (в том числе из-за рубежа) в 2025 году?</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="adopcion" value="si" onchange="toggleCond('adopc_det')"> Да</label>
+        <label class="radio-option"><input type="radio" name="adopcion" value="no" onchange="closeCond('adopc_det')"> Нет</label>
+      </div>
+      <div class="cond-field" id="adopc_det">
+        <div class="q-label">Усыновление международное (из другой страны)?</div>
+        <div class="radio-group inline">
+          <label class="radio-option"><input type="radio" name="adopcion_internacional" value="si"> Да</label>
+          <label class="radio-option"><input type="radio" name="adopcion_internacional" value="no"> Нет</label>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ==========================================
+     БЛОК 2: ЖИЛЬЁ
+     ========================================== -->
+<div class="form-section" id="block2">
+  <div class="section-header">
+    <div class="section-num">2</div>
+    <div>
+      <h2>Жильё и недвижимость</h2>
+      <p>Ипотека, аренда, энергоэффективность</p>
+    </div>
+  </div>
+  <div class="questions-wrap">
+
+    <div class="question">
+      <div class="q-label">Тип вашего жилья</div>
+      <div class="radio-group">
+        <label class="radio-option"><input type="radio" name="tipo_vivienda" value="propia_hipoteca"> Собственное, с ипотекой</label>
+        <label class="radio-option"><input type="radio" name="tipo_vivienda" value="propia_sin_hip"> Собственное, без ипотеки</label>
+        <label class="radio-option"><input type="radio" name="tipo_vivienda" value="alquiler"> Арендую</label>
+        <label class="radio-option"><input type="radio" name="tipo_vivienda" value="familiar"> Живу у родственников</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Если есть ипотека — куплено ли жильё ДО 1 января 2013 года?</div>
+      <div class="q-tip">Переходный режим вычета за жильё — до 1 356 €/год</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="vivienda_antes_2013" value="si"> Да, до 2013</label>
+        <label class="radio-option"><input type="radio" name="vivienda_antes_2013" value="no"> Нет</label>
+        <label class="radio-option"><input type="radio" name="vivienda_antes_2013" value="na"> Нет ипотеки</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Если арендуете — заключён ли договор ДО 1 января 2015 года?</div>
+      <div class="q-tip">Переходный режим государственного вычета за аренду</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="alquiler_antes_2015" value="si"> Да, до 2015</label>
+        <label class="radio-option"><input type="radio" name="alquiler_antes_2015" value="no"> Нет</label>
+        <label class="radio-option"><input type="radio" name="alquiler_antes_2015" value="na"> Не арендую</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Если арендуете — какова сумма аренды за 2025 год?</div>
+      <div class="input-euro"><input type="number" name="alquiler_pagado" placeholder="0"></div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Есть ли у вас ипотека с переменной ставкой (tipo variable / Euríbor)?</div>
+      <div class="q-tip">Если выросли проценты — возможен вычет за рост ставок</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="hipoteca_variable" value="si"> Да</label>
+        <label class="radio-option"><input type="radio" name="hipoteca_variable" value="no"> Нет / фиксированная</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Проводили ли работы по повышению энергоэффективности жилья в 2025 году?</div>
+      <div class="q-tip">Вычет 20–60% в зависимости от типа работ</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="obras_energia" value="si" onchange="toggleCond('obras_det')"> Да</label>
+        <label class="radio-option"><input type="radio" name="obras_energia" value="no" onchange="closeCond('obras_det')"> Нет</label>
+      </div>
+      <div class="cond-field" id="obras_det">
+        <div class="q-label">Тип работ</div>
+        <div class="checkbox-group">
+          <label class="check-option"><input type="checkbox" name="obras_tipo" value="7pct"> Снижение потребления отопления/охлаждения на 7%+</label>
+          <label class="check-option"><input type="checkbox" name="obras_tipo" value="30pct"> Снижение невозобновляемой энергии на 30%+</label>
+          <label class="check-option"><input type="checkbox" name="obras_tipo" value="integral"> Комплексная реабилитация здания</label>
+        </div>
+        <div style="height:10px"></div>
+        <div class="q-label">Общая сумма работ</div>
+        <div class="input-euro"><input type="number" name="obras_importe" placeholder="0"></div>
+        <div class="q-hint" style="margin-top:8px">Есть ли сертификат энергоэффективности до и после работ?</div>
+        <div class="radio-group inline" style="margin-top:6px">
+          <label class="radio-option"><input type="radio" name="cert_energia" value="si"> Да</label>
+          <label class="radio-option"><input type="radio" name="cert_energia" value="no"> Нет</label>
+          <label class="radio-option"><input type="radio" name="cert_energia" value="en_proceso"> В процессе</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Купили ли электромобиль или установили зарядную станцию в 2025 году?</div>
+      <div class="q-tip">Вычет 15% от стоимости (до 3 000 € за авто, до 600 € за зарядку)</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="vehiculo_electrico" value="coche"> Электромобиль</label>
+        <label class="radio-option"><input type="radio" name="vehiculo_electrico" value="cargador"> Зарядная станция</label>
+        <label class="radio-option"><input type="radio" name="vehiculo_electrico" value="ambos"> Оба</label>
+        <label class="radio-option"><input type="radio" name="vehiculo_electrico" value="no"> Нет</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Вы сдаёте жильё в аренду как собственник?</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="es_arrendador" value="si" onchange="toggleCond('arrendador_det')"> Да</label>
+        <label class="radio-option"><input type="radio" name="es_arrendador" value="no" onchange="closeCond('arrendador_det')"> Нет</label>
+      </div>
+      <div class="cond-field" id="arrendador_det">
+        <div class="q-label">Жильё пустовало более 1 года до сдачи?</div>
+        <div class="radio-group inline">
+          <label class="radio-option"><input type="radio" name="vivienda_vacia" value="si"> Да</label>
+          <label class="radio-option"><input type="radio" name="vivienda_vacia" value="no"> Нет</label>
+        </div>
+        <div style="height:8px"></div>
+        <div class="q-label">Расходы на ремонт/страховку/сертификаты для сдаваемого жилья за 2025 год</div>
+        <div class="input-euro"><input type="number" name="gastos_arrendador" placeholder="0"></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ==========================================
+     БЛОК 3: ГОСУДАРСТВЕННЫЕ ВЫЧЕТЫ
+     ========================================== -->
+<div class="form-section" id="block3">
+  <div class="section-header">
+    <div class="section-num orange">3</div>
+    <div>
+      <h2>Государственные вычеты</h2>
+      <p>Применяются по всей Испании</p>
+    </div>
+  </div>
+  <div class="questions-wrap">
+
+    <div class="question">
+      <div class="q-label">Делали ли пожертвования НКО, фондам, церкви или политическим партиям в 2025 году?</div>
+      <div class="q-tip">Вычет 80% от первых 250 € и 40–45% от остального</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="donaciones_ngo" value="si" onchange="toggleCond('don_det')"> Да</label>
+        <label class="radio-option"><input type="radio" name="donaciones_ngo" value="no" onchange="closeCond('don_det')"> Нет</label>
+      </div>
+      <div class="cond-field" id="don_det">
+        <div class="q-label">Общая сумма пожертвований</div>
+        <div class="input-euro"><input type="number" name="donaciones_importe" placeholder="0"></div>
+        <div style="height:8px"></div>
+        <div class="q-label">Жертвовали ли в одну и ту же организацию 3 года подряд?</div>
+        <div class="radio-group inline">
+          <label class="radio-option"><input type="radio" name="donacion_recurrente" value="si"> Да (регулярный донор)</label>
+          <label class="radio-option"><input type="radio" name="donacion_recurrente" value="no"> Нет</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Инвестировали ли в акции/доли новых компаний (стартапов) в 2025 году?</div>
+      <div class="q-tip">Вычет 50% от суммы инвестиций (до 50 000 €)</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="inversion_startup" value="si" onchange="toggleCond('startup_det')"> Да</label>
+        <label class="radio-option"><input type="radio" name="inversion_startup" value="no" onchange="closeCond('startup_det')"> Нет</label>
+      </div>
+      <div class="cond-field" id="startup_det">
+        <div class="q-label">Сумма инвестиции</div>
+        <div class="input-euro"><input type="number" name="inversion_startup_importe" placeholder="0"></div>
+        <div style="height:8px"></div>
+        <div class="q-label">Компания основана менее 5 лет назад?</div>
+        <div class="radio-group inline">
+          <label class="radio-option"><input type="radio" name="startup_nueva" value="si"> Да</label>
+          <label class="radio-option"><input type="radio" name="startup_nueva" value="no"> Нет</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Получали ли авансовый вычет за материнство (cheque bebé) в 2025 году?</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="adelanto_maternidad" value="si"> Да</label>
+        <label class="radio-option"><input type="radio" name="adelanto_maternidad" value="no"> Нет</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Получали ли авансовый вычет за многодетную семью или инвалидность?</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="adelanto_familia" value="si"> Да</label>
+        <label class="radio-option"><input type="radio" name="adelanto_familia" value="no"> Нет</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Есть ли у вас взносы в план пенсионного накопления (plan de pensiones)?</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="plan_pensiones" value="si" onchange="toggleCond('pension_det')"> Да</label>
+        <label class="radio-option"><input type="radio" name="plan_pensiones" value="no" onchange="closeCond('pension_det')"> Нет</label>
+      </div>
+      <div class="cond-field" id="pension_det">
+        <div class="q-label">Сумма взносов в план пенсий за 2025 год</div>
+        <div class="input-euro"><input type="number" name="plan_pensiones_importe" placeholder="0"></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ==========================================
+     БЛОК 4: РЕГИОНАЛЬНЫЕ — МАДРИД
+     ========================================== -->
+<div class="form-section province-section" id="block_madrid" data-province="madrid">
+  <div class="section-header">
+    <div class="section-num orange">4</div>
+    <div>
+      <h2>Региональные вычеты — Мадрид</h2>
+      <p>Льготы автономного сообщества Мадрид</p>
+    </div>
+  </div>
+  <div class="questions-wrap">
+
+    <div class="question">
+      <div class="q-label">Вы младше 40 лет и арендуете основное жильё?</div>
+      <div class="q-tip">Вычет 30% от аренды, до 1 237 €/год</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="mad_alquiler_joven" value="si"> Да</label>
+        <label class="radio-option"><input type="radio" name="mad_alquiler_joven" value="no"> Нет</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Есть ли дети школьного возраста — несли ли расходы на обучение, языки или форму?</div>
+      <div class="q-tip">Вычет 15% за обучение и языки, 5% за форму — до 927–1 031 €/ребёнка</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="mad_educacion" value="si" onchange="toggleCond('mad_edu_det')"> Да</label>
+        <label class="radio-option"><input type="radio" name="mad_educacion" value="no" onchange="closeCond('mad_edu_det')"> Нет</label>
+      </div>
+      <div class="cond-field" id="mad_edu_det">
+        <div class="checkbox-group">
+          <label class="check-option"><input type="checkbox" name="mad_edu_tipo" value="escolaridad"> Обучение в частной школе</label>
+          <label class="check-option"><input type="checkbox" name="mad_edu_tipo" value="idiomas"> Курсы иностранных языков</label>
+          <label class="check-option"><input type="checkbox" name="mad_edu_tipo" value="uniforme"> Школьная форма</label>
+          <label class="check-option"><input type="checkbox" name="mad_edu_tipo" value="infancia_0_3"> Ясли (0–3 года)</label>
+        </div>
+        <div style="height:10px"></div>
+        <div class="q-label">Общая сумма образовательных расходов за 2025 год</div>
+        <div class="input-euro"><input type="number" name="mad_edu_importe" placeholder="0"></div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Вам до 35 лет и вы впервые регистрируетесь как autónomo в Мадриде в 2025 году?</div>
+      <div class="q-tip">Фиксированный вычет 1 031 €</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="mad_autonomo_joven" value="si"> Да</label>
+        <label class="radio-option"><input type="radio" name="mad_autonomo_joven" value="no"> Нет</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Вам до 30 лет и вы платите ипотечные проценты по своему жилью?</div>
+      <div class="q-tip">Вычет 25% от процентов, до 1 031 €/год</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="mad_hipoteca_joven" value="si"> Да</label>
+        <label class="radio-option"><input type="radio" name="mad_hipoteca_joven" value="no"> Нет</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Брали ли кредит на обучение (бакалавриат, магистратура, докторантура)?</div>
+      <div class="q-tip">100% от уплаченных процентов — без лимита</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="mad_prestamo_estudios" value="si" onchange="toggleCond('mad_prestamo_det')"> Да</label>
+        <label class="radio-option"><input type="radio" name="mad_prestamo_estudios" value="no" onchange="closeCond('mad_prestamo_det')"> Нет</label>
+      </div>
+      <div class="cond-field" id="mad_prestamo_det">
+        <div class="q-label">Сумма процентов по кредиту на обучение в 2025 году</div>
+        <div class="input-euro"><input type="number" name="mad_prestamo_intereses" placeholder="0"></div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Купили ли жильё в Мадриде после рождения/усыновления ребёнка (с 01.01.2023)?</div>
+      <div class="q-tip">Вычет 10% от цены, до 1 546 €/год в течение 10 лет</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="mad_vivienda_nacimiento" value="si"> Да</label>
+        <label class="radio-option"><input type="radio" name="mad_vivienda_nacimiento" value="no"> Нет</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Вам до 35 лет и вы переехали/купили жильё в муниципалитете Мадрида с менее чем 2 500 жителей?</div>
+      <div class="q-tip">До 2 000 € за переезд + до 1 546 €/год за 10 лет за покупку</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="mad_despoblacion" value="si"> Да</label>
+        <label class="radio-option"><input type="radio" name="mad_despoblacion" value="no"> Нет</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Семья получила статус многодетной семьи в 2023–2025 году?</div>
+      <div class="q-tip">Вычет 50–100% от регионального налога</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="mad_familia_num_nueva" value="si"> Да</label>
+        <label class="radio-option"><input type="radio" name="mad_familia_num_nueva" value="no"> Нет</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Делали ли пожертвования мадридским фондам или базовым спортивным клубам?</div>
+      <div class="q-tip">Вычет 15% от пожертвования</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="mad_donacion_fund" value="si" onchange="toggleCond('mad_don_det')"> Да</label>
+        <label class="radio-option"><input type="radio" name="mad_donacion_fund" value="no" onchange="closeCond('mad_don_det')"> Нет</label>
+      </div>
+      <div class="cond-field" id="mad_don_det">
+        <div class="q-label">Сумма пожертвований мадридским организациям</div>
+        <div class="input-euro"><input type="number" name="mad_donacion_importe" placeholder="0"></div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Инвестировали ли в новые компании/стартапы с адресом в Мадриде?</div>
+      <div class="q-tip">Региональный вычет 40–50% (дополнительно к государственному)</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="mad_inversion_empresa" value="si" onchange="toggleCond('mad_inv_det')"> Да</label>
+        <label class="radio-option"><input type="radio" name="mad_inversion_empresa" value="no" onchange="closeCond('mad_inv_det')"> Нет</label>
+      </div>
+      <div class="cond-field" id="mad_inv_det">
+        <div class="q-label">Тип компании</div>
+        <div class="radio-group">
+          <label class="radio-option"><input type="radio" name="mad_inv_tipo" value="sl_sa"> SA или SL — 40%</label>
+          <label class="radio-option"><input type="radio" name="mad_inv_tipo" value="laboral"> SAL / SLL / кооператив — 50%</label>
+          <label class="radio-option"><input type="radio" name="mad_inv_tipo" value="universidad"> При университете/исследовательском центре — 50%</label>
+        </div>
+        <div style="height:8px"></div>
+        <div class="q-label">Сумма инвестиции</div>
+        <div class="input-euro"><input type="number" name="mad_inv_importe" placeholder="0"></div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Вы переехали в Мадрид из-за рубежа с 01.01.2024 и не жили в Испании 5+ лет?</div>
+      <div class="q-tip">«Закон Мбаппе» — вычет 20% от инвестиций в ценные бумаги</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="mad_mbape" value="si"> Да</label>
+        <label class="radio-option"><input type="radio" name="mad_mbape" value="no"> Нет</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Осуществляли ли безвозмездный уход за пожилым человеком (65+) или инвалидом?</div>
+      <div class="q-tip">Вычет 1 546 €/год за каждого подопечного</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="mad_acogimiento_mayor" value="si"> Да</label>
+        <label class="radio-option"><input type="radio" name="mad_acogimiento_mayor" value="no"> Нет</label>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ==========================================
+     БЛОК 4: РЕГИОНАЛЬНЫЕ — ВАЛЕНСИЯ
+     ========================================== -->
+<div class="form-section province-section" id="block_valencia" data-province="valencia">
+  <div class="section-header">
+    <div class="section-num orange">4</div>
+    <div>
+      <h2>Региональные вычеты — Валенсия / Аликанте</h2>
+      <p>Льготы Comunitat Valenciana</p>
+    </div>
+  </div>
+  <div class="questions-wrap">
+
+    <div class="question">
+      <div class="q-label">Вам 35 лет или меньше и вы арендуете основное жильё?</div>
+      <div class="q-tip">Вычет 25% от аренды, до 950 €/год</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="val_alquiler_joven" value="si"> Да</label>
+        <label class="radio-option"><input type="radio" name="val_alquiler_joven" value="no"> Нет</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Переехали ли в другой муниципалитет (50+ км) по причине работы и арендуете там жильё?</div>
+      <div class="q-tip">Дополнительный вычет 10%, до 224 €</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="val_alquiler_trabajo" value="si"> Да</label>
+        <label class="radio-option"><input type="radio" name="val_alquiler_trabajo" value="no"> Нет</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Вы владелец и сдаёте жильё ниже официальной справочной цены Валенсии?</div>
+      <div class="q-tip">Вычет 5% от арендного дохода</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="val_arrendador_ref" value="si"> Да</label>
+        <label class="radio-option"><input type="radio" name="val_arrendador_ref" value="no"> Нет</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Вам 35 лет или меньше и вы покупаете ПЕРВОЕ основное жильё?</div>
+      <div class="q-tip">Вычет 5% от уплаченных сумм (без процентов)</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="val_primera_vivienda" value="si"> Да</label>
+        <label class="radio-option"><input type="radio" name="val_primera_vivienda" value="no"> Нет</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Устанавливали ли солнечные панели или систему самопотребления энергии в жилье?</div>
+      <div class="q-tip">Вычет 40% для основного жилья, 20% для второго (база до 8 800 €)</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="val_solar" value="si" onchange="toggleCond('val_solar_det')"> Да</label>
+        <label class="radio-option"><input type="radio" name="val_solar" value="no" onchange="closeCond('val_solar_det')"> Нет</label>
+      </div>
+      <div class="cond-field" id="val_solar_det">
+        <div class="q-label">Тип жилья</div>
+        <div class="radio-group inline">
+          <label class="radio-option"><input type="radio" name="val_solar_tipo" value="principal"> Основное — 40%</label>
+          <label class="radio-option"><input type="radio" name="val_solar_tipo" value="segunda"> Второе — 20%</label>
+        </div>
+        <div style="height:8px"></div>
+        <div class="q-label">Сумма инвестиции</div>
+        <div class="input-euro"><input type="number" name="val_solar_importe" placeholder="0"></div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Есть ли ребёнок от 3 до 5 лет (мать работает)?</div>
+      <div class="q-tip">Вычет 460 € за каждого ребёнка 3–5 лет (только для матери)</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="val_conciliacion" value="si"> Да</label>
+        <label class="radio-option"><input type="radio" name="val_conciliacion" value="no"> Нет</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Вам 65+ лет и есть инвалидность 33%+?</div>
+      <div class="q-tip">Вычет 197 €</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="val_discap_mayor" value="si"> Да</label>
+        <label class="radio-option"><input type="radio" name="val_discap_mayor" value="no"> Нет</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Купили ли велосипед, электровелосипед или самокат в 2025 году?</div>
+      <div class="q-tip">Вычет 10% от покупки: до 154 € за электровелосипед</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="val_bicicleta" value="si" onchange="toggleCond('val_bici_det')"> Да</label>
+        <label class="radio-option"><input type="radio" name="val_bicicleta" value="no" onchange="closeCond('val_bici_det')"> Нет</label>
+      </div>
+      <div class="cond-field" id="val_bici_det">
+        <div class="q-label">Тип транспортного средства</div>
+        <div class="radio-group">
+          <label class="radio-option"><input type="radio" name="val_bici_tipo" value="electrica"> Электровелосипед (лимит 1 540 €)</label>
+          <label class="radio-option"><input type="radio" name="val_bici_tipo" value="normal"> Обычный городской велосипед (лимит 550 €)</label>
+          <label class="radio-option"><input type="radio" name="val_bici_tipo" value="patinete"> Самокат / VMP (лимит 495 €)</label>
+        </div>
+        <div style="height:8px"></div>
+        <div class="q-label">Стоимость покупки</div>
+        <div class="input-euro"><input type="number" name="val_bici_importe" placeholder="0"></div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Оплачивали ли спортзал или спортивный клуб (за себя или членов семьи)?</div>
+      <div class="q-tip">Вычет 30% от расходов на спорт и здоровье</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="val_deporte" value="si" onchange="toggleCond('val_dep_det')"> Да</label>
+        <label class="radio-option"><input type="radio" name="val_deporte" value="no" onchange="closeCond('val_dep_det')"> Нет</label>
+      </div>
+      <div class="cond-field" id="val_dep_det">
+        <div class="q-label">Общая сумма расходов на спорт за 2025 год</div>
+        <div class="input-euro"><input type="number" name="val_deporte_importe" placeholder="0"></div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Несли ли расходы на стоматолога (не эстетику), психолога или очки/линзы?</div>
+      <div class="q-tip">Вычет 30% от медицинских расходов (до 150 € за каждый тип)</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="val_salud" value="si" onchange="toggleCond('val_salud_det')"> Да</label>
+        <label class="radio-option"><input type="radio" name="val_salud" value="no" onchange="closeCond('val_salud_det')"> Нет</label>
+      </div>
+      <div class="cond-field" id="val_salud_det">
+        <div class="checkbox-group">
+          <label class="check-option"><input type="checkbox" name="val_salud_tipo" value="dental"> Стоматолог (не эстетика)</label>
+          <label class="check-option"><input type="checkbox" name="val_salud_tipo" value="psicologo"> Психолог</label>
+          <label class="check-option"><input type="checkbox" name="val_salud_tipo" value="gafas"> Очки / контактные линзы</label>
+        </div>
+        <div style="height:8px"></div>
+        <div class="q-label">Общая сумма медицинских расходов</div>
+        <div class="input-euro"><input type="number" name="val_salud_importe" placeholder="0"></div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Несёте ли расходы на музыкальное образование или покупали музыкальные инструменты?</div>
+      <div class="q-tip">Вычет за музыкальное образование и инструменты — ст. 4.Uno.ae Закона 13/1997</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="val_musica" value="si" onchange="toggleCond('val_mus_det')"> Да</label>
+        <label class="radio-option"><input type="radio" name="val_musica" value="no" onchange="closeCond('val_mus_det')"> Нет</label>
+      </div>
+      <div class="cond-field" id="val_mus_det">
+        <div class="checkbox-group">
+          <label class="check-option"><input type="checkbox" name="val_mus_tipo" value="escuela"> Музыкальная школа / консерватория</label>
+          <label class="check-option"><input type="checkbox" name="val_mus_tipo" value="instrumento"> Покупка музыкального инструмента</label>
+          <label class="check-option"><input type="checkbox" name="val_mus_tipo" value="sociedad"> Музыкальное общество (sociedad musical)</label>
+        </div>
+        <div style="height:8px"></div>
+        <div class="q-label">Общая сумма расходов</div>
+        <div class="input-euro"><input type="number" name="val_musica_importe" placeholder="0"></div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Живёте ли в муниципалитете Валенсийского сообщества с риском депопуляции?</div>
+      <div class="q-tip">Базовый вычет 330 € + увеличение за детей</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="val_despoblacion" value="si"> Да</label>
+        <label class="radio-option"><input type="radio" name="val_despoblacion" value="no"> Нет</label>
+        <label class="radio-option"><input type="radio" name="val_despoblacion" value="no_se"> Не знаю</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Женщина 40–45 лет, проходящая лечение от бесплодия?</div>
+      <div class="q-tip">Вычет 100 €</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="val_fertilidad" value="si"> Да</label>
+        <label class="radio-option"><input type="radio" name="val_fertilidad" value="no"> Нет</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Покупали ли культурный абонемент Bono Cultural Valenciano в 2025 году?</div>
+      <div class="q-tip">Вычет 21%, максимальная база 165 €</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="val_bono_cultura" value="si"> Да</label>
+        <label class="radio-option"><input type="radio" name="val_bono_cultura" value="no"> Нет</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Делали ли пожертвования экологическим, культурным или спортивным организациям Валенсии?</div>
+      <div class="q-tip">Вычет 20–25% от пожертвований</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="val_donacion" value="si" onchange="toggleCond('val_don_det')"> Да</label>
+        <label class="radio-option"><input type="radio" name="val_donacion" value="no" onchange="closeCond('val_don_det')"> Нет</label>
+      </div>
+      <div class="cond-field" id="val_don_det">
+        <div class="q-label">Сумма пожертвований</div>
+        <div class="input-euro"><input type="number" name="val_donacion_importe" placeholder="0"></div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Инвестировали ли в стартапы или новые компании Валенсийского сообщества?</div>
+      <div class="q-tip">Региональный вычет до 6 600 € (или до 15 000 € с увеличением)</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="val_startup" value="si" onchange="toggleCond('val_start_det')"> Да</label>
+        <label class="radio-option"><input type="radio" name="val_startup" value="no" onchange="closeCond('val_start_det')"> Нет</label>
+      </div>
+      <div class="cond-field" id="val_start_det">
+        <div class="q-label">Сумма инвестиции</div>
+        <div class="input-euro"><input type="number" name="val_startup_importe" placeholder="0"></div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">У кого-то из семьи хроническое заболевание высокой сложности, болезнь Альцгеймера или черепно-мозговая травма?</div>
+      <div class="q-tip">Вычет до 150 € за расходы на лечение</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="val_enfermedad_cronica" value="si"> Да</label>
+        <label class="radio-option"><input type="radio" name="val_enfermedad_cronica" value="no"> Нет</label>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ==========================================
+     БЛОК 4: РЕГИОНАЛЬНЫЕ — АНДАЛУСИЯ
+     ========================================== -->
+<div class="form-section province-section" id="block_andalucia" data-province="andalucia">
+  <div class="section-header">
+    <div class="section-num orange">4</div>
+    <div>
+      <h2>Региональные вычеты — Андалусия</h2>
+      <p>Льготы автономного сообщества Андалусия</p>
+    </div>
+  </div>
+  <div class="questions-wrap">
+
+    <div class="question">
+      <div class="q-label">Вам до 35 лет или покупаете социальное жильё (VPO) в Андалусии?</div>
+      <div class="q-tip">Вычет 6% от суммы выплат по жилью (база до 9 040 €)</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="and_vivienda_joven" value="si"> Да</label>
+        <label class="radio-option"><input type="radio" name="and_vivienda_joven" value="no"> Нет</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Вы арендуете жильё и вам до 35 лет, или вам 65+, или вы жертва домашнего насилия / терроризма?</div>
+      <div class="q-tip">Вычет 15% от аренды, до 1 200–1 500 €/год</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="and_alquiler" value="si"> Да</label>
+        <label class="radio-option"><input type="radio" name="and_alquiler" value="no"> Нет</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Вы мать-одиночка или отец-одиночка в Андалусии?</div>
+      <div class="q-tip">Вычет 100 € + доп. 100 € за каждого проживающего с вами родителя 75+</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="and_monoparental" value="si"> Да</label>
+        <label class="radio-option"><input type="radio" name="and_monoparental" value="no"> Нет</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Дети несут расходы на изучение иностранных языков или информатики?</div>
+      <div class="q-tip">Вычет 15% от расходов, до 150 €/ребёнка</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="and_idiomas" value="si" onchange="toggleCond('and_idiom_det')"> Да</label>
+        <label class="radio-option"><input type="radio" name="and_idiomas" value="no" onchange="closeCond('and_idiom_det')"> Нет</label>
+      </div>
+      <div class="cond-field" id="and_idiom_det">
+        <div class="q-label">Сумма расходов на языки / IT детей в 2025 году</div>
+        <div class="input-euro"><input type="number" name="and_idiomas_importe" placeholder="0"></div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">У вас или члена семьи инвалидность 33%+ ?</div>
+      <div class="q-tip">Вычет 150 € за инвалидность налогоплательщика</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="and_discapacidad" value="si"> Да</label>
+        <label class="radio-option"><input type="radio" name="and_discapacidad" value="no"> Нет</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Оплачивали ли взносы в спортзал или спортивный клуб (за себя, супруга или детей)?</div>
+      <div class="q-tip">Вычет 15% от взносов, до 100 €/чел.</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="and_deporte" value="si" onchange="toggleCond('and_dep_det')"> Да</label>
+        <label class="radio-option"><input type="radio" name="and_deporte" value="no" onchange="closeCond('and_dep_det')"> Нет</label>
+      </div>
+      <div class="cond-field" id="and_dep_det">
+        <div class="q-label">Общая сумма спортивных взносов за 2025 год</div>
+        <div class="input-euro"><input type="number" name="and_deporte_importe" placeholder="0"></div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Понесли ли ветеринарные расходы за домашнее животное в 2025 году? <span class="info-tag new">Новое</span></div>
+      <div class="q-tip">Вычет 30% от ветрасходов, до 100 €. Животное должно быть приобретено после 01.01.2025</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="and_veterinario" value="si" onchange="toggleCond('and_vet_det')"> Да</label>
+        <label class="radio-option"><input type="radio" name="and_veterinario" value="no" onchange="closeCond('and_vet_det')"> Нет</label>
+      </div>
+      <div class="cond-field" id="and_vet_det">
+        <div class="q-label">Когда приобретено/усыновлено животное?</div>
+        <div class="radio-group">
+          <label class="radio-option"><input type="radio" name="and_vet_fecha" value="2025"> В 2025 году — подходит</label>
+          <label class="radio-option"><input type="radio" name="and_vet_fecha" value="antes"> До 2025 — не подходит (кроме собаки-поводыря)</label>
+          <label class="radio-option"><input type="radio" name="and_vet_fecha" value="perro_guia"> Собака-поводырь — вычет всегда</label>
+        </div>
+        <div style="height:8px"></div>
+        <div class="q-label">Сумма ветеринарных расходов (вакцины, стерилизация)</div>
+        <div class="input-euro"><input type="number" name="and_vet_importe" placeholder="0"></div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Есть ли в семье кто-то с диагностированной целиакией? <span class="info-tag new">Новое</span></div>
+      <div class="q-tip">Вычет 100 € за каждого члена семьи с подтверждённой целиакией</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="and_celiaco" value="si" onchange="toggleCond('and_cel_det')"> Да</label>
+        <label class="radio-option"><input type="radio" name="and_celiaco" value="no" onchange="closeCond('and_cel_det')"> Нет</label>
+      </div>
+      <div class="cond-field" id="and_cel_det">
+        <div class="q-label">Количество членов семьи с диагнозом целиакия</div>
+        <select name="and_celiaco_num">
+          <option value="">— выберите —</option>
+          <option value="1">1</option><option value="2">2</option><option value="3">3+</option>
+        </select>
+        <div style="height:8px"></div>
+        <div class="q-hint">Есть ли официальное медицинское заключение (diagnóstico oficial)?</div>
+        <div class="radio-group inline" style="margin-top:6px">
+          <label class="radio-option"><input type="radio" name="and_celiaco_diag" value="si"> Да</label>
+          <label class="radio-option"><input type="radio" name="and_celiaco_diag" value="no"> Нет</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Нанимали ли домашнего работника через соцстрах для ухода за детьми или пожилыми?</div>
+      <div class="q-tip">Вычет 20% от взносов, до 500 €</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="and_empleado_hogar" value="si" onchange="toggleCond('and_emp_det')"> Да</label>
+        <label class="radio-option"><input type="radio" name="and_empleado_hogar" value="no" onchange="closeCond('and_emp_det')"> Нет</label>
+      </div>
+      <div class="cond-field" id="and_emp_det">
+        <div class="q-label">Сумма взносов в соцстрах за домашнего работника</div>
+        <div class="input-euro"><input type="number" name="and_emp_importe" placeholder="0"></div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Делали ли пожертвования экологическим НКО или организациям Андалусии?</div>
+      <div class="q-tip">Вычет 10% от пожертвований, до 150 €</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="and_donacion_eco" value="si" onchange="toggleCond('and_don_eco_det')"> Да</label>
+        <label class="radio-option"><input type="radio" name="and_donacion_eco" value="no" onchange="closeCond('and_don_eco_det')"> Нет</label>
+      </div>
+      <div class="cond-field" id="and_don_eco_det">
+        <div class="q-label">Сумма экологических пожертвований</div>
+        <div class="input-euro"><input type="number" name="and_don_eco_importe" placeholder="0"></div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Инвестировали ли в компании с юридическим адресом в Андалусии?</div>
+      <div class="q-tip">Вычет 20–50% от инвестиции (50% если компания при университете)</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="and_inversion" value="si" onchange="toggleCond('and_inv_det')"> Да</label>
+        <label class="radio-option"><input type="radio" name="and_inversion" value="no" onchange="closeCond('and_inv_det')"> Нет</label>
+      </div>
+      <div class="cond-field" id="and_inv_det">
+        <div class="q-label">Тип компании</div>
+        <div class="radio-group">
+          <label class="radio-option"><input type="radio" name="and_inv_tipo" value="normal"> Обычная SA/SL — 20%, до 4 000 €</label>
+          <label class="radio-option"><input type="radio" name="and_inv_tipo" value="universidad"> При университете/исследовательском центре — 50%, до 12 000 €</label>
+        </div>
+        <div style="height:8px"></div>
+        <div class="q-label">Сумма инвестиции</div>
+        <div class="input-euro"><input type="number" name="and_inv_importe" placeholder="0"></div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Несли ли расходы на адвоката в трудовом споре (увольнение, задолженность по зарплате)?</div>
+      <div class="q-tip">Вычет до 200 €</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="and_defensa_juridica" value="si"> Да</label>
+        <label class="radio-option"><input type="radio" name="and_defensa_juridica" value="no"> Нет</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Родили или усыновили ребёнка в 2025 году — живёте ли в муниципалитете до 3 000 жителей?</div>
+      <div class="q-tip">Увеличенный вычет 400 € вместо стандартных 200 €</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="and_nacimiento_rural" value="si"> Да, в малом муниципалитете</label>
+        <label class="radio-option"><input type="radio" name="and_nacimiento_rural" value="no"> Нет</label>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ==========================================
+     БЛОК 4: РЕГИОНАЛЬНЫЕ — КАТАЛОНИЯ
+     ========================================== -->
+<div class="form-section province-section" id="block_cataluna" data-province="cataluna">
+  <div class="section-header">
+    <div class="section-num orange">4</div>
+    <div>
+      <h2>Региональные вычеты — Каталония</h2>
+      <p>Льготы автономного сообщества Каталония</p>
+    </div>
+  </div>
+  <div class="questions-wrap">
+
+    <div class="question">
+      <div class="q-label">Вам 35 лет или меньше, вы безработный (183+ дней), инвалид 65%+ или вдовец 65+ — и арендуете жильё?</div>
+      <div class="q-tip">Вычет 10% от аренды, до 500 €/год</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="cat_alquiler" value="si"> Да</label>
+        <label class="radio-option"><input type="radio" name="cat_alquiler" value="no"> Нет</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Вы подаёте как многодетная или неполная семья?</div>
+      <div class="q-tip">Повышенный лимит аренды до 1 000 €</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="cat_familia_arrendamiento" value="si"> Да</label>
+        <label class="radio-option"><input type="radio" name="cat_familia_arrendamiento" value="no"> Нет</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Вы овдовели в 2023, 2024 или 2025 году?</div>
+      <div class="q-tip">Вычет 150–300 € применяется 3 года подряд</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="cat_viudedad" value="si" onchange="toggleCond('cat_viud_det')"> Да</label>
+        <label class="radio-option"><input type="radio" name="cat_viudedad" value="no" onchange="closeCond('cat_viud_det')"> Нет</label>
+      </div>
+      <div class="cond-field" id="cat_viud_det">
+        <div class="q-label">Год овдовения</div>
+        <div class="radio-group inline">
+          <label class="radio-option"><input type="radio" name="cat_viud_año" value="2023"> 2023</label>
+          <label class="radio-option"><input type="radio" name="cat_viud_año" value="2024"> 2024</label>
+          <label class="radio-option"><input type="radio" name="cat_viud_año" value="2025"> 2025</label>
+        </div>
+        <div style="height:8px"></div>
+        <div class="q-label">Есть ли иждивенцы (дети) на попечении?</div>
+        <div class="radio-group inline">
+          <label class="radio-option"><input type="radio" name="cat_viud_descendientes" value="si"> Да — вычет 300 €</label>
+          <label class="radio-option"><input type="radio" name="cat_viud_descendientes" value="no"> Нет — 150 €</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Проводили ли реконструкцию (не косметический ремонт) постоянного жилья в 2025 году?</div>
+      <div class="q-tip">Вычет 1,5% от суммы работ (база до 9 040 €)</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="cat_rehabilitacion" value="si" onchange="toggleCond('cat_rehab_det')"> Да</label>
+        <label class="radio-option"><input type="radio" name="cat_rehabilitacion" value="no" onchange="closeCond('cat_rehab_det')"> Нет</label>
+      </div>
+      <div class="cond-field" id="cat_rehab_det">
+        <div class="q-label">Сумма работ по реконструкции</div>
+        <div class="input-euro"><input type="number" name="cat_rehab_importe" placeholder="0"></div>
+        <div style="height:8px"></div>
+        <div class="q-hint">Это структурные работы (кровля, фасад, фундамент), а не покраска/отделка?</div>
+        <div class="radio-group inline" style="margin-top:6px">
+          <label class="radio-option"><input type="radio" name="cat_rehab_estructural" value="si"> Да</label>
+          <label class="radio-option"><input type="radio" name="cat_rehab_estructural" value="no"> Нет</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Брали ли кредит AGAUR на магистратуру или докторантуру в Каталонии?</div>
+      <div class="q-tip">Вычет 100% от уплаченных процентов</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="cat_prestamo_agaur" value="si" onchange="toggleCond('cat_agaur_det')"> Да</label>
+        <label class="radio-option"><input type="radio" name="cat_prestamo_agaur" value="no" onchange="closeCond('cat_agaur_det')"> Нет</label>
+      </div>
+      <div class="cond-field" id="cat_agaur_det">
+        <div class="q-label">Сумма процентов по кредиту AGAUR в 2025 году</div>
+        <div class="input-euro"><input type="number" name="cat_agaur_intereses" placeholder="0"></div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Делали ли пожертвования организациям, продвигающим каталанский или аранский язык?</div>
+      <div class="q-tip">Вычет 15%</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="cat_donacion_idioma" value="si" onchange="toggleCond('cat_don_idiom_det')"> Да</label>
+        <label class="radio-option"><input type="radio" name="cat_donacion_idioma" value="no" onchange="closeCond('cat_don_idiom_det')"> Нет</label>
+      </div>
+      <div class="cond-field" id="cat_don_idiom_det">
+        <div class="q-label">Сумма пожертвований</div>
+        <div class="input-euro"><input type="number" name="cat_don_idioma_importe" placeholder="0"></div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Делали ли пожертвования на научные исследования (I+D+i) в каталонские университеты?</div>
+      <div class="q-tip">Вычет 30%</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="cat_donacion_ciencia" value="si" onchange="toggleCond('cat_don_cien_det')"> Да</label>
+        <label class="radio-option"><input type="radio" name="cat_donacion_ciencia" value="no" onchange="closeCond('cat_don_cien_det')"> Нет</label>
+      </div>
+      <div class="cond-field" id="cat_don_cien_det">
+        <div class="q-label">Сумма пожертвований на науку</div>
+        <div class="input-euro"><input type="number" name="cat_don_cien_importe" placeholder="0"></div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Делали ли пожертвования на охрану окружающей среды Каталонии?</div>
+      <div class="q-tip">Вычет 15%</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="cat_donacion_medio" value="si" onchange="toggleCond('cat_don_med_det')"> Да</label>
+        <label class="radio-option"><input type="radio" name="cat_donacion_medio" value="no" onchange="closeCond('cat_don_med_det')"> Нет</label>
+      </div>
+      <div class="cond-field" id="cat_don_med_det">
+        <div class="q-label">Сумма экологических пожертвований</div>
+        <div class="input-euro"><input type="number" name="cat_don_med_importe" placeholder="0"></div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Инвестировали ли в новые компании (бизнес-ангел) с адресом в Каталонии?</div>
+      <div class="q-tip">Вычет 40% (или 50% если при университете), до 12 000 €</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="cat_inversion_angel" value="si" onchange="toggleCond('cat_ang_det')"> Да</label>
+        <label class="radio-option"><input type="radio" name="cat_inversion_angel" value="no" onchange="closeCond('cat_ang_det')"> Нет</label>
+      </div>
+      <div class="cond-field" id="cat_ang_det">
+        <div class="q-label">Тип компании</div>
+        <div class="radio-group">
+          <label class="radio-option"><input type="radio" name="cat_ang_tipo" value="normal"> Обычная SA/SL — 40%</label>
+          <label class="radio-option"><input type="radio" name="cat_ang_tipo" value="universidad"> При университете — 50%</label>
+        </div>
+        <div style="height:8px"></div>
+        <div class="q-label">Сумма инвестиции</div>
+        <div class="input-euro"><input type="number" name="cat_ang_importe" placeholder="0"></div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Вносили ли взносы в сельскохозяйственный или жилищный кооператив Каталонии?</div>
+      <div class="q-tip">Вычет 20% от взносов, до 3 000 €</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="cat_cooperativa" value="si" onchange="toggleCond('cat_coop_det')"> Да</label>
+        <label class="radio-option"><input type="radio" name="cat_cooperativa" value="no" onchange="closeCond('cat_coop_det')"> Нет</label>
+      </div>
+      <div class="cond-field" id="cat_coop_det">
+        <div class="q-label">Сумма взносов в кооператив</div>
+        <div class="input-euro"><input type="number" name="cat_coop_importe" placeholder="0"></div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">В 2025 году было несколько работодателей (pagadores) и доход 15 876 – 22 000 €?</div>
+      <div class="q-tip">Каталонский вычет компенсирует дополнительный налог от нескольких плательщиков</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="cat_varios_pagadores" value="si"> Да</label>
+        <label class="radio-option"><input type="radio" name="cat_varios_pagadores" value="no"> Нет</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Вы жертва гендерного насилия и арендуете жильё?</div>
+      <div class="q-tip">Специальный вычет 20–25% от аренды, до 1 000–1 200 €</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="cat_violencia_genero" value="si"> Да</label>
+        <label class="radio-option"><input type="radio" name="cat_violencia_genero" value="no"> Нет</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Купили ли жильё до 1 января 2013 года и применяли вычет за основное жильё тогда?</div>
+      <div class="q-tip">Переходный режим — каталонский вычет 7,5–9%</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="cat_vivienda_transitorio" value="si"> Да</label>
+        <label class="radio-option"><input type="radio" name="cat_vivienda_transitorio" value="no"> Нет</label>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ==========================================
+     БЛОК 5: ДОПОЛНИТЕЛЬНО
+     ========================================== -->
+<div class="form-section" id="block5">
+  <div class="section-header">
+    <div class="section-num">5</div>
+    <div>
+      <h2>Дополнительная информация</h2>
+      <p>Документы и комментарии</p>
+    </div>
+  </div>
+  <div class="questions-wrap">
+
+    <div class="question">
+      <div class="q-label">Есть ли у вас задолженности или суммы к возврату от предыдущих лет?</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="deudas_hacienda" value="si"> Да</label>
+        <label class="radio-option"><input type="radio" name="deudas_hacienda" value="no"> Нет</label>
+        <label class="radio-option"><input type="radio" name="deudas_hacienda" value="no_se"> Не знаю</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Ожидаете ли получить возврат (a devolver) или доплатить (a pagar)?</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="expectativa" value="devolver"> Ожидаю возврат</label>
+        <label class="radio-option"><input type="radio" name="expectativa" value="pagar"> Ожидаю доплату</label>
+        <label class="radio-option"><input type="radio" name="expectativa" value="no_se"> Не знаю</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Документы, которые у вас есть</div>
+      <div class="checkbox-group">
+        <label class="check-option"><input type="checkbox" name="docs" value="certificado_retencion"> Справка об удержаниях от работодателя</label>
+        <label class="check-option"><input type="checkbox" name="docs" value="hipoteca"> Справка банка по ипотеке</label>
+        <label class="check-option"><input type="checkbox" name="docs" value="contrato_alquiler"> Договор аренды</label>
+        <label class="check-option"><input type="checkbox" name="docs" value="certificados_donaciones"> Сертификаты пожертвований</label>
+        <label class="check-option"><input type="checkbox" name="docs" value="certificados_discapacidad"> Справка об инвалидности</label>
+        <label class="check-option"><input type="checkbox" name="docs" value="libro_familia"> Книга семьи / свидетельства о рождении</label>
+        <label class="check-option"><input type="checkbox" name="docs" value="cert_energia"> Сертификат энергоэффективности</label>
+        <label class="check-option"><input type="checkbox" name="docs" value="facturas_obras"> Счета за работы / ремонт</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Дополнительные комментарии для gestora</div>
+      <textarea name="comentarios" placeholder="Напишите здесь всё, что считаете важным…"></textarea>
+    </div>
+
+    <div class="submit-wrap">
+      <button class="btn-submit" onclick="submitForm()">Отправить опросник</button>
+      <div class="submit-note">После отправки мы свяжемся с вами для подготовки декларации с максимальной налоговой оптимизацией</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- SUCCESS -->
+<div class="success-screen" id="successScreen">
+  <div class="success-icon">✓</div>
+  <h2>Опросник отправлен</h2>
+  <p>Ваши данные получены. DaryMir Gestoría · Asesoría свяжется с вами в ближайшее время для подготовки декларации IRPF 2025.</p>
+</div>
+
+</div><!-- end .main -->
+
+<script>
+// Show kid cards based on total number entered manually
+function updateKidsFromInputs() {
+  const totalInput = document.querySelector('input[name="num_hijos_total"]');
+  const num = parseInt(totalInput?.value) || 0;
+  for (let i = 1; i <= 4; i++) {
+    const el = document.getElementById('kid_' + i);
+    if (el) el.style.display = i <= num ? 'block' : 'none';
+  }
+  updateProgress();
+}
+
+// Legacy — keep for compatibility
+function showKidsFields(val) {
+  updateKidsFromInputs();
+}
+
+function collectFormData() {
+  const data = {};
+  document.querySelectorAll('input, select, textarea').forEach(el => {
+    if (!el.name) return;
+    if (el.type === 'radio' && !el.checked) return;
+    if (el.type === 'checkbox') {
+      if (!data[el.name]) data[el.name] = [];
+      if (el.checked) data[el.name].push(el.value);
+    } else {
+      data[el.name] = el.value;
+    }
+  });
+  Object.keys(data).forEach(k => { if (Array.isArray(data[k])) data[k] = data[k].join(', '); });
+  data['timestamp'] = new Date().toISOString();
+  data['province'] = currentProvince;
+  return data;
+}
+
+let currentProvince = '';
+
+function selectProvince(province, btn) {
+  currentProvince = province;
+  document.querySelectorAll('.province-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+
+  // Показываем все базовые блоки
+  ['block0','block1','block2','block3','block5'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) { el.classList.add('visible'); el.style.display = 'block'; }
+  });
+
+  // Скрываем все региональные, показываем нужный
+  document.querySelectorAll('.province-section').forEach(s => {
+    s.classList.remove('active','visible');
+    s.style.display = 'none';
+  });
+  const target = document.getElementById('block_' + province);
+  if (target) {
+    target.classList.add('active','visible');
+    target.style.display = 'block';
+  }
+
+  updateProgress();
+  const hint = document.getElementById('provinceHint');
+  if (hint) hint.classList.add('hidden');
+  setTimeout(() => {
+    document.getElementById('block0')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 100);
+}
+
+function toggleCond(id) { document.getElementById(id)?.classList.add('open'); updateProgress(); }
+function closeCond(id) { document.getElementById(id)?.classList.remove('open'); updateProgress(); }
+
+function updateProgress() {
+  // progress bar removed — function kept for compatibility
+}
+
+document.addEventListener('change', updateProgress);
+document.addEventListener('input', updateProgress);
+
+function submitForm() {
+  const data = collectFormData();
+  const SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
+  if (SCRIPT_URL !== 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
+    fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify(data), headers: { 'Content-Type': 'application/json' } }).catch(err => console.log(err));
+  }
+  document.querySelectorAll('.form-section, .province-select-section').forEach(s => s.style.display = 'none');
+  document.querySelector('.hero').style.display = 'none';
+  document.getElementById('successScreen').classList.add('visible');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  console.log('IRPF Form Data:', JSON.stringify(data, null, 2));
+}
+</script>
+</body>
+</html>
