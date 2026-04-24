@@ -716,29 +716,42 @@
     <div class="block0-group-title">Источники дохода</div>
 
     <div class="question">
-      <div class="q-label">Вы являетесь autónomo (самозанятым)?</div>
-      <div class="radio-group inline">
-        <label class="radio-option"><input type="radio" name="es_autonomo" value="si" onchange="toggleCond('autonomo_detail')"> Да</label>
-        <label class="radio-option"><input type="radio" name="es_autonomo" value="no" onchange="closeCond('autonomo_detail')"> Нет</label>
-      </div>
-      <div class="cond-field" id="autonomo_detail">
-        <div class="q-label">Направление деятельности</div>
-        <input type="text" name="autonomo_actividad" placeholder="Например: diseño, gestoría, informática…" style="max-width:100%">
+      <div class="q-label">Какой у вас статус занятости в 2025 году?</div>
+      <div class="q-hint">Можно выбрать несколько вариантов</div>
+      <div class="checkbox-group">
+        <label class="check-option"><input type="checkbox" name="status_autonomo" value="si" onchange="toggleIfChecked(this, 'autonomo_detail')"> Autónomo (самозанятый физлицо)</label>
+        <label class="check-option"><input type="checkbox" name="status_sl" value="si" onchange="toggleIfChecked(this, 'sl_detail')"> Socios / Administrador de SL или SA (владелец/директор компании)</label>
+        <label class="check-option"><input type="checkbox" name="status_comunidad" value="si"> Comunidad de Bienes (совместный бизнес без юрлица)</label>
+        <label class="check-option"><input type="checkbox" name="status_asalariado" value="si" onchange="toggleIfChecked(this, 'asalariado_detail')"> Asalariado (наёмный работник)</label>
+        <label class="check-option"><input type="checkbox" name="status_sin_actividad" value="si"> Без трудовой деятельности</label>
       </div>
     </div>
 
-    <div class="question">
-      <div class="q-label">Работаете по найму (asalariado)?</div>
+    <div class="cond-field" id="autonomo_detail">
+      <div class="q-label">Направление деятельности autónomo</div>
+      <input type="text" name="autonomo_actividad" placeholder="Например: diseño, gestoría, informática…" style="max-width:100%">
+      <div style="height:10px"></div>
+      <div class="q-label">Примерный доход как autónomo за 2025 год (до налогов)</div>
+      <div class="input-euro"><input type="number" name="autonomo_ingresos" placeholder="0"></div>
+    </div>
+
+    <div class="cond-field" id="sl_detail">
+      <div class="q-label">Название компании (SL/SA)</div>
+      <input type="text" name="sl_nombre" placeholder="Nombre S.L." style="max-width:100%">
+      <div style="height:10px"></div>
+      <div class="q-label">Ваша роль в компании</div>
       <div class="radio-group inline">
-        <label class="radio-option"><input type="radio" name="es_asalariado" value="si" onchange="toggleCond('asalariado_detail')"> Да</label>
-        <label class="radio-option"><input type="radio" name="es_asalariado" value="no" onchange="closeCond('asalariado_detail')"> Нет</label>
+        <label class="radio-option"><input type="radio" name="sl_rol" value="administrador"> Administrador (директор)</label>
+        <label class="radio-option"><input type="radio" name="sl_rol" value="socio"> Socio (участник)</label>
+        <label class="radio-option"><input type="radio" name="sl_rol" value="ambos"> Оба</label>
       </div>
-      <div class="cond-field" id="asalariado_detail">
-        <div class="q-label">Сколько работодателей (pagadores) было в 2025 году?</div>
-        <div class="radio-group inline">
-          <label class="radio-option"><input type="radio" name="num_pagadores" value="1"> 1</label>
-          <label class="radio-option"><input type="radio" name="num_pagadores" value="2+"> 2 и более</label>
-        </div>
+    </div>
+
+    <div class="cond-field" id="asalariado_detail">
+      <div class="q-label">Сколько работодателей (pagadores) было в 2025 году?</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="num_pagadores" value="1"> 1</label>
+        <label class="radio-option"><input type="radio" name="num_pagadores" value="2+"> 2 и более</label>
       </div>
     </div>
 
@@ -1227,11 +1240,117 @@
     </div>
 
     <div class="question">
-      <div class="q-label">Осуществляли ли безвозмездный уход за пожилым человеком (65+) или инвалидом?</div>
-      <div class="q-tip">Вычет 1 546 €/год за каждого подопечного</div>
+      <div class="q-label">Осуществляли ли безвозмездный уход за пожилым человеком (65+) или инвалидом (не родственником до 4-й степени)?</div>
+      <div class="q-tip">Вычет 1 546 €/год за каждого подопечного. Нужен сертификат опекунства от Consejería Мадрида</div>
       <div class="radio-group inline">
         <label class="radio-option"><input type="radio" name="mad_acogimiento_mayor" value="si"> Да</label>
         <label class="radio-option"><input type="radio" name="mad_acogimiento_mayor" value="no"> Нет</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Родился или усыновлён ребёнок в 2025 году (или в 2024, 2023)?</div>
+      <div class="q-tip">Вычет 721,70 € за каждого ребёнка в год рождения и 2 следующих года. При многоплодных родах — дополнительно 721,70 € за каждого</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="mad_nacimiento" value="si" onchange="toggleCond('mad_nac_det')"> Да</label>
+        <label class="radio-option"><input type="radio" name="mad_nacimiento" value="no" onchange="closeCond('mad_nac_det')"> Нет</label>
+      </div>
+      <div class="cond-field" id="mad_nac_det">
+        <div class="q-label">В каком году родился / был усыновлён ребёнок?</div>
+        <div class="checkbox-group">
+          <label class="check-option"><input type="checkbox" name="mad_nac_año" value="2025"> 2025</label>
+          <label class="check-option"><input type="checkbox" name="mad_nac_año" value="2024"> 2024</label>
+          <label class="check-option"><input type="checkbox" name="mad_nac_año" value="2023"> 2023</label>
+        </div>
+        <div style="height:8px"></div>
+        <div class="q-label">Это многоплодные роды (близнецы и более)?</div>
+        <div class="radio-group inline">
+          <label class="radio-option"><input type="radio" name="mad_nac_multiple" value="si"> Да</label>
+          <label class="radio-option"><input type="radio" name="mad_nac_multiple" value="no"> Нет</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Принимаете ли несовершеннолетнего под временную опеку (acogimiento familiar)?</div>
+      <div class="q-tip">Вычет 618–927 € в зависимости от числа принятых детей. Нужен сертификат Consejería</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="mad_acogimiento_menor" value="si" onchange="toggleCond('mad_acog_det')"> Да</label>
+        <label class="radio-option"><input type="radio" name="mad_acogimiento_menor" value="no" onchange="closeCond('mad_acog_det')"> Нет</label>
+      </div>
+      <div class="cond-field" id="mad_acog_det">
+        <div class="q-label">Сколько несовершеннолетних под вашей опекой более 183 дней в 2025 году?</div>
+        <div class="radio-group inline">
+          <label class="radio-option"><input type="radio" name="mad_acog_num" value="1"> 1 (618 €)</label>
+          <label class="radio-option"><input type="radio" name="mad_acog_num" value="2"> 2 (773 €)</label>
+          <label class="radio-option"><input type="radio" name="mad_acog_num" value="3+"> 3+ (927 €)</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Ухаживаете ли за родителями / бабушками / дедушками старше 65 лет (или с инвалидностью 33%+), проживающими с вами?</div>
+      <div class="q-tip">Вычет 515,50 € за каждого родственника. Их доход должен быть менее 8 000 €/год</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="mad_cuidado_ascend" value="si" onchange="toggleCond('mad_asc_det')"> Да</label>
+        <label class="radio-option"><input type="radio" name="mad_cuidado_ascend" value="no" onchange="closeCond('mad_asc_det')"> Нет</label>
+      </div>
+      <div class="cond-field" id="mad_asc_det">
+        <div class="q-label">Количество таких родственников</div>
+        <div class="radio-group inline">
+          <label class="radio-option"><input type="radio" name="mad_asc_num" value="1"> 1</label>
+          <label class="radio-option"><input type="radio" name="mad_asc_num" value="2"> 2</label>
+          <label class="radio-option"><input type="radio" name="mad_asc_num" value="3+"> 3+</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Сдаёте ли жильё в аренду и несёте расходы на ремонт, страховку или получение сертификатов для него?</div>
+      <div class="q-tip">Вычет 10% от расходов, до 154 €/год</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="mad_gastos_arrendador" value="si" onchange="toggleCond('mad_gast_arr_det')"> Да</label>
+        <label class="radio-option"><input type="radio" name="mad_gastos_arrendador" value="no" onchange="closeCond('mad_gast_arr_det')"> Нет</label>
+      </div>
+      <div class="cond-field" id="mad_gast_arr_det">
+        <div class="q-label">Сумма таких расходов за 2025 год</div>
+        <div class="input-euro"><input type="number" name="mad_gastos_arrendador_importe" placeholder="0"></div>
+        <div class="q-hint" style="margin-top:8px">Внесён ли залог в Агентство социального жилья Мадрида?</div>
+        <div class="radio-group inline" style="margin-top:6px">
+          <label class="radio-option"><input type="radio" name="mad_deposito_fianza" value="si"> Да</label>
+          <label class="radio-option"><input type="radio" name="mad_deposito_fianza" value="no"> Нет</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Сдаёте ли жильё, которое пустовало более 1 года до заключения нового договора аренды?</div>
+      <div class="q-tip">Вычет 1 000 € в год подписания договора. Договор должен быть на срок не менее 3 лет</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="mad_vivienda_vacia" value="si"> Да</label>
+        <label class="radio-option"><input type="radio" name="mad_vivienda_vacia" value="no"> Нет</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Есть ли у вас 2 или более детей на иждивении и низкий доход семьи (до 24 744 €)?</div>
+      <div class="q-tip">Вычет 10% от регионального налога после применения остальных вычетов</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="mad_dos_hijos_bajos_ingresos" value="si"> Да</label>
+        <label class="radio-option"><input type="radio" name="mad_dos_hijos_bajos_ingresos" value="no"> Нет</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Инвестировали ли в компании, котирующиеся на рынке BME Growth (бывший MAB)?</div>
+      <div class="q-tip">Вычет 20% от инвестиции, до 10 310 €/год. Нужно держать акции не менее 2 лет</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="mad_mab" value="si" onchange="toggleCond('mad_mab_det')"> Да</label>
+        <label class="radio-option"><input type="radio" name="mad_mab" value="no" onchange="closeCond('mad_mab_det')"> Нет</label>
+      </div>
+      <div class="cond-field" id="mad_mab_det">
+        <div class="q-label">Сумма инвестиции в BME Growth</div>
+        <div class="input-euro"><input type="number" name="mad_mab_importe" placeholder="0"></div>
       </div>
     </div>
 
@@ -1451,10 +1570,198 @@
 
     <div class="question">
       <div class="q-label">У кого-то из семьи хроническое заболевание высокой сложности, болезнь Альцгеймера или черепно-мозговая травма?</div>
-      <div class="q-tip">Вычет до 150 € за расходы на лечение</div>
+      <div class="q-tip">Вычет до 150 € за расходы на лечение (до 100 € в обычных случаях, до 150 € для многодетных/неполных семей)</div>
       <div class="radio-group inline">
         <label class="radio-option"><input type="radio" name="val_enfermedad_cronica" value="si"> Да</label>
         <label class="radio-option"><input type="radio" name="val_enfermedad_cronica" value="no"> Нет</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Родился, усыновлён или принят под опеку ребёнок в 2025 году?</div>
+      <div class="q-tip">Вычет 600 € (1-й ребёнок), 750 € (2-й), 900 € (3-й и более) — применяется 3 года подряд</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="val_nacimiento" value="si" onchange="toggleCond('val_nac_det')"> Да</label>
+        <label class="radio-option"><input type="radio" name="val_nacimiento" value="no" onchange="closeCond('val_nac_det')"> Нет</label>
+      </div>
+      <div class="cond-field" id="val_nac_det">
+        <div class="q-label">Какой по счёту ребёнок?</div>
+        <div class="radio-group inline">
+          <label class="radio-option"><input type="radio" name="val_nac_orden" value="1"> Первый (600 €)</label>
+          <label class="radio-option"><input type="radio" name="val_nac_orden" value="2"> Второй (750 €)</label>
+          <label class="radio-option"><input type="radio" name="val_nac_orden" value="3+"> Третий и более (900 €)</label>
+        </div>
+        <div style="height:8px"></div>
+        <div class="q-label">Это рождение 2025 года или применяете вычет за предыдущие годы?</div>
+        <div class="radio-group">
+          <label class="radio-option"><input type="radio" name="val_nac_año" value="2025"> Ребёнок родился в 2025 (1-й год)</label>
+          <label class="radio-option"><input type="radio" name="val_nac_año" value="2024"> Ребёнок родился в 2024 (2-й год)</label>
+          <label class="radio-option"><input type="radio" name="val_nac_año" value="2023"> Ребёнок родился в 2023 (3-й год)</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Были ли многоплодные роды (близнецы, тройня) или одновременное усыновление 2+ детей?</div>
+      <div class="q-tip">Дополнительный вычет 246 € (совместим с вычетом за рождение)</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="val_parto_multiple" value="si"> Да</label>
+        <label class="radio-option"><input type="radio" name="val_parto_multiple" value="no"> Нет</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Есть ли ребёнок с физической/сенсорной инвалидностью 65%+ или интеллектуальной 33%+?</div>
+      <div class="q-tip">Вычет 246 € (или 303 € если двое и более таких детей)</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="val_hijo_discap" value="si" onchange="toggleCond('val_hijo_disc_det')"> Да</label>
+        <label class="radio-option"><input type="radio" name="val_hijo_discap" value="no" onchange="closeCond('val_hijo_disc_det')"> Нет</label>
+      </div>
+      <div class="cond-field" id="val_hijo_disc_det">
+        <div class="q-label">Количество детей с такой инвалидностью</div>
+        <div class="radio-group inline">
+          <label class="radio-option"><input type="radio" name="val_hijo_disc_num" value="1"> 1 ребёнок (246 €)</label>
+          <label class="radio-option"><input type="radio" name="val_hijo_disc_num" value="2+"> 2 и более (303 € каждый)</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Оплачиваете ли детский сад (guardería) для ребёнка до 3 лет — оба родителя работают?</div>
+      <div class="q-tip">Вычет 15% от оплаты, до 297 €/год. Оба родителя должны работать. Оплата только безналичная</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="val_guarderia" value="si" onchange="toggleCond('val_guard_det')"> Да</label>
+        <label class="radio-option"><input type="radio" name="val_guarderia" value="no" onchange="closeCond('val_guard_det')"> Нет</label>
+      </div>
+      <div class="cond-field" id="val_guard_det">
+        <div class="q-label">Сумма оплаты детского сада за 2025 год</div>
+        <div class="input-euro"><input type="number" name="val_guarderia_importe" placeholder="0"></div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Нанимали ли домашнего работника (contrato indefinido) для ухода за детьми до 5 лет или за пожилыми родственниками?</div>
+      <div class="q-tip">Вычет 50% от взносов в соцстрах: до 660 € за 1 ребёнка, до 1 100 € за 2+ детей или неполная семья</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="val_trabajador_hogar" value="si" onchange="toggleCond('val_trab_det')"> Да</label>
+        <label class="radio-option"><input type="radio" name="val_trabajador_hogar" value="no" onchange="closeCond('val_trab_det')"> Нет</label>
+      </div>
+      <div class="cond-field" id="val_trab_det">
+        <div class="q-label">За кем осуществляется уход?</div>
+        <div class="radio-group">
+          <label class="radio-option"><input type="radio" name="val_trab_tipo" value="hijo_1"> Один ребёнок до 5 лет (лимит 660 €)</label>
+          <label class="radio-option"><input type="radio" name="val_trab_tipo" value="hijos_2+"> Двое+ детей или неполная семья (лимит 1 100 €)</label>
+          <label class="radio-option"><input type="radio" name="val_trab_tipo" value="ascend"> Пожилой родственник 75+ или инвалид 65%+ (лимит 330–550 €)</label>
+        </div>
+        <div style="height:8px"></div>
+        <div class="q-label">Сумма взносов в соцстрах за домашнего работника в 2025 году</div>
+        <div class="input-euro"><input type="number" name="val_trab_importe" placeholder="0"></div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Покупаете основное жильё и у вас инвалидность 65%+ (или интеллектуальная/психическая 33%+)?</div>
+      <div class="q-tip">Вычет 5% от суммы выплат за жильё (совместим с вычетом для молодёжи)</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="val_vivienda_discap" value="si"> Да</label>
+        <label class="radio-option"><input type="radio" name="val_vivienda_discap" value="no"> Нет</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Получали ли субсидию (ayuda) от Generalitat Valenciana на покупку или ремонт основного жилья в 2025 году?</div>
+      <div class="q-tip">Вычет 112 € фиксированно или процент от суммы субсидии</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="val_subvencion_vivienda" value="si"> Да</label>
+        <label class="radio-option"><input type="radio" name="val_subvencion_vivienda" value="no"> Нет</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Есть ли ипотека, и выросли ли проценты по ней в 2025 году по сравнению с 2024?</div>
+      <div class="q-tip">Вычет 50% от разницы процентов, до 100 €/год (только при отсутствии переходного режима покупки жилья)</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="val_subida_intereses" value="si"> Да</label>
+        <label class="radio-option"><input type="radio" name="val_subida_intereses" value="no"> Нет</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Ухаживаете ли за родителем/бабушкой/дедушкой старше 75 лет (или 65+ с инвалидностью 65%+), проживающим с вами?</div>
+      <div class="q-tip">Вычет 197 € за каждого такого родственника. Их доход должен быть менее 8 000 €/год</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="val_ascendiente_mayor" value="si" onchange="toggleCond('val_asc_det')"> Да</label>
+        <label class="radio-option"><input type="radio" name="val_ascendiente_mayor" value="no" onchange="closeCond('val_asc_det')"> Нет</label>
+      </div>
+      <div class="cond-field" id="val_asc_det">
+        <div class="q-label">Количество таких родственников</div>
+        <div class="radio-group inline">
+          <label class="radio-option"><input type="radio" name="val_asc_num" value="1"> 1 (197 €)</label>
+          <label class="radio-option"><input type="radio" name="val_asc_num" value="2+"> 2+ (197 € каждый)</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Есть ли у вас 2 или более детей на иждивении?</div>
+      <div class="q-tip">Вычет 10% от регионального налога после применения других вычетов. Доход семьи не должен превышать 30 000 €</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="val_dos_hijos" value="si"> Да</label>
+        <label class="radio-option"><input type="radio" name="val_dos_hijos" value="no"> Нет</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Есть ли дети школьного возраста и вы зарегистрированы как безработный (desempleado)?</div>
+      <div class="q-tip">Вычет 110 € за каждого ребёнка, обучающегося в государственной или концертированной школе Валенсии</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="val_material_escolar" value="si"> Да</label>
+        <label class="radio-option"><input type="radio" name="val_material_escolar" value="no"> Нет</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Проводили ли работы по улучшению, сохранению или доступности основного жилья (с 2017 года)?</div>
+      <div class="q-tip">Вычет 20% от расходов; 50% если работы для адаптации жилья инвалида 33%+</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="val_obras_mejora" value="si" onchange="toggleCond('val_obras_det')"> Да</label>
+        <label class="radio-option"><input type="radio" name="val_obras_mejora" value="no" onchange="closeCond('val_obras_det')"> Нет</label>
+      </div>
+      <div class="cond-field" id="val_obras_det">
+        <div class="q-label">Тип работ</div>
+        <div class="radio-group">
+          <label class="radio-option"><input type="radio" name="val_obras_tipo" value="mejora"> Общее улучшение/сохранение (20%)</label>
+          <label class="radio-option"><input type="radio" name="val_obras_tipo" value="accesibilidad"> Адаптация для инвалида 33%+ (50%)</label>
+        </div>
+        <div style="height:8px"></div>
+        <div class="q-label">Сумма расходов на работы</div>
+        <div class="input-euro"><input type="number" name="val_obras_importe" placeholder="0"></div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Делали ли пожертвования организациям, продвигающим валенсийский язык?</div>
+      <div class="q-tip">Вычет 20% на первые 250 € и 25% на остаток</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="val_donacion_idioma" value="si" onchange="toggleCond('val_don_idiom_det')"> Да</label>
+        <label class="radio-option"><input type="radio" name="val_donacion_idioma" value="no" onchange="closeCond('val_don_idiom_det')"> Нет</label>
+      </div>
+      <div class="cond-field" id="val_don_idiom_det">
+        <div class="q-label">Сумма пожертвований</div>
+        <div class="input-euro"><input type="number" name="val_don_idioma_importe" placeholder="0"></div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Делали ли пожертвования на культурное наследие Валенсии, научные исследования или культурные проекты?</div>
+      <div class="q-tip">Вычет 20% на первые 250 € и 25% на остаток</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="val_donacion_cultura" value="si" onchange="toggleCond('val_don_cult_det')"> Да</label>
+        <label class="radio-option"><input type="radio" name="val_donacion_cultura" value="no" onchange="closeCond('val_don_cult_det')"> Нет</label>
+      </div>
+      <div class="cond-field" id="val_don_cult_det">
+        <div class="q-label">Сумма культурных пожертвований</div>
+        <div class="input-euro"><input type="number" name="val_don_cultura_importe" placeholder="0"></div>
       </div>
     </div>
 
@@ -1641,6 +1948,66 @@
       </div>
     </div>
 
+    <div class="question">
+      <div class="q-label">Родился или усыновлён ребёнок в 2025 году (стандартный вычет)?</div>
+      <div class="q-tip">Вычет 200 € за каждого рождённого/усыновлённого ребёнка. При многоплодных родах — дополнительно 200 € за каждого</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="and_nacimiento_std" value="si" onchange="toggleCond('and_nac_det')"> Да</label>
+        <label class="radio-option"><input type="radio" name="and_nacimiento_std" value="no" onchange="closeCond('and_nac_det')"> Нет</label>
+      </div>
+      <div class="cond-field" id="and_nac_det">
+        <div class="q-label">Это многоплодные роды (близнецы и более) или несколько усыновлений одновременно?</div>
+        <div class="radio-group inline">
+          <label class="radio-option"><input type="radio" name="and_nac_multiple" value="si"> Да (+200 € за каждого)</label>
+          <label class="radio-option"><input type="radio" name="and_nac_multiple" value="no"> Нет</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Было ли международное усыновление ребёнка в 2025 году?</div>
+      <div class="q-tip">Вычет 600 € за каждого ребёнка, усыновлённого из другой страны</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="and_adopcion_int" value="si"> Да</label>
+        <label class="radio-option"><input type="radio" name="and_adopcion_int" value="no"> Нет</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Является ли ваша семья многодетной (familia numerosa) в Андалусии?</div>
+      <div class="q-tip">Вычет 200 € (общая категория) или 400 € (особая категория — 5+ детей)</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="and_familia_numerosa" value="general"> Общая категория — 200 €</label>
+        <label class="radio-option"><input type="radio" name="and_familia_numerosa" value="especial"> Особая категория (5+) — 400 €</label>
+        <label class="radio-option"><input type="radio" name="and_familia_numerosa" value="no"> Нет</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">У вашего супруга/сожителя инвалидность 65%+ и он/она НЕ подаёт собственную декларацию?</div>
+      <div class="q-tip">Вычет 100 €</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="and_conyuge_discap_grave" value="si"> Да</label>
+        <label class="radio-option"><input type="radio" name="and_conyuge_discap_grave" value="no"> Нет</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Несёте ли расходы на уход за родственником (восходящим или нисходящим) с официально признанной инвалидностью?</div>
+      <div class="q-tip">Вычет 100 € за каждого + 20% от взносов домашнего работника (до 500 €) если нужна помощь третьих лиц</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="and_cuidado_discap" value="si" onchange="toggleCond('and_cuid_det')"> Да</label>
+        <label class="radio-option"><input type="radio" name="and_cuidado_discap" value="no" onchange="closeCond('and_cuid_det')"> Нет</label>
+      </div>
+      <div class="cond-field" id="and_cuid_det">
+        <div class="q-label">Нанимаете ли официально домашнего работника для ухода за этим родственником?</div>
+        <div class="radio-group inline">
+          <label class="radio-option"><input type="radio" name="and_cuid_trab" value="si"> Да (дополнительно 20% взносов до 500 €)</label>
+          <label class="radio-option"><input type="radio" name="and_cuid_trab" value="no"> Нет</label>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
 
@@ -1821,10 +2188,35 @@
 
     <div class="question">
       <div class="q-label">Купили ли жильё до 1 января 2013 года и применяли вычет за основное жильё тогда?</div>
-      <div class="q-tip">Переходный режим — каталонский вычет 7,5–9%</div>
+      <div class="q-tip">Переходный режим — каталонский вычет 7,5% (или 9% если покупка до 30.07.2011 и вам до 32 лет, безработный 183+ дней, инвалид 65%+ или есть ребёнок в семье)</div>
       <div class="radio-group inline">
-        <label class="radio-option"><input type="radio" name="cat_vivienda_transitorio" value="si"> Да</label>
-        <label class="radio-option"><input type="radio" name="cat_vivienda_transitorio" value="no"> Нет</label>
+        <label class="radio-option"><input type="radio" name="cat_vivienda_transitorio" value="si" onchange="toggleCond('cat_trans_det')"> Да</label>
+        <label class="radio-option"><input type="radio" name="cat_vivienda_transitorio" value="no" onchange="closeCond('cat_trans_det')"> Нет</label>
+      </div>
+      <div class="cond-field" id="cat_trans_det">
+        <div class="q-label">Жильё куплено до 30 июля 2011 года и выполняется хотя бы одно условие для ставки 9%?</div>
+        <div class="q-hint">Условия: вам до 32 лет; или безработный 183+ дней; или инвалидность 65%+; или есть ребёнок в семье</div>
+        <div class="radio-group inline">
+          <label class="radio-option"><input type="radio" name="cat_trans_9pct" value="si"> Да (9%)</label>
+          <label class="radio-option"><input type="radio" name="cat_trans_9pct" value="no"> Нет (7,5%)</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Родился, усыновлён или принят под опеку ребёнок в 2025 году в Каталонии?</div>
+      <div class="q-tip">Вычет 150 € (индивидуальная декларация) или 300 € (совместная / неполная семья)</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="cat_nacimiento" value="si" onchange="toggleCond('cat_nac_det')"> Да</label>
+        <label class="radio-option"><input type="radio" name="cat_nacimiento" value="no" onchange="closeCond('cat_nac_det')"> Нет</label>
+      </div>
+      <div class="cond-field" id="cat_nac_det">
+        <div class="q-label">Тип декларации и состав семьи</div>
+        <div class="radio-group">
+          <label class="radio-option"><input type="radio" name="cat_nac_tipo" value="individual"> Индивидуальная (150 €)</label>
+          <label class="radio-option"><input type="radio" name="cat_nac_tipo" value="conjunta"> Совместная с другим родителем (300 €)</label>
+          <label class="radio-option"><input type="radio" name="cat_nac_tipo" value="monoparental"> Неполная семья (300 €)</label>
+        </div>
       </div>
     </div>
 
@@ -1899,6 +2291,17 @@
 </div><!-- end .main -->
 
 <script>
+function toggleIfChecked(checkbox, condId) {
+  const el = document.getElementById(condId);
+  if (!el) return;
+  if (checkbox.checked) {
+    el.classList.add('open');
+  } else {
+    el.classList.remove('open');
+  }
+  updateProgress();
+}
+
 // Show kid cards based on total number entered manually
 function updateKidsFromInputs() {
   const totalInput = document.querySelector('input[name="num_hijos_total"]');
