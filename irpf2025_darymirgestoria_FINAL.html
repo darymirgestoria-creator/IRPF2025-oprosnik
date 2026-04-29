@@ -367,6 +367,53 @@
     letter-spacing: 2px; text-transform: uppercase;
     color: var(--gray-500); margin-bottom: 10px;
   }
+
+  /* ── INCOME SPLIT ── */
+  .income-split-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 8px;
+  }
+  .income-col {
+    background: var(--off-white);
+    border-left: 3px solid var(--orange);
+    padding: 16px;
+  }
+  .income-col-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px; font-weight: 800;
+    color: var(--orange); letter-spacing: 2px;
+    text-transform: uppercase; margin-bottom: 12px;
+  }
+  @media (max-width: 600px) {
+    .income-split-wrap { grid-template-columns: 1fr; }
+  }
+
+  /* ── WORLD INCOME BLOCK ── */
+  .world-income-section {
+    background: var(--navy-mid, #152338);
+    border-left: 4px solid var(--orange);
+    padding: 20px 24px;
+    margin-bottom: 12px;
+  }
+  .world-income-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800; font-size: 15px;
+    color: white; text-transform: uppercase;
+    letter-spacing: 1px; margin-bottom: 16px;
+  }
+
+  /* ── SECTION COMMENT ── */
+  .section-comment {
+    margin-top: 20px;
+    padding: 12px 14px;
+    background: rgba(232,93,10,0.05);
+    border-left: 2px dashed var(--orange);
+  }
+  .section-comment .q-label {
+    font-size: 12px; color: var(--gray-500); font-style: italic;
+  }
 </style>
 </head>
 <body>
@@ -405,7 +452,7 @@
   <div class="section-subtitle">От этого зависят региональные вычеты в вашей декларации</div>
   <div class="province-grid">
     <button class="province-btn" onclick="selectProvince('madrid', this)">Мадрид</button>
-    <button class="province-btn" onclick="selectProvince('valencia', this)">Валенсия / Аликанте</button>
+    <button class="province-btn" onclick="selectProvince('valencia', this)">Валенсия</button>
     <button class="province-btn" onclick="selectProvince('andalucia', this)">Андалусия</button>
     <button class="province-btn" onclick="selectProvince('cataluna', this)">Каталония</button>
   </div>
@@ -453,6 +500,31 @@
     </div>
 
     <div class="question">
+      <div class="q-label">Адрес проживания на 31.12.2025 <span class="info-tag">Обязательно</span></div>
+      <input type="text" name="direccion_completa" placeholder="Calle, número, piso, localidad, provincia, CP" style="max-width:100%" />
+    </div>
+
+    <div class="question">
+      <div class="q-label">Кадастровый номер жилья (referencia catastral)</div>
+      <div class="q-hint">Указан в квитанции IBI или на сайте sedecatastro.gob.es</div>
+      <input type="text" name="referencia_catastral" placeholder="Например: 1234567VK1234A0001AA" style="max-width:100%" />
+    </div>
+
+    <div class="question">
+      <div class="q-label">Тип проживания на 31.12.2025</div>
+      <div class="radio-group">
+        <label class="radio-option"><input type="radio" name="tipo_vivienda_b0" value="propia" onchange="closeCond('arrendador_nie_det')"> Собственное жильё</label>
+        <label class="radio-option"><input type="radio" name="tipo_vivienda_b0" value="alquiler" onchange="toggleCond('arrendador_nie_det')"> Арендую</label>
+        <label class="radio-option"><input type="radio" name="tipo_vivienda_b0" value="otro" onchange="closeCond('arrendador_nie_det')"> Иное / без права собственности или аренды</label>
+      </div>
+      <div class="cond-field" id="arrendador_nie_det">
+        <div class="q-label">DNI / NIE арендодателя <span class="info-tag">Обязательно</span></div>
+        <div class="q-hint">Необходим для заполнения декларации</div>
+        <input type="text" name="arrendador_nie" placeholder="X1234567A" />
+      </div>
+    </div>
+
+    <div class="question">
       <div class="q-label">4. Семейное положение</div>
       <div class="radio-group">
         <label class="radio-option"><input type="radio" name="estado_civil" value="soltero" onchange="closeCond('conyuge_datos')"> Холост / не замужем</label>
@@ -463,12 +535,11 @@
     </div>
 
     <div class="question">
-      <div class="q-label">Есть ли у вас Número de referencia IRPF?</div>
+      <div class="q-label">Número de referencia IRPF</div>
       <div class="q-hint">При совместной декларации код нужен и у супруга/супруги.</div>
       <div class="radio-group">
-        <label class="radio-option"><input type="radio" name="tiene_referencia" value="certificado" onchange="closeCond('referencia_det')"> Сертификат уже передан / передам gestora</label>
+        <label class="radio-option"><input type="radio" name="tiene_referencia" value="certificado" onchange="closeCond('referencia_det')"> Сертификат уже передан</label>
         <label class="radio-option"><input type="radio" name="tiene_referencia" value="si" onchange="toggleCond('referencia_det')"> Есть код — укажу ниже</label>
-        <label class="radio-option"><input type="radio" name="tiene_referencia" value="no" onchange="closeCond('referencia_det')"> Нет</label>
       </div>
       <div class="cond-field" id="referencia_det">
         <div class="q-label">Número de referencia</div>
@@ -495,10 +566,10 @@
         <input type="text" name="conyuge_nacimiento" placeholder="дд / мм / гггг" />
       </div>
       <div class="question" style="margin-top:14px">
-        <div class="q-label">Есть ли Número de referencia у супруга/супруги?</div>
+        <div class="q-label">Número de referencia супруга/супруги</div>
         <div class="radio-group inline">
-          <label class="radio-option"><input type="radio" name="conyuge_tiene_referencia" value="si" onchange="toggleCond('conyuge_ref_det')"> Да</label>
-          <label class="radio-option"><input type="radio" name="conyuge_tiene_referencia" value="no" onchange="closeCond('conyuge_ref_det')"> Нет</label>
+          <label class="radio-option"><input type="radio" name="conyuge_tiene_referencia" value="certificado" onchange="closeCond('conyuge_ref_det')"> Сертификат уже передан</label>
+          <label class="radio-option"><input type="radio" name="conyuge_tiene_referencia" value="si" onchange="toggleCond('conyuge_ref_det')"> Есть код — укажу ниже</label>
         </div>
         <div class="cond-field" id="conyuge_ref_det">
           <div class="q-label">Número de referencia супруга/супруги</div>
@@ -506,20 +577,11 @@
         </div>
       </div>
       <div class="question" style="margin-top:14px">
-        <div class="q-label">7. Согласны ли супруг(а) и дети подавать совместную декларацию, если так налог будет меньше?</div>
-        <div class="radio-group inline">
-          <label class="radio-option"><input type="radio" name="acepta_conjunta" value="si"> Да, согласны</label>
-          <label class="radio-option"><input type="radio" name="acepta_conjunta" value="no"> Нет, отдельно</label>
+        <div class="q-label">Ваш супруг / супруга подаёт декларацию отдельно или хочет подать совместно с вами, если это будет выгодно?</div>
+        <div class="radio-group">
+          <label class="radio-option"><input type="radio" name="conyuge_declaracion" value="conjunta_si"> Хочет совместно, если выгодно</label>
+          <label class="radio-option"><input type="radio" name="conyuge_declaracion" value="separada"> Подаёт отдельно</label>
         </div>
-      </div>
-    </div>
-
-    <div class="question">
-      <div class="q-label">Как планируете подавать декларацию?</div>
-      <div class="radio-group">
-        <label class="radio-option"><input type="radio" name="tipo_declaracion" value="individual"> Индивидуально</label>
-        <label class="radio-option"><input type="radio" name="tipo_declaracion" value="conjunta"> Совместно (conjunta)</label>
-        <label class="radio-option"><input type="radio" name="tipo_declaracion" value="no_se"> Не знаю — нужна консультация</label>
       </div>
     </div>
 
@@ -569,9 +631,14 @@
         <div class="radio-group inline">
           <label class="radio-option"><input type="radio" name="custodia_hijos" value="conmigo"> Со мной</label>
           <label class="radio-option"><input type="radio" name="custodia_hijos" value="expareja"> С бывшим супругом/супругой</label>
-          <label class="radio-option"><input type="radio" name="custodia_hijos" value="compartida"> Совместная опека (50/50)</label>
-          <label class="radio-option"><input type="radio" name="custodia_hijos" value="na"> Не применимо</label>
         </div>
+      </div>
+
+      <div class="question" style="margin-top:14px">
+        <div class="q-label">Если вы в разводе и указываете детей в своей декларации — укажите данные второго родителя</div>
+        <div class="q-hint">Необходимо для корректного заполнения декларации</div>
+        <input type="text" name="segundo_padre_nombre" placeholder="Фамилия и имя на испанском" style="max-width:100%; margin-bottom:8px" />
+        <input type="text" name="segundo_padre_nie" placeholder="NIE / DNI второго родителя" />
       </div>
 
       <div style="height:16px"></div>
@@ -712,69 +779,77 @@
 
     <hr class="q-divider">
 
-    <!-- ДОХОДЫ -->
-    <div class="block0-group-title">Источники дохода</div>
+    <!-- ИСТОЧНИКИ ДОХОДА -->
+    <div class="block0-group-title">Источники дохода заявителя и супруга/супруги</div>
+    <div class="q-tip" style="margin-bottom:16px">Важно: если супруг/супруга получали доходы в 2025 году, эта информация может повлиять на расчёт декларации и выбор наиболее выгодного варианта подачи.</div>
 
-    <div class="question">
-      <div class="q-label">Какой у вас статус занятости в 2025 году?</div>
-      <div class="q-hint">Можно выбрать несколько вариантов</div>
-      <div class="checkbox-group">
-        <label class="check-option"><input type="checkbox" name="status_autonomo" value="si" onchange="toggleIfChecked(this, 'autonomo_detail')"> Autónomo (самозанятый физлицо)</label>
-        <label class="check-option"><input type="checkbox" name="status_sl" value="si" onchange="toggleIfChecked(this, 'sl_detail')"> Socios / Administrador de SL или SA (владелец/директор компании)</label>
-        <label class="check-option"><input type="checkbox" name="status_comunidad" value="si"> Comunidad de Bienes (совместный бизнес без юрлица)</label>
-        <label class="check-option"><input type="checkbox" name="status_asalariado" value="si" onchange="toggleIfChecked(this, 'asalariado_detail')"> Asalariado (наёмный работник)</label>
-        <label class="check-option"><input type="checkbox" name="status_sin_actividad" value="si"> Без трудовой деятельности</label>
+    <div class="income-split-wrap">
+      <div class="income-col">
+        <div class="income-col-title">Основной заявитель</div>
+        <div class="question">
+          <div class="q-label">Укажите ваши источники дохода</div>
+          <div class="q-hint">Можно выбрать несколько вариантов</div>
+          <div class="checkbox-group">
+            <label class="check-option"><input type="checkbox" name="status_autonomo" value="si" onchange="toggleIfChecked(this, 'autonomo_detail')"> Autónomo (самозанятый)</label>
+            <label class="check-option"><input type="checkbox" name="status_sl" value="si" onchange="toggleIfChecked(this, 'sl_detail')"> Socio de SL (autónomo societario)</label>
+            <label class="check-option"><input type="checkbox" name="status_comunidad" value="si"> Comunidad de Bienes</label>
+            <label class="check-option"><input type="checkbox" name="status_asalariado" value="si" onchange="toggleIfChecked(this, 'asalariado_detail')"> Asalariado (наёмный работник)</label>
+            <label class="check-option"><input type="checkbox" name="status_pension" value="si"> Пенсия</label>
+            <label class="check-option"><input type="checkbox" name="status_paro" value="si"> Paro (пособие по безработице)</label>
+            <label class="check-option"><input type="checkbox" name="status_alquiler" value="si"> Доход от аренды недвижимости</label>
+            <label class="check-option"><input type="checkbox" name="status_capital" value="si"> Продажа активов / акции / крипто</label>
+            <label class="check-option"><input type="checkbox" name="status_sin_actividad" value="si"> Без трудовой деятельности</label>
+          </div>
+          <div class="cond-field" id="autonomo_detail">
+            <div class="q-label">Направление деятельности autónomo</div>
+            <input type="text" name="autonomo_actividad" placeholder="Например: diseño, gestoría, informática…" style="max-width:100%">
+          </div>
+          <div class="cond-field" id="sl_detail">
+            <div class="q-label">Название компании SL</div>
+            <input type="text" name="sl_nombre" placeholder="Nombre S.L." style="max-width:100%">
+          </div>
+          <div class="cond-field" id="asalariado_detail">
+            <div class="q-label">Сколько работодателей (pagadores) в 2025 году?</div>
+            <div class="radio-group inline">
+              <label class="radio-option"><input type="radio" name="num_pagadores" value="1"> 1</label>
+              <label class="radio-option"><input type="radio" name="num_pagadores" value="2+"> 2 и более</label>
+            </div>
+          </div>
+        </div>
+        <div class="question">
+          <div class="q-label">Мои комментарии</div>
+          <textarea name="comentarios_ingresos_titular" placeholder="Например: работал по найму и одновременно как autónomo, были разовые доходы и т.д."></textarea>
+        </div>
       </div>
-    </div>
 
-    <div class="cond-field" id="autonomo_detail">
-      <div class="q-label">Направление деятельности autónomo</div>
-      <input type="text" name="autonomo_actividad" placeholder="Например: diseño, gestoría, informática…" style="max-width:100%">
-      <div style="height:10px"></div>
-      <div class="q-label">Примерный доход как autónomo за 2025 год (до налогов)</div>
-      <div class="input-euro"><input type="number" name="autonomo_ingresos" placeholder="0"></div>
-    </div>
-
-    <div class="cond-field" id="sl_detail">
-      <div class="q-label">Название компании (SL/SA)</div>
-      <input type="text" name="sl_nombre" placeholder="Nombre S.L." style="max-width:100%">
-      <div style="height:10px"></div>
-      <div class="q-label">Ваша роль в компании</div>
-      <div class="radio-group inline">
-        <label class="radio-option"><input type="radio" name="sl_rol" value="administrador"> Administrador (директор)</label>
-        <label class="radio-option"><input type="radio" name="sl_rol" value="socio"> Socio (участник)</label>
-        <label class="radio-option"><input type="radio" name="sl_rol" value="ambos"> Оба</label>
-      </div>
-    </div>
-
-    <div class="cond-field" id="asalariado_detail">
-      <div class="q-label">Сколько работодателей (pagadores) было в 2025 году?</div>
-      <div class="radio-group inline">
-        <label class="radio-option"><input type="radio" name="num_pagadores" value="1"> 1</label>
-        <label class="radio-option"><input type="radio" name="num_pagadores" value="2+"> 2 и более</label>
-      </div>
-    </div>
-
-    <div class="question">
-      <div class="q-label">Примерный общий доход за 2025 год (до налогов)</div>
-      <div class="radio-group">
-        <label class="radio-option"><input type="radio" name="ingresos_aprox" value="<15000"> До 15 000 €</label>
-        <label class="radio-option"><input type="radio" name="ingresos_aprox" value="15-22000"> 15 000 — 22 000 €</label>
-        <label class="radio-option"><input type="radio" name="ingresos_aprox" value="22-30000"> 22 000 — 30 000 €</label>
-        <label class="radio-option"><input type="radio" name="ingresos_aprox" value="30-50000"> 30 000 — 50 000 €</label>
-        <label class="radio-option"><input type="radio" name="ingresos_aprox" value=">50000"> Свыше 50 000 €</label>
-      </div>
-    </div>
-
-    <div class="question">
-      <div class="q-label">Есть ли у вас доходы от аренды недвижимости?</div>
-      <div class="radio-group inline">
-        <label class="radio-option"><input type="radio" name="ingresos_alquiler" value="si" onchange="toggleCond('alquiler_ingreso_det')"> Да</label>
-        <label class="radio-option"><input type="radio" name="ingresos_alquiler" value="no" onchange="closeCond('alquiler_ingreso_det')"> Нет</label>
-      </div>
-      <div class="cond-field" id="alquiler_ingreso_det">
-        <div class="q-label">Примерная сумма дохода от аренды за 2025 год</div>
-        <div class="input-euro"><input type="number" name="alquiler_ingreso_importe" placeholder="0"></div>
+      <div class="income-col">
+        <div class="income-col-title">Супруг / Супруга</div>
+        <div class="question">
+          <div class="q-label">Источники дохода супруга/супруги</div>
+          <div class="q-hint">Можно выбрать несколько вариантов</div>
+          <div class="checkbox-group">
+            <label class="check-option"><input type="checkbox" name="conyuge_status_autonomo" value="si"> Autónomo (самозанятый)</label>
+            <label class="check-option"><input type="checkbox" name="conyuge_status_sl" value="si"> Socio de SL (autónomo societario)</label>
+            <label class="check-option"><input type="checkbox" name="conyuge_status_comunidad" value="si"> Comunidad de Bienes</label>
+            <label class="check-option"><input type="checkbox" name="conyuge_status_asalariado" value="si" onchange="toggleIfChecked(this, 'conyuge_asalariado_detail')"> Asalariado (наёмный работник)</label>
+            <label class="check-option"><input type="checkbox" name="conyuge_status_pension" value="si"> Пенсия</label>
+            <label class="check-option"><input type="checkbox" name="conyuge_status_paro" value="si"> Paro</label>
+            <label class="check-option"><input type="checkbox" name="conyuge_status_alquiler" value="si"> Доход от аренды</label>
+            <label class="check-option"><input type="checkbox" name="conyuge_status_capital" value="si"> Продажа активов / акции / крипто</label>
+            <label class="check-option"><input type="checkbox" name="conyuge_status_ninguno" value="si"> Без трудовой деятельности</label>
+          </div>
+          <div class="cond-field" id="conyuge_asalariado_detail">
+            <div class="q-label">Сколько работодателей у супруга/супруги?</div>
+            <div class="radio-group inline">
+              <label class="radio-option"><input type="radio" name="conyuge_num_pagadores" value="1"> 1</label>
+              <label class="radio-option"><input type="radio" name="conyuge_num_pagadores" value="2+"> 2 и более</label>
+            </div>
+          </div>
+        </div>
+        <div class="question">
+          <div class="q-label">Комментарии по доходам супруга/супруги</div>
+          <textarea name="comentarios_ingresos_conyuge" placeholder="Дополнительная информация о доходах супруга/супруги…"></textarea>
+        </div>
       </div>
     </div>
 
@@ -783,16 +858,6 @@
       <div class="radio-group inline">
         <label class="radio-option"><input type="radio" name="ganancias_capital" value="si"> Да</label>
         <label class="radio-option"><input type="radio" name="ganancias_capital" value="no"> Нет</label>
-      </div>
-    </div>
-
-    <div class="question">
-      <div class="q-label">Получали ли пенсию или пособие по безработице (paro) в 2025 году?</div>
-      <div class="radio-group inline">
-        <label class="radio-option"><input type="radio" name="pension_paro" value="pension"> Пенсию</label>
-        <label class="radio-option"><input type="radio" name="pension_paro" value="paro"> Paro</label>
-        <label class="radio-option"><input type="radio" name="pension_paro" value="ambos"> Оба</label>
-        <label class="radio-option"><input type="radio" name="pension_paro" value="no"> Нет</label>
       </div>
     </div>
 
@@ -813,22 +878,6 @@
   <div class="questions-wrap">
 
     <div class="question">
-      <div class="q-label">Есть ли дети МЛАДШЕ 3 лет на 31.12.2025?</div>
-      <div class="radio-group inline">
-        <label class="radio-option"><input type="radio" name="hijos_menores_3" value="si"> Да</label>
-        <label class="radio-option"><input type="radio" name="hijos_menores_3" value="no"> Нет</label>
-      </div>
-    </div>
-
-    <div class="question">
-      <div class="q-label">Есть ли дети в возрасте от 3 до 5 лет?</div>
-      <div class="radio-group inline">
-        <label class="radio-option"><input type="radio" name="hijos_menores_5" value="si"> Да</label>
-        <label class="radio-option"><input type="radio" name="hijos_menores_5" value="no"> Нет</label>
-      </div>
-    </div>
-
-    <div class="question">
       <div class="q-label">Родился или усыновлён ребёнок в 2025 году?</div>
       <div class="radio-group inline">
         <label class="radio-option"><input type="radio" name="nacimiento_2025" value="si"> Да</label>
@@ -847,8 +896,8 @@
     <div class="question">
       <div class="q-label">Есть ли у вас статус многодетной семьи (familia numerosa)?</div>
       <div class="radio-group">
-        <label class="radio-option"><input type="radio" name="familia_numerosa" value="general"> Общая категория (3–4 ребёнка)</label>
-        <label class="radio-option"><input type="radio" name="familia_numerosa" value="especial"> Особая категория (5+)</label>
+        <label class="radio-option"><input type="radio" name="familia_numerosa" value="general"> Общая категория</label>
+        <label class="radio-option"><input type="radio" name="familia_numerosa" value="especial"> Особая категория</label>
         <label class="radio-option"><input type="radio" name="familia_numerosa" value="no"> Нет</label>
       </div>
     </div>
@@ -882,19 +931,9 @@
       </div>
     </div>
 
-    <div class="question">
-      <div class="q-label">Усыновляли ли ребёнка (в том числе из-за рубежа) в 2025 году?</div>
-      <div class="radio-group inline">
-        <label class="radio-option"><input type="radio" name="adopcion" value="si" onchange="toggleCond('adopc_det')"> Да</label>
-        <label class="radio-option"><input type="radio" name="adopcion" value="no" onchange="closeCond('adopc_det')"> Нет</label>
-      </div>
-      <div class="cond-field" id="adopc_det">
-        <div class="q-label">Усыновление международное (из другой страны)?</div>
-        <div class="radio-group inline">
-          <label class="radio-option"><input type="radio" name="adopcion_internacional" value="si"> Да</label>
-          <label class="radio-option"><input type="radio" name="adopcion_internacional" value="no"> Нет</label>
-        </div>
-      </div>
+    <div class="section-comment">
+      <div class="q-label">Мои комментарии к разделу «Семья и иждивенцы»</div>
+      <textarea name="comentarios_familia" placeholder="Любые дополнительные сведения о вашей семейной ситуации…" style="max-width:100%; margin-top:6px"></textarea>
     </div>
 
   </div>
@@ -914,16 +953,6 @@
   <div class="questions-wrap">
 
     <div class="question">
-      <div class="q-label">Тип вашего жилья</div>
-      <div class="radio-group">
-        <label class="radio-option"><input type="radio" name="tipo_vivienda" value="propia_hipoteca"> Собственное, с ипотекой</label>
-        <label class="radio-option"><input type="radio" name="tipo_vivienda" value="propia_sin_hip"> Собственное, без ипотеки</label>
-        <label class="radio-option"><input type="radio" name="tipo_vivienda" value="alquiler"> Арендую</label>
-        <label class="radio-option"><input type="radio" name="tipo_vivienda" value="familiar"> Живу у родственников</label>
-      </div>
-    </div>
-
-    <div class="question">
       <div class="q-label">Если есть ипотека — куплено ли жильё ДО 1 января 2013 года?</div>
       <div class="q-tip">Переходный режим вычета за жильё — до 1 356 €/год</div>
       <div class="radio-group inline">
@@ -937,15 +966,21 @@
       <div class="q-label">Если арендуете — заключён ли договор ДО 1 января 2015 года?</div>
       <div class="q-tip">Переходный режим государственного вычета за аренду</div>
       <div class="radio-group inline">
-        <label class="radio-option"><input type="radio" name="alquiler_antes_2015" value="si"> Да, до 2015</label>
-        <label class="radio-option"><input type="radio" name="alquiler_antes_2015" value="no"> Нет</label>
-        <label class="radio-option"><input type="radio" name="alquiler_antes_2015" value="na"> Не арендую</label>
+        <label class="radio-option"><input type="radio" name="alquiler_antes_2015" value="si" onchange="toggleCond('alquiler_persona_det')"> Да, до 2015</label>
+        <label class="radio-option"><input type="radio" name="alquiler_antes_2015" value="no" onchange="toggleCond('alquiler_persona_det')"> Нет</label>
+        <label class="radio-option"><input type="radio" name="alquiler_antes_2015" value="na" onchange="closeCond('alquiler_persona_det')"> Не арендую</label>
       </div>
-    </div>
-
-    <div class="question">
-      <div class="q-label">Если арендуете — какова сумма аренды за 2025 год?</div>
-      <div class="input-euro"><input type="number" name="alquiler_pagado" placeholder="0"></div>
+      <div class="cond-field" id="alquiler_persona_det">
+        <div class="q-label">На кого заключён договор аренды?</div>
+        <div class="radio-group">
+          <label class="radio-option"><input type="radio" name="alquiler_titular" value="solo"> Только на меня</label>
+          <label class="radio-option"><input type="radio" name="alquiler_titular" value="conyuge"> На меня и супруга / супругу</label>
+          <label class="radio-option"><input type="radio" name="alquiler_titular" value="otro"> На меня и другое лицо</label>
+        </div>
+        <div style="height:8px"></div>
+        <div class="q-label">Сумма аренды за 2025 год</div>
+        <div class="input-euro"><input type="number" name="alquiler_pagado" placeholder="0"></div>
+      </div>
     </div>
 
     <div class="question">
@@ -994,22 +1029,9 @@
       </div>
     </div>
 
-    <div class="question">
-      <div class="q-label">Вы сдаёте жильё в аренду как собственник?</div>
-      <div class="radio-group inline">
-        <label class="radio-option"><input type="radio" name="es_arrendador" value="si" onchange="toggleCond('arrendador_det')"> Да</label>
-        <label class="radio-option"><input type="radio" name="es_arrendador" value="no" onchange="closeCond('arrendador_det')"> Нет</label>
-      </div>
-      <div class="cond-field" id="arrendador_det">
-        <div class="q-label">Жильё пустовало более 1 года до сдачи?</div>
-        <div class="radio-group inline">
-          <label class="radio-option"><input type="radio" name="vivienda_vacia" value="si"> Да</label>
-          <label class="radio-option"><input type="radio" name="vivienda_vacia" value="no"> Нет</label>
-        </div>
-        <div style="height:8px"></div>
-        <div class="q-label">Расходы на ремонт/страховку/сертификаты для сдаваемого жилья за 2025 год</div>
-        <div class="input-euro"><input type="number" name="gastos_arrendador" placeholder="0"></div>
-      </div>
+    <div class="section-comment">
+      <div class="q-label">Мои комментарии к разделу «Жильё и недвижимость»</div>
+      <textarea name="comentarios_vivienda" placeholder="Любые дополнительные сведения о вашем жилье…" style="max-width:100%; margin-top:6px"></textarea>
     </div>
 
   </div>
@@ -1094,6 +1116,130 @@
       </div>
     </div>
 
+    <div class="section-comment">
+      <div class="q-label">Мои комментарии к разделу «Государственные вычеты»</div>
+      <textarea name="comentarios_estatales" placeholder="Любые дополнительные сведения…" style="max-width:100%; margin-top:6px"></textarea>
+    </div>
+
+  </div>
+</div>
+
+<!-- ==========================================
+     БЛОК МИРОВОГО ДОХОДА — МАДРИД
+     ========================================== -->
+<div class="form-section province-section" id="world_income_madrid" data-province="madrid">
+  <div class="section-header">
+    <div class="section-num orange">★</div>
+    <div>
+      <h2>Доходы и имущество из других стран</h2>
+      <p>Заполните, если в 2025 году были доходы или активы за пределами Испании</p>
+    </div>
+  </div>
+  <div class="questions-wrap">
+    <div class="q-tip" style="margin-bottom:8px">Эта информация касается как заявителя, так и супруга/супруги</div>
+
+    <div class="block0-group-title">Autónomo / деятельность в другой стране</div>
+    <div class="question">
+      <div class="q-label">Осуществляли ли вы деятельность как самозанятый в другой стране в 2025 году?</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="ext_autonomo" value="si" onchange="toggleCond('ext_auto_det')"> Да</label>
+        <label class="radio-option"><input type="radio" name="ext_autonomo" value="no" onchange="closeCond('ext_auto_det')"> Нет</label>
+      </div>
+      <div class="cond-field" id="ext_auto_det">
+        <div class="q-label">Вид дохода / деятельности</div>
+        <input type="text" name="ext_autonomo_tipo" placeholder="Например: консультации, разработка…" style="max-width:100%">
+        <div style="height:8px"></div>
+        <div class="q-label">Сумма выставленных фактур (€)</div>
+        <div class="input-euro"><input type="number" name="ext_autonomo_ingresos" placeholder="0"></div>
+        <div style="height:8px"></div>
+        <div class="q-label">Сумма расходов (€)</div>
+        <div class="input-euro"><input type="number" name="ext_autonomo_gastos" placeholder="0"></div>
+        <div style="height:8px"></div>
+        <div class="q-label">Налог, уплаченный в другой стране (€)</div>
+        <div class="input-euro"><input type="number" name="ext_autonomo_impuesto" placeholder="0"></div>
+      </div>
+    </div>
+
+    <div class="block0-group-title" style="margin-top:16px">Заработная плата из другой страны</div>
+    <div class="question">
+      <div class="q-label">Получали ли вы зарплату от иностранного работодателя в 2025 году?</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="ext_salario" value="si" onchange="toggleCond('ext_sal_det')"> Да</label>
+        <label class="radio-option"><input type="radio" name="ext_salario" value="no" onchange="closeCond('ext_sal_det')"> Нет</label>
+      </div>
+      <div class="cond-field" id="ext_sal_det">
+        <div class="q-label">Сумма дохода (€)</div>
+        <div class="input-euro"><input type="number" name="ext_salario_importe" placeholder="0"></div>
+        <div style="height:8px"></div>
+        <div class="q-label">Налог, уплаченный в другой стране (€)</div>
+        <div class="input-euro"><input type="number" name="ext_salario_impuesto" placeholder="0"></div>
+      </div>
+    </div>
+
+    <div class="block0-group-title" style="margin-top:16px">Недвижимость в другой стране</div>
+    <div class="question">
+      <div class="q-label">Продавали ли вы недвижимость в другой стране в 2025 году?</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="ext_venta_inmueble" value="si"> Да</label>
+        <label class="radio-option"><input type="radio" name="ext_venta_inmueble" value="no"> Нет</label>
+      </div>
+    </div>
+    <div class="question">
+      <div class="q-label">Сдавали ли вы недвижимость в другой стране в аренду в 2025 году?</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="ext_alquiler_inmueble" value="si" onchange="toggleCond('ext_alq_det')"> Да</label>
+        <label class="radio-option"><input type="radio" name="ext_alquiler_inmueble" value="no" onchange="closeCond('ext_alq_det')"> Нет</label>
+      </div>
+      <div class="cond-field" id="ext_alq_det">
+        <div class="q-label">Сумма дохода от аренды (€)</div>
+        <div class="input-euro"><input type="number" name="ext_alquiler_importe" placeholder="0"></div>
+      </div>
+    </div>
+    <div class="question">
+      <div class="q-label">Есть ли у вас недвижимость в другой стране, которая пустует и не сдаётся?</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="ext_inmueble_vacio" value="si"> Да</label>
+        <label class="radio-option"><input type="radio" name="ext_inmueble_vacio" value="no"> Нет</label>
+      </div>
+    </div>
+
+    <div class="block0-group-title" style="margin-top:16px">Акции, дивиденды и финансовые доходы из других стран</div>
+    <div class="question">
+      <div class="q-label">Продавали ли вы акции или другие финансовые активы в другой стране в 2025 году?</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="ext_venta_acciones" value="si"> Да</label>
+        <label class="radio-option"><input type="radio" name="ext_venta_acciones" value="no"> Нет</label>
+      </div>
+    </div>
+    <div class="question">
+      <div class="q-label">Получали ли дивиденды из другой страны в 2025 году?</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="ext_dividendos" value="si" onchange="toggleCond('ext_div_det')"> Да</label>
+        <label class="radio-option"><input type="radio" name="ext_dividendos" value="no" onchange="closeCond('ext_div_det')"> Нет</label>
+      </div>
+      <div class="cond-field" id="ext_div_det">
+        <div class="q-label">Сумма дивидендов (€)</div>
+        <div class="input-euro"><input type="number" name="ext_dividendos_importe" placeholder="0"></div>
+      </div>
+    </div>
+
+    <div class="block0-group-title" style="margin-top:16px">Лотерея / призы в другой стране</div>
+    <div class="question">
+      <div class="q-label">Получали ли вы выигрыш в лотерею или иной приз в другой стране в 2025 году?</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="ext_loteria" value="si" onchange="toggleCond('ext_lot_det')"> Да</label>
+        <label class="radio-option"><input type="radio" name="ext_loteria" value="no" onchange="closeCond('ext_lot_det')"> Нет</label>
+      </div>
+      <div class="cond-field" id="ext_lot_det">
+        <div class="q-label">Сумма выигрыша (€)</div>
+        <div class="input-euro"><input type="number" name="ext_loteria_importe" placeholder="0"></div>
+      </div>
+    </div>
+
+    <div class="section-comment">
+      <div class="q-label">Мои комментарии по иностранным доходам</div>
+      <textarea name="comentarios_mundial" placeholder="Страна, вид дохода, дополнительные сведения…" style="max-width:100%; margin-top:6px"></textarea>
+    </div>
   </div>
 </div>
 
@@ -1231,11 +1377,30 @@
     </div>
 
     <div class="question">
-      <div class="q-label">Вы переехали в Мадрид из-за рубежа с 01.01.2024 и не жили в Испании 5+ лет?</div>
-      <div class="q-tip">«Закон Мбаппе» — вычет 20% от инвестиций в ценные бумаги</div>
-      <div class="radio-group inline">
-        <label class="radio-option"><input type="radio" name="mad_mbape" value="si"> Да</label>
-        <label class="radio-option"><input type="radio" name="mad_mbape" value="no"> Нет</label>
+      <div class="q-label">Вычет за инвестиции в ценные бумаги («Закон Мбаппе»)</div>
+      <div class="q-hint">Применяется если вы переехали в Мадрид из-за рубежа с 01.01.2024 и не жили в Испании 5+ лет</div>
+      <div class="q-tip">Вычет 20% от инвестиций в котируемые ценные бумаги</div>
+      <div class="question" style="margin-top:10px">
+        <div class="q-label">Осуществляли ли вы в 2025 году инвестиции в акции, доли или иные обращающиеся ценные бумаги?</div>
+        <div class="radio-group inline">
+          <label class="radio-option"><input type="radio" name="mad_mbape" value="si" onchange="toggleCond('mad_mbape_det')"> Да</label>
+          <label class="radio-option"><input type="radio" name="mad_mbape" value="no" onchange="closeCond('mad_mbape_det')"> Нет</label>
+        </div>
+      </div>
+      <div class="cond-field" id="mad_mbape_det">
+        <div class="q-label">Тип инвестиции (можно выбрать несколько)</div>
+        <div class="checkbox-group">
+          <label class="check-option"><input type="checkbox" name="mad_mbape_tipo" value="cotizadas"> Котируемые акции</label>
+          <label class="check-option"><input type="checkbox" name="mad_mbape_tipo" value="participaciones"> Доли участия в некотируемых компаниях</label>
+          <label class="check-option"><input type="checkbox" name="mad_mbape_tipo" value="startups"> Стартапы / компании на ранней стадии</label>
+          <label class="check-option"><input type="checkbox" name="mad_mbape_tipo" value="otro"> Другое</label>
+        </div>
+        <div style="height:10px"></div>
+        <div class="q-label">Дата или даты инвестиции</div>
+        <input type="text" name="mad_mbape_fecha" placeholder="Например: 15/03/2025" />
+        <div style="height:8px"></div>
+        <div class="q-label">Общий объём инвестиций (без учёта расходов)</div>
+        <div class="input-euro"><input type="number" name="mad_mbape_importe" placeholder="0"></div>
       </div>
     </div>
 
@@ -1354,6 +1519,79 @@
       </div>
     </div>
 
+    <div class="section-comment">
+      <div class="q-label">Мои комментарии к региональным вычетам Мадрида</div>
+      <textarea name="comentarios_madrid" placeholder="Любые дополнительные сведения…" style="max-width:100%; margin-top:6px"></textarea>
+    </div>
+
+  </div>
+</div>
+
+<!-- ==========================================
+     МИРОВОЙ ДОХОД — ВАЛЕНСИЯ
+     ========================================== -->
+<div class="form-section province-section" id="world_income_valencia" data-province="valencia">
+  <div class="section-header">
+    <div class="section-num orange">★</div>
+    <div>
+      <h2>Доходы и имущество из других стран</h2>
+      <p>Заполните, если в 2025 году были доходы или активы за пределами Испании</p>
+    </div>
+  </div>
+  <div class="questions-wrap">
+    <div class="q-tip" style="margin-bottom:8px">Эта информация касается как заявителя, так и супруга/супруги</div>
+    <div class="question">
+      <div class="q-label">Осуществляли ли вы деятельность как самозанятый в другой стране в 2025 году?</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="val_ext_autonomo" value="si" onchange="toggleCond('val_ext_auto_det')"> Да</label>
+        <label class="radio-option"><input type="radio" name="val_ext_autonomo" value="no" onchange="closeCond('val_ext_auto_det')"> Нет</label>
+      </div>
+      <div class="cond-field" id="val_ext_auto_det">
+        <div class="q-label">Вид деятельности / доход</div><input type="text" name="val_ext_auto_tipo" placeholder="Например: консультации…" style="max-width:100%">
+        <div class="q-label" style="margin-top:8px">Сумма фактур (€)</div><div class="input-euro"><input type="number" name="val_ext_auto_ingresos" placeholder="0"></div>
+        <div class="q-label" style="margin-top:8px">Расходы (€)</div><div class="input-euro"><input type="number" name="val_ext_auto_gastos" placeholder="0"></div>
+        <div class="q-label" style="margin-top:8px">Налог в другой стране (€)</div><div class="input-euro"><input type="number" name="val_ext_auto_impuesto" placeholder="0"></div>
+      </div>
+    </div>
+    <div class="question">
+      <div class="q-label">Получали ли зарплату от иностранного работодателя в 2025 году?</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="val_ext_salario" value="si" onchange="toggleCond('val_ext_sal_det')"> Да</label>
+        <label class="radio-option"><input type="radio" name="val_ext_salario" value="no" onchange="closeCond('val_ext_sal_det')"> Нет</label>
+      </div>
+      <div class="cond-field" id="val_ext_sal_det">
+        <div class="q-label">Сумма дохода (€)</div><div class="input-euro"><input type="number" name="val_ext_salario_importe" placeholder="0"></div>
+        <div class="q-label" style="margin-top:8px">Налог в другой стране (€)</div><div class="input-euro"><input type="number" name="val_ext_salario_impuesto" placeholder="0"></div>
+      </div>
+    </div>
+    <div class="question">
+      <div class="q-label">Продавали ли недвижимость в другой стране в 2025 году?</div>
+      <div class="radio-group inline"><label class="radio-option"><input type="radio" name="val_ext_venta_inmueble" value="si"> Да</label><label class="radio-option"><input type="radio" name="val_ext_venta_inmueble" value="no"> Нет</label></div>
+    </div>
+    <div class="question">
+      <div class="q-label">Сдавали ли недвижимость за рубежом в аренду в 2025 году?</div>
+      <div class="radio-group inline"><label class="radio-option"><input type="radio" name="val_ext_alquiler" value="si"> Да</label><label class="radio-option"><input type="radio" name="val_ext_alquiler" value="no"> Нет</label></div>
+    </div>
+    <div class="question">
+      <div class="q-label">Есть ли у вас пустующая недвижимость за рубежом?</div>
+      <div class="radio-group inline"><label class="radio-option"><input type="radio" name="val_ext_inmueble_vacio" value="si"> Да</label><label class="radio-option"><input type="radio" name="val_ext_inmueble_vacio" value="no"> Нет</label></div>
+    </div>
+    <div class="question">
+      <div class="q-label">Продавали ли акции или другие финансовые активы за рубежом в 2025 году?</div>
+      <div class="radio-group inline"><label class="radio-option"><input type="radio" name="val_ext_acciones" value="si"> Да</label><label class="radio-option"><input type="radio" name="val_ext_acciones" value="no"> Нет</label></div>
+    </div>
+    <div class="question">
+      <div class="q-label">Получали ли дивиденды из другой страны в 2025 году?</div>
+      <div class="radio-group inline"><label class="radio-option"><input type="radio" name="val_ext_dividendos" value="si"> Да</label><label class="radio-option"><input type="radio" name="val_ext_dividendos" value="no"> Нет</label></div>
+    </div>
+    <div class="question">
+      <div class="q-label">Получали ли выигрыш в лотерею или приз в другой стране в 2025 году?</div>
+      <div class="radio-group inline"><label class="radio-option"><input type="radio" name="val_ext_loteria" value="si"> Да</label><label class="radio-option"><input type="radio" name="val_ext_loteria" value="no"> Нет</label></div>
+    </div>
+    <div class="section-comment">
+      <div class="q-label">Мои комментарии по иностранным доходам</div>
+      <textarea name="val_comentarios_mundial" placeholder="Страна, вид дохода, дополнительные сведения…" style="max-width:100%; margin-top:6px"></textarea>
+    </div>
   </div>
 </div>
 
@@ -1364,7 +1602,7 @@
   <div class="section-header">
     <div class="section-num orange">4</div>
     <div>
-      <h2>Региональные вычеты — Валенсия / Аликанте</h2>
+      <h2>Региональные вычеты — Валенсия</h2>
       <p>Льготы Comunitat Valenciana</p>
     </div>
   </div>
@@ -1444,8 +1682,8 @@
     </div>
 
     <div class="question">
-      <div class="q-label">Купили ли велосипед, электровелосипед или самокат в 2025 году?</div>
-      <div class="q-tip">Вычет 10% от покупки: до 154 € за электровелосипед</div>
+      <div class="q-label">Купили ли вы велосипед, электровелосипед или самокат в 2025 году?</div>
+      <div class="q-hint">Только новый, оплата безналичным способом, при наличии фактуры</div>
       <div class="radio-group inline">
         <label class="radio-option"><input type="radio" name="val_bicicleta" value="si" onchange="toggleCond('val_bici_det')"> Да</label>
         <label class="radio-option"><input type="radio" name="val_bicicleta" value="no" onchange="closeCond('val_bici_det')"> Нет</label>
@@ -1465,6 +1703,7 @@
 
     <div class="question">
       <div class="q-label">Оплачивали ли спортзал или спортивный клуб (за себя или членов семьи)?</div>
+      <div class="q-hint">Только при оплате безналичным способом и при наличии фактуры</div>
       <div class="q-tip">Вычет 30% от расходов на спорт и здоровье</div>
       <div class="radio-group inline">
         <label class="radio-option"><input type="radio" name="val_deporte" value="si" onchange="toggleCond('val_dep_det')"> Да</label>
@@ -1477,7 +1716,8 @@
     </div>
 
     <div class="question">
-      <div class="q-label">Несли ли расходы на стоматолога (не эстетику), психолога или очки/линзы?</div>
+      <div class="q-label">Несли ли расходы на стоматолога (не эстетику), психолога или очки/линзы и растворы для линз?</div>
+      <div class="q-hint">Только при оплате безналичным способом и при наличии фактуры</div>
       <div class="q-tip">Вычет 30% от медицинских расходов (до 150 € за каждый тип)</div>
       <div class="radio-group inline">
         <label class="radio-option"><input type="radio" name="val_salud" value="si" onchange="toggleCond('val_salud_det')"> Да</label>
@@ -1487,7 +1727,7 @@
         <div class="checkbox-group">
           <label class="check-option"><input type="checkbox" name="val_salud_tipo" value="dental"> Стоматолог (не эстетика)</label>
           <label class="check-option"><input type="checkbox" name="val_salud_tipo" value="psicologo"> Психолог</label>
-          <label class="check-option"><input type="checkbox" name="val_salud_tipo" value="gafas"> Очки / контактные линзы</label>
+          <label class="check-option"><input type="checkbox" name="val_salud_tipo" value="gafas"> Очки / контактные линзы / растворы для линз</label>
         </div>
         <div style="height:8px"></div>
         <div class="q-label">Общая сумма медицинских расходов</div>
@@ -1497,6 +1737,7 @@
 
     <div class="question">
       <div class="q-label">Несёте ли расходы на музыкальное образование или покупали музыкальные инструменты?</div>
+      <div class="q-hint">Только при оплате безналичным способом и при наличии фактуры</div>
       <div class="q-tip">Вычет за музыкальное образование и инструменты — ст. 4.Uno.ae Закона 13/1997</div>
       <div class="radio-group inline">
         <label class="radio-option"><input type="radio" name="val_musica" value="si" onchange="toggleCond('val_mus_det')"> Да</label>
@@ -1765,6 +2006,55 @@
       </div>
     </div>
 
+    <div class="section-comment">
+      <div class="q-label">Мои комментарии к региональным вычетам Валенсии</div>
+      <textarea name="comentarios_valencia" placeholder="Любые дополнительные сведения…" style="max-width:100%; margin-top:6px"></textarea>
+    </div>
+
+  </div>
+</div>
+
+<!-- ==========================================
+     МИРОВОЙ ДОХОД — АНДАЛУСИЯ
+     ========================================== -->
+<div class="form-section province-section" id="world_income_andalucia" data-province="andalucia">
+  <div class="section-header">
+    <div class="section-num orange">★</div>
+    <div>
+      <h2>Доходы и имущество из других стран</h2>
+      <p>Заполните, если в 2025 году были доходы или активы за пределами Испании</p>
+    </div>
+  </div>
+  <div class="questions-wrap">
+    <div class="q-tip" style="margin-bottom:8px">Эта информация касается как заявителя, так и супруга/супруги</div>
+    <div class="question">
+      <div class="q-label">Осуществляли ли вы деятельность как самозанятый в другой стране в 2025 году?</div>
+      <div class="radio-group inline"><label class="radio-option"><input type="radio" name="and_ext_autonomo" value="si" onchange="toggleCond('and_ext_auto_det')"> Да</label><label class="radio-option"><input type="radio" name="and_ext_autonomo" value="no" onchange="closeCond('and_ext_auto_det')"> Нет</label></div>
+      <div class="cond-field" id="and_ext_auto_det">
+        <div class="q-label">Вид деятельности</div><input type="text" name="and_ext_auto_tipo" placeholder="…" style="max-width:100%">
+        <div class="q-label" style="margin-top:8px">Сумма фактур (€)</div><div class="input-euro"><input type="number" name="and_ext_auto_ingresos" placeholder="0"></div>
+        <div class="q-label" style="margin-top:8px">Расходы (€)</div><div class="input-euro"><input type="number" name="and_ext_auto_gastos" placeholder="0"></div>
+        <div class="q-label" style="margin-top:8px">Налог в другой стране (€)</div><div class="input-euro"><input type="number" name="and_ext_auto_impuesto" placeholder="0"></div>
+      </div>
+    </div>
+    <div class="question">
+      <div class="q-label">Получали ли зарплату от иностранного работодателя в 2025 году?</div>
+      <div class="radio-group inline"><label class="radio-option"><input type="radio" name="and_ext_salario" value="si" onchange="toggleCond('and_ext_sal_det')"> Да</label><label class="radio-option"><input type="radio" name="and_ext_salario" value="no" onchange="closeCond('and_ext_sal_det')"> Нет</label></div>
+      <div class="cond-field" id="and_ext_sal_det">
+        <div class="q-label">Сумма дохода (€)</div><div class="input-euro"><input type="number" name="and_ext_salario_importe" placeholder="0"></div>
+        <div class="q-label" style="margin-top:8px">Налог в другой стране (€)</div><div class="input-euro"><input type="number" name="and_ext_salario_impuesto" placeholder="0"></div>
+      </div>
+    </div>
+    <div class="question"><div class="q-label">Продавали ли недвижимость в другой стране в 2025 году?</div><div class="radio-group inline"><label class="radio-option"><input type="radio" name="and_ext_venta" value="si"> Да</label><label class="radio-option"><input type="radio" name="and_ext_venta" value="no"> Нет</label></div></div>
+    <div class="question"><div class="q-label">Сдавали ли недвижимость за рубежом в аренду?</div><div class="radio-group inline"><label class="radio-option"><input type="radio" name="and_ext_alquiler" value="si"> Да</label><label class="radio-option"><input type="radio" name="and_ext_alquiler" value="no"> Нет</label></div></div>
+    <div class="question"><div class="q-label">Есть ли пустующая недвижимость за рубежом?</div><div class="radio-group inline"><label class="radio-option"><input type="radio" name="and_ext_vacio" value="si"> Да</label><label class="radio-option"><input type="radio" name="and_ext_vacio" value="no"> Нет</label></div></div>
+    <div class="question"><div class="q-label">Продавали ли акции или финансовые активы за рубежом?</div><div class="radio-group inline"><label class="radio-option"><input type="radio" name="and_ext_acciones" value="si"> Да</label><label class="radio-option"><input type="radio" name="and_ext_acciones" value="no"> Нет</label></div></div>
+    <div class="question"><div class="q-label">Получали ли дивиденды из другой страны?</div><div class="radio-group inline"><label class="radio-option"><input type="radio" name="and_ext_dividendos" value="si"> Да</label><label class="radio-option"><input type="radio" name="and_ext_dividendos" value="no"> Нет</label></div></div>
+    <div class="question"><div class="q-label">Получали ли выигрыш в лотерею или приз за рубежом?</div><div class="radio-group inline"><label class="radio-option"><input type="radio" name="and_ext_loteria" value="si"> Да</label><label class="radio-option"><input type="radio" name="and_ext_loteria" value="no"> Нет</label></div></div>
+    <div class="section-comment">
+      <div class="q-label">Мои комментарии по иностранным доходам</div>
+      <textarea name="and_comentarios_mundial" placeholder="Страна, вид дохода, дополнительные сведения…" style="max-width:100%; margin-top:6px"></textarea>
+    </div>
   </div>
 </div>
 
@@ -1809,15 +2099,30 @@
     </div>
 
     <div class="question">
-      <div class="q-label">Дети несут расходы на изучение иностранных языков или информатики?</div>
+      <div class="q-label">Несли ли вы в 2025 году расходы на изучение иностранных языков для детей?</div>
+      <div class="q-hint">Учитываются только расходы, оплаченные безналичным способом и при наличии фактуры</div>
       <div class="q-tip">Вычет 15% от расходов, до 150 €/ребёнка</div>
       <div class="radio-group inline">
         <label class="radio-option"><input type="radio" name="and_idiomas" value="si" onchange="toggleCond('and_idiom_det')"> Да</label>
         <label class="radio-option"><input type="radio" name="and_idiomas" value="no" onchange="closeCond('and_idiom_det')"> Нет</label>
       </div>
       <div class="cond-field" id="and_idiom_det">
-        <div class="q-label">Сумма расходов на языки / IT детей в 2025 году</div>
+        <div class="q-label">Сумма расходов на иностранные языки для детей в 2025 году</div>
         <div class="input-euro"><input type="number" name="and_idiomas_importe" placeholder="0"></div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Несли ли вы в 2025 году расходы на обучение детей в сфере информатики?</div>
+      <div class="q-hint">Учитываются только расходы, оплаченные безналичным способом и при наличии фактуры</div>
+      <div class="q-tip">Вычет 15% от расходов, до 150 €/ребёнка</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="and_informatica" value="si" onchange="toggleCond('and_info_det')"> Да</label>
+        <label class="radio-option"><input type="radio" name="and_informatica" value="no" onchange="closeCond('and_info_det')"> Нет</label>
+      </div>
+      <div class="cond-field" id="and_info_det">
+        <div class="q-label">Сумма расходов на информатику для детей в 2025 году</div>
+        <div class="input-euro"><input type="number" name="and_informatica_importe" placeholder="0"></div>
       </div>
     </div>
 
@@ -1831,7 +2136,8 @@
     </div>
 
     <div class="question">
-      <div class="q-label">Оплачивали ли взносы в спортзал или спортивный клуб (за себя, супруга или детей)?</div>
+      <div class="q-label">Оплачивали ли вы в 2025 году взносы в спортзал, спортивный клуб или спортивную секцию (за себя, супруга или детей)?</div>
+      <div class="q-hint">Учитываются только расходы, оплаченные безналичным способом и при наличии фактуры</div>
       <div class="q-tip">Вычет 15% от взносов, до 100 €/чел.</div>
       <div class="radio-group inline">
         <label class="radio-option"><input type="radio" name="and_deporte" value="si" onchange="toggleCond('and_dep_det')"> Да</label>
@@ -1844,8 +2150,9 @@
     </div>
 
     <div class="question">
-      <div class="q-label">Понесли ли ветеринарные расходы за домашнее животное в 2025 году? <span class="info-tag new">Новое</span></div>
-      <div class="q-tip">Вычет 30% от ветрасходов, до 100 €. Животное должно быть приобретено после 01.01.2025</div>
+      <div class="q-label">Понесли ли вы в 2025 году ветеринарные расходы за домашнее животное? <span class="info-tag new">Новое</span></div>
+      <div class="q-hint">Учитываются только расходы, оплаченные безналичным способом и при наличии фактуры. Животное должно быть приобретено после 01.01.2025</div>
+      <div class="q-tip">Вычет 30% от ветрасходов, до 100 €</div>
       <div class="radio-group inline">
         <label class="radio-option"><input type="radio" name="and_veterinario" value="si" onchange="toggleCond('and_vet_det')"> Да</label>
         <label class="radio-option"><input type="radio" name="and_veterinario" value="no" onchange="closeCond('and_vet_det')"> Нет</label>
@@ -2008,6 +2315,55 @@
       </div>
     </div>
 
+    <div class="section-comment">
+      <div class="q-label">Мои комментарии к региональным вычетам Андалусии</div>
+      <textarea name="comentarios_andalucia" placeholder="Любые дополнительные сведения…" style="max-width:100%; margin-top:6px"></textarea>
+    </div>
+
+  </div>
+</div>
+
+<!-- ==========================================
+     МИРОВОЙ ДОХОД — КАТАЛОНИЯ
+     ========================================== -->
+<div class="form-section province-section" id="world_income_cataluna" data-province="cataluna">
+  <div class="section-header">
+    <div class="section-num orange">★</div>
+    <div>
+      <h2>Доходы и имущество из других стран</h2>
+      <p>Заполните, если в 2025 году были доходы или активы за пределами Испании</p>
+    </div>
+  </div>
+  <div class="questions-wrap">
+    <div class="q-tip" style="margin-bottom:8px">Эта информация касается как заявителя, так и супруга/супруги</div>
+    <div class="question">
+      <div class="q-label">Осуществляли ли вы деятельность как самозанятый в другой стране в 2025 году?</div>
+      <div class="radio-group inline"><label class="radio-option"><input type="radio" name="cat_ext_autonomo" value="si" onchange="toggleCond('cat_ext_auto_det')"> Да</label><label class="radio-option"><input type="radio" name="cat_ext_autonomo" value="no" onchange="closeCond('cat_ext_auto_det')"> Нет</label></div>
+      <div class="cond-field" id="cat_ext_auto_det">
+        <div class="q-label">Вид деятельности</div><input type="text" name="cat_ext_auto_tipo" placeholder="…" style="max-width:100%">
+        <div class="q-label" style="margin-top:8px">Сумма фактур (€)</div><div class="input-euro"><input type="number" name="cat_ext_auto_ingresos" placeholder="0"></div>
+        <div class="q-label" style="margin-top:8px">Расходы (€)</div><div class="input-euro"><input type="number" name="cat_ext_auto_gastos" placeholder="0"></div>
+        <div class="q-label" style="margin-top:8px">Налог в другой стране (€)</div><div class="input-euro"><input type="number" name="cat_ext_auto_impuesto" placeholder="0"></div>
+      </div>
+    </div>
+    <div class="question">
+      <div class="q-label">Получали ли зарплату от иностранного работодателя в 2025 году?</div>
+      <div class="radio-group inline"><label class="radio-option"><input type="radio" name="cat_ext_salario" value="si" onchange="toggleCond('cat_ext_sal_det')"> Да</label><label class="radio-option"><input type="radio" name="cat_ext_salario" value="no" onchange="closeCond('cat_ext_sal_det')"> Нет</label></div>
+      <div class="cond-field" id="cat_ext_sal_det">
+        <div class="q-label">Сумма дохода (€)</div><div class="input-euro"><input type="number" name="cat_ext_salario_importe" placeholder="0"></div>
+        <div class="q-label" style="margin-top:8px">Налог в другой стране (€)</div><div class="input-euro"><input type="number" name="cat_ext_salario_impuesto" placeholder="0"></div>
+      </div>
+    </div>
+    <div class="question"><div class="q-label">Продавали ли недвижимость в другой стране в 2025 году?</div><div class="radio-group inline"><label class="radio-option"><input type="radio" name="cat_ext_venta" value="si"> Да</label><label class="radio-option"><input type="radio" name="cat_ext_venta" value="no"> Нет</label></div></div>
+    <div class="question"><div class="q-label">Сдавали ли недвижимость за рубежом в аренду?</div><div class="radio-group inline"><label class="radio-option"><input type="radio" name="cat_ext_alquiler" value="si"> Да</label><label class="radio-option"><input type="radio" name="cat_ext_alquiler" value="no"> Нет</label></div></div>
+    <div class="question"><div class="q-label">Есть ли пустующая недвижимость за рубежом?</div><div class="radio-group inline"><label class="radio-option"><input type="radio" name="cat_ext_vacio" value="si"> Да</label><label class="radio-option"><input type="radio" name="cat_ext_vacio" value="no"> Нет</label></div></div>
+    <div class="question"><div class="q-label">Продавали ли акции или финансовые активы за рубежом?</div><div class="radio-group inline"><label class="radio-option"><input type="radio" name="cat_ext_acciones" value="si"> Да</label><label class="radio-option"><input type="radio" name="cat_ext_acciones" value="no"> Нет</label></div></div>
+    <div class="question"><div class="q-label">Получали ли дивиденды из другой страны?</div><div class="radio-group inline"><label class="radio-option"><input type="radio" name="cat_ext_dividendos" value="si"> Да</label><label class="radio-option"><input type="radio" name="cat_ext_dividendos" value="no"> Нет</label></div></div>
+    <div class="question"><div class="q-label">Получали ли выигрыш в лотерею или приз за рубежом?</div><div class="radio-group inline"><label class="radio-option"><input type="radio" name="cat_ext_loteria" value="si"> Да</label><label class="radio-option"><input type="radio" name="cat_ext_loteria" value="no"> Нет</label></div></div>
+    <div class="section-comment">
+      <div class="q-label">Мои комментарии по иностранным доходам</div>
+      <textarea name="cat_comentarios_mundial" placeholder="Страна, вид дохода, дополнительные сведения…" style="max-width:100%; margin-top:6px"></textarea>
+    </div>
   </div>
 </div>
 
@@ -2220,60 +2576,12 @@
       </div>
     </div>
 
-  </div>
-</div>
-
-<!-- ==========================================
-     БЛОК 5: ДОПОЛНИТЕЛЬНО
-     ========================================== -->
-<div class="form-section" id="block5">
-  <div class="section-header">
-    <div class="section-num">5</div>
-    <div>
-      <h2>Дополнительная информация</h2>
-      <p>Документы и комментарии</p>
-    </div>
-  </div>
-  <div class="questions-wrap">
-
-    <div class="question">
-      <div class="q-label">Есть ли у вас задолженности или суммы к возврату от предыдущих лет?</div>
-      <div class="radio-group inline">
-        <label class="radio-option"><input type="radio" name="deudas_hacienda" value="si"> Да</label>
-        <label class="radio-option"><input type="radio" name="deudas_hacienda" value="no"> Нет</label>
-        <label class="radio-option"><input type="radio" name="deudas_hacienda" value="no_se"> Не знаю</label>
-      </div>
+    <div class="section-comment">
+      <div class="q-label">Мои комментарии к региональным вычетам Каталонии</div>
+      <textarea name="comentarios_cataluna" placeholder="Любые дополнительные сведения…" style="max-width:100%; margin-top:6px"></textarea>
     </div>
 
-    <div class="question">
-      <div class="q-label">Ожидаете ли получить возврат (a devolver) или доплатить (a pagar)?</div>
-      <div class="radio-group inline">
-        <label class="radio-option"><input type="radio" name="expectativa" value="devolver"> Ожидаю возврат</label>
-        <label class="radio-option"><input type="radio" name="expectativa" value="pagar"> Ожидаю доплату</label>
-        <label class="radio-option"><input type="radio" name="expectativa" value="no_se"> Не знаю</label>
-      </div>
-    </div>
-
-    <div class="question">
-      <div class="q-label">Документы, которые у вас есть</div>
-      <div class="checkbox-group">
-        <label class="check-option"><input type="checkbox" name="docs" value="certificado_retencion"> Справка об удержаниях от работодателя</label>
-        <label class="check-option"><input type="checkbox" name="docs" value="hipoteca"> Справка банка по ипотеке</label>
-        <label class="check-option"><input type="checkbox" name="docs" value="contrato_alquiler"> Договор аренды</label>
-        <label class="check-option"><input type="checkbox" name="docs" value="certificados_donaciones"> Сертификаты пожертвований</label>
-        <label class="check-option"><input type="checkbox" name="docs" value="certificados_discapacidad"> Справка об инвалидности</label>
-        <label class="check-option"><input type="checkbox" name="docs" value="libro_familia"> Книга семьи / свидетельства о рождении</label>
-        <label class="check-option"><input type="checkbox" name="docs" value="cert_energia"> Сертификат энергоэффективности</label>
-        <label class="check-option"><input type="checkbox" name="docs" value="facturas_obras"> Счета за работы / ремонт</label>
-      </div>
-    </div>
-
-    <div class="question">
-      <div class="q-label">Дополнительные комментарии для gestora</div>
-      <textarea name="comentarios" placeholder="Напишите здесь всё, что считаете важным…"></textarea>
-    </div>
-
-    <div class="submit-wrap">
+    <div class="submit-wrap" style="margin-top:24px">
       <button class="btn-submit" onclick="submitForm()">Отправить опросник</button>
       <div class="submit-note">После отправки мы свяжемся с вами для подготовки декларации с максимальной налоговой оптимизацией</div>
     </div>
@@ -2343,22 +2651,27 @@ function selectProvince(province, btn) {
   document.querySelectorAll('.province-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
 
-  // Показываем все базовые блоки
-  ['block0','block1','block2','block3','block5'].forEach(id => {
+  // Показываем все базовые блоки (без block5 — он удалён)
+  ['block0','block1','block2','block3'].forEach(id => {
     const el = document.getElementById(id);
     if (el) { el.classList.add('visible'); el.style.display = 'block'; }
   });
 
-  // Скрываем все региональные, показываем нужный
+  // Скрываем все региональные и мировые блоки
   document.querySelectorAll('.province-section').forEach(s => {
     s.classList.remove('active','visible');
     s.style.display = 'none';
   });
-  const target = document.getElementById('block_' + province);
-  if (target) {
-    target.classList.add('active','visible');
-    target.style.display = 'block';
-  }
+
+  // Показываем нужные блоки для выбранной провинции
+  const toShow = [
+    'world_income_' + province,
+    'block_' + province
+  ];
+  toShow.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) { el.classList.add('active','visible'); el.style.display = 'block'; }
+  });
 
   updateProgress();
   const hint = document.getElementById('provinceHint');
