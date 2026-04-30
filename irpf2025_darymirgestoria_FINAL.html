@@ -404,6 +404,63 @@
     letter-spacing: 1px; margin-bottom: 16px;
   }
 
+  /* ── RENTAL AUTO-CALC SUMMARY ── */
+  .alq-summary {
+    margin-top: 18px;
+    background: var(--navy);
+    padding: 16px 18px;
+    border-left: 4px solid var(--orange);
+  }
+  .alq-summary-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px; font-weight: 800;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: var(--orange); margin-bottom: 12px;
+  }
+  .alq-summary-row {
+    display: flex; justify-content: space-between;
+    font-size: 13px; color: rgba(255,255,255,0.7);
+    padding: 5px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .alq-summary-neto {
+    color: white !important;
+    font-weight: 600;
+    font-size: 14px !important;
+    border-bottom: 1px solid rgba(255,255,255,0.2) !important;
+  }
+  .alq-summary-final {
+    color: var(--orange) !important;
+    font-weight: 700;
+    font-size: 15px !important;
+    border-bottom: none !important;
+    padding-top: 8px !important;
+  }
+  .alq-summary-hint {
+    font-size: 10px; color: rgba(255,255,255,0.3);
+    margin-top: 8px; font-style: italic;
+  }
+
+  /* ── RENTAL INCOME BLOCK ── */
+  .alquiler-section-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px; font-weight: 800;
+    color: var(--navy); letter-spacing: 2px;
+    text-transform: uppercase;
+    border-bottom: 2px solid var(--navy);
+    padding-bottom: 6px; margin-bottom: 14px;
+  }
+  .alquiler-inmueble-block {
+    background: white;
+    border: 1.5px solid var(--smoke);
+    border-top: 2px solid var(--orange);
+    padding: 16px; margin-top: 8px;
+  }
+  .alquiler-inmueble-block .q-label {
+    font-size: 12px; font-weight: 600;
+    color: var(--navy); margin-bottom: 4px;
+  }
+
   /* ── SECTION COMMENT ── */
   .section-comment {
     margin-top: 20px;
@@ -796,7 +853,7 @@
             <label class="check-option"><input type="checkbox" name="status_asalariado" value="si" onchange="toggleIfChecked(this, 'asalariado_detail')"> Asalariado (наёмный работник)</label>
             <label class="check-option"><input type="checkbox" name="status_pension" value="si"> Пенсия</label>
             <label class="check-option"><input type="checkbox" name="status_paro" value="si"> Paro (пособие по безработице)</label>
-            <label class="check-option"><input type="checkbox" name="status_alquiler" value="si"> Доход от аренды недвижимости</label>
+            <label class="check-option"><input type="checkbox" name="status_alquiler" value="si" onchange="toggleIfChecked(this, 'alquiler_ingreso_detail')"> Доход от аренды недвижимости</label>
             <label class="check-option"><input type="checkbox" name="status_capital" value="si"> Продажа активов / акции / крипто</label>
             <label class="check-option"><input type="checkbox" name="status_sin_actividad" value="si"> Без трудовой деятельности</label>
           </div>
@@ -834,7 +891,7 @@
             <label class="check-option"><input type="checkbox" name="conyuge_status_asalariado" value="si" onchange="toggleIfChecked(this, 'conyuge_asalariado_detail')"> Asalariado (наёмный работник)</label>
             <label class="check-option"><input type="checkbox" name="conyuge_status_pension" value="si"> Пенсия</label>
             <label class="check-option"><input type="checkbox" name="conyuge_status_paro" value="si"> Paro</label>
-            <label class="check-option"><input type="checkbox" name="conyuge_status_alquiler" value="si"> Доход от аренды</label>
+            <label class="check-option"><input type="checkbox" name="conyuge_status_alquiler" value="si" onchange="toggleIfChecked(this, 'conyuge_alquiler_detail')"> Доход от аренды</label>
             <label class="check-option"><input type="checkbox" name="conyuge_status_capital" value="si"> Продажа активов / акции / крипто</label>
             <label class="check-option"><input type="checkbox" name="conyuge_status_ninguno" value="si"> Без трудовой деятельности</label>
           </div>
@@ -849,6 +906,126 @@
         <div class="question">
           <div class="q-label">Комментарии по доходам супруга/супруги</div>
           <textarea name="comentarios_ingresos_conyuge" placeholder="Дополнительная информация о доходах супруга/супруги…"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- АРЕНДА КАК ДОХОД — ОСНОВНОЙ ЗАЯВИТЕЛЬ (полная ширина) -->
+    <div class="cond-field" id="alquiler_ingreso_detail" style="margin-top:12px">
+      <div class="alquiler-section-title">Данные об арендуемой недвижимости — Основной заявитель</div>
+      <div class="alquiler-inmueble-block">
+        <div class="q-label">Referencia catastral объекта</div>
+        <input type="text" name="alq_ref_catastral" placeholder="Например: 1234567VK1234A0001AA" style="max-width:100%; margin-bottom:10px">
+        <div class="q-label">Адрес объекта аренды</div>
+        <input type="text" name="alq_direccion" placeholder="Calle, número, piso, localidad, CP" style="max-width:100%; margin-bottom:10px">
+        <div class="q-label">Ваша доля собственности (%)</div>
+        <input type="number" name="alq_pct_titularidad" placeholder="100" style="max-width:100px; margin-bottom:10px">
+        <div class="q-label">Год приобретения объекта</div>
+        <input type="text" name="alq_año_adquisicion" placeholder="Например: 2015" style="max-width:120px; margin-bottom:10px">
+        <div class="q-label">Кадастровая стоимость объекта (total)</div>
+        <div class="input-euro" style="margin-bottom:10px"><input type="number" name="alq_valor_catastral" placeholder="0"></div>
+        <div class="q-label">Из них кадастровая стоимость земли (suelo)</div>
+        <div class="input-euro" style="margin-bottom:10px"><input type="number" name="alq_valor_suelo" placeholder="0"></div>
+        <div class="q-label">NIF/NIE арендатора</div>
+        <input type="text" name="alq_nif_arrendatario" placeholder="X1234567A" style="margin-bottom:10px">
+        <div class="q-label">Дата начала договора аренды</div>
+        <input type="text" name="alq_fecha_contrato" placeholder="дд/мм/гггг" style="margin-bottom:10px">
+        <div class="q-label">Договор заключён ДО 26 мая 2023 года?</div>
+        <div class="radio-group inline" style="margin-bottom:10px">
+          <label class="radio-option"><input type="radio" name="alq_antes_mayo2023" value="si"> Да</label>
+          <label class="radio-option"><input type="radio" name="alq_antes_mayo2023" value="no"> Нет</label>
+        </div>
+        <div class="q-label">Использование объекта</div>
+        <div class="radio-group" style="margin-bottom:10px">
+          <label class="radio-option"><input type="radio" name="alq_uso" value="vivienda_habitual"> Жильё (основное место проживания арендатора)</label>
+          <label class="radio-option"><input type="radio" name="alq_uso" value="temporal"> Временное / посуточное</label>
+          <label class="radio-option"><input type="radio" name="alq_uso" value="otro"> Другое</label>
+        </div>
+        <div class="q-label">Количество дней сдачи в аренду в 2025 году</div>
+        <input type="number" name="alq_dias_alquilado" placeholder="0" style="max-width:100px; margin-bottom:10px">
+        <div class="q-label">Количество дней объект пустовал в 2025 году</div>
+        <input type="number" name="alq_dias_vacio" placeholder="0" style="max-width:100px; margin-bottom:10px">
+
+        <div class="q-label" style="margin-top:12px; font-weight:700; color:var(--navy)">Доходы от аренды</div>
+        <div class="q-label">Общая сумма полученного дохода за 2025 год (íntegros)</div>
+        <div class="input-euro" style="margin-bottom:10px"><input type="number" name="alq_ingresos_totales" placeholder="0" oninput="calcAlquiler()"></div>
+        <div class="q-label">Есть ли сомнительные долги (impago более 6 месяцев)?</div>
+        <div class="radio-group inline" style="margin-bottom:10px">
+          <label class="radio-option"><input type="radio" name="alq_dudoso_cobro" value="si" onchange="toggleCond('alq_dudoso_det')"> Да</label>
+          <label class="radio-option"><input type="radio" name="alq_dudoso_cobro" value="no" onchange="closeCond('alq_dudoso_det')"> Нет</label>
+        </div>
+        <div class="cond-field" id="alq_dudoso_det">
+          <div class="q-label">Сумма задолженности (€)</div>
+          <div class="input-euro"><input type="number" name="alq_dudoso_importe" placeholder="0"></div>
+        </div>
+
+        <div class="q-label" style="margin-top:12px; font-weight:700; color:var(--navy)">Вычитаемые расходы</div>
+        <div class="q-label" style="margin-top:8px">Проценты по ипотеке за объект (€)</div>
+        <div class="input-euro" style="margin-bottom:8px"><input type="number" name="alq_gasto_hipoteca" placeholder="0" oninput="calcAlquiler()"></div>
+        <div class="q-label">Ремонт и содержание (reparaciones y conservación) (€)</div>
+        <div class="input-euro" style="margin-bottom:8px"><input type="number" name="alq_gasto_reparaciones" placeholder="0" oninput="calcAlquiler()"></div>
+        <div class="q-label">IBI и муниципальные сборы (€)</div>
+        <div class="input-euro" style="margin-bottom:8px"><input type="number" name="alq_gasto_ibi" placeholder="0" oninput="calcAlquiler()"></div>
+        <div class="q-label">Gastos de comunidad y derramas (€)</div>
+        <div class="input-euro" style="margin-bottom:8px"><input type="number" name="alq_gasto_comunidad" placeholder="0" oninput="calcAlquiler()"></div>
+        <div class="q-label">Страховка жилья (seguro del hogar) (€)</div>
+        <div class="input-euro" style="margin-bottom:8px"><input type="number" name="alq_gasto_seguro" placeholder="0" oninput="calcAlquiler()"></div>
+        <div class="q-label">Коммунальные услуги, оплачиваемые собственником (€)</div>
+        <div class="input-euro" style="margin-bottom:8px"><input type="number" name="alq_gasto_suministros" placeholder="0" oninput="calcAlquiler()"></div>
+        <div class="q-label">Амортизация недвижимости — 3% от кадастровой стоимости строения (€)</div>
+        <div class="input-euro" style="margin-bottom:8px"><input type="number" name="alq_gasto_amort_inmueble" placeholder="0" oninput="calcAlquiler()"></div>
+        <div class="q-label">Амортизация мебели и предметов обихода — 10% (€)</div>
+        <div class="input-euro" style="margin-bottom:8px"><input type="number" name="alq_gasto_amort_muebles" placeholder="0" oninput="calcAlquiler()"></div>
+        <div class="q-label">Расходы на gestión / оформление договора (€)</div>
+        <div class="input-euro" style="margin-bottom:8px"><input type="number" name="alq_gasto_gestion" placeholder="0" oninput="calcAlquiler()"></div>
+        <div class="q-label">Расходы прошлых лет, не учтённые ранее (€)</div>
+        <div class="input-euro" style="margin-bottom:8px"><input type="number" name="alq_gasto_anteriores" placeholder="0" oninput="calcAlquiler()"></div>
+
+        <div class="q-label" style="margin-top:12px; font-weight:700; color:var(--navy)">Применяемый вычет</div>
+        <div class="radio-group" style="margin-top:6px">
+          <label class="radio-option"><input type="radio" name="alq_reduccion" value="90" onchange="calcAlquiler()"> 90% — Zona tensionada, снижение аренды более 5%</label>
+          <label class="radio-option"><input type="radio" name="alq_reduccion" value="70" onchange="calcAlquiler()"> 70% — Zona tensionada, арендатор молодой (18–35 лет)</label>
+          <label class="radio-option"><input type="radio" name="alq_reduccion" value="60" onchange="calcAlquiler()"> 60% — Реабилитация или договор до мая 2023</label>
+          <label class="radio-option"><input type="radio" name="alq_reduccion" value="50" onchange="calcAlquiler()"> 50% — Общий случай</label>
+          <label class="radio-option"><input type="radio" name="alq_reduccion" value="no_se"> Не знаю — нужна консультация</label>
+        </div>
+
+        <div class="alq-summary" id="alq_summary">
+          <div class="alq-summary-title">Предварительный расчёт</div>
+          <div class="alq-summary-row"><span>Доходы брутто</span><span id="alq_s_ingresos">0,00 €</span></div>
+          <div class="alq-summary-row"><span>Итого расходы</span><span id="alq_s_gastos">0,00 €</span></div>
+          <div class="alq-summary-row alq-summary-neto"><span>Rendimiento neto</span><span id="alq_s_neto">0,00 €</span></div>
+          <div class="alq-summary-row alq-summary-final"><span>После вычета</span><span id="alq_s_final">— выберите вычет</span></div>
+          <div class="alq-summary-hint">* Предварительный расчёт. Точная сумма определяется gestora.</div>
+        </div>
+
+        <div class="q-label" style="margin-top:14px; font-weight:600; color:var(--navy)">Дополнительные примечания</div>
+        <textarea name="alq_notas" placeholder="Любые дополнительные сведения об этом объекте аренды…" style="max-width:100%; margin-top:6px; min-height:70px"></textarea>
+      </div>
+    </div>
+
+    <!-- АРЕНДА КАК ДОХОД — СУПРУГ/СУПРУГА (полная ширина) -->
+    <div class="cond-field" id="conyuge_alquiler_detail" style="margin-top:12px">
+      <div class="alquiler-section-title">Данные об арендуемой недвижимости — Супруг / Супруга</div>
+      <div class="alquiler-inmueble-block">
+        <div class="q-label">Referencia catastral объекта</div>
+        <input type="text" name="conyuge_alq_ref_catastral" placeholder="Например: 1234567VK1234A0001AA" style="max-width:100%; margin-bottom:10px">
+        <div class="q-label">Адрес объекта аренды</div>
+        <input type="text" name="conyuge_alq_direccion" placeholder="Calle, número, piso, localidad, CP" style="max-width:100%; margin-bottom:10px">
+        <div class="q-label">Доля собственности (%)</div>
+        <input type="number" name="conyuge_alq_pct" placeholder="100" style="max-width:100px; margin-bottom:10px">
+        <div class="q-label">NIF/NIE арендатора</div>
+        <input type="text" name="conyuge_alq_nif_arrendatario" placeholder="X1234567A" style="margin-bottom:10px">
+        <div class="q-label">Количество дней сдачи в 2025 году</div>
+        <input type="number" name="conyuge_alq_dias" placeholder="0" style="max-width:100px; margin-bottom:10px">
+        <div class="q-label">Общая сумма полученного дохода за 2025 год (€)</div>
+        <div class="input-euro" style="margin-bottom:10px"><input type="number" name="conyuge_alq_ingresos" placeholder="0"></div>
+        <div class="q-label">Применяемый вычет</div>
+        <div class="radio-group" style="margin-top:6px">
+          <label class="radio-option"><input type="radio" name="conyuge_alq_reduccion" value="90"> 90% — Zona tensionada, снижение &gt;5%</label>
+          <label class="radio-option"><input type="radio" name="conyuge_alq_reduccion" value="70"> 70% — Zona tensionada, арендатор 18–35 лет</label>
+          <label class="radio-option"><input type="radio" name="conyuge_alq_reduccion" value="60"> 60% — Реабилитация / договор до мая 2023</label>
+          <label class="radio-option"><input type="radio" name="conyuge_alq_reduccion" value="50"> 50% — Общий случай</label>
         </div>
       </div>
     </div>
@@ -977,9 +1154,18 @@
           <label class="radio-option"><input type="radio" name="alquiler_titular" value="conyuge"> На меня и супруга / супругу</label>
           <label class="radio-option"><input type="radio" name="alquiler_titular" value="otro"> На меня и другое лицо</label>
         </div>
-        <div style="height:8px"></div>
-        <div class="q-label">Сумма аренды за 2025 год</div>
-        <div class="input-euro"><input type="number" name="alquiler_pagado" placeholder="0"></div>
+        <div style="height:10px"></div>
+        <div class="q-label">Сколько жильцов указано в договоре аренды?</div>
+        <input type="number" name="alquiler_num_inquilinos" placeholder="1" style="max-width:80px; margin-bottom:10px">
+
+        <div class="q-label">Сколько дней вы проживали в этой квартире в 2025 году?</div>
+        <input type="number" name="alquiler_dias_habitados" placeholder="365" style="max-width:100px; margin-bottom:10px">
+
+        <div class="q-label">Полная сумма аренды, оплаченная за 2025 год</div>
+        <div class="input-euro" style="margin-bottom:10px"><input type="number" name="alquiler_pagado" placeholder="0"></div>
+
+        <div class="q-label">NIE / DNI владельца жилья</div>
+        <input type="text" name="alquiler_nie_propietario" placeholder="X1234567A" style="margin-bottom:4px">
       </div>
     </div>
 
@@ -1524,6 +1710,11 @@
       <textarea name="comentarios_madrid" placeholder="Любые дополнительные сведения…" style="max-width:100%; margin-top:6px"></textarea>
     </div>
 
+    <div class="submit-wrap" style="margin-top:24px">
+      <button class="btn-submit" onclick="submitForm()">Отправить опросник</button>
+      <div class="submit-note">После отправки мы свяжемся с вами для подготовки декларации с максимальной налоговой оптимизацией</div>
+    </div>
+
   </div>
 </div>
 
@@ -2011,11 +2202,13 @@
       <textarea name="comentarios_valencia" placeholder="Любые дополнительные сведения…" style="max-width:100%; margin-top:6px"></textarea>
     </div>
 
+    <div class="submit-wrap" style="margin-top:24px">
+      <button class="btn-submit" onclick="submitForm()">Отправить опросник</button>
+      <div class="submit-note">После отправки мы свяжемся с вами для подготовки декларации с максимальной налоговой оптимизацией</div>
+    </div>
+
   </div>
 </div>
-
-<!-- ==========================================
-     МИРОВОЙ ДОХОД — АНДАЛУСИЯ
      ========================================== -->
 <div class="form-section province-section" id="world_income_andalucia" data-province="andalucia">
   <div class="section-header">
@@ -2320,11 +2513,13 @@
       <textarea name="comentarios_andalucia" placeholder="Любые дополнительные сведения…" style="max-width:100%; margin-top:6px"></textarea>
     </div>
 
+    <div class="submit-wrap" style="margin-top:24px">
+      <button class="btn-submit" onclick="submitForm()">Отправить опросник</button>
+      <div class="submit-note">После отправки мы свяжемся с вами для подготовки декларации с максимальной налоговой оптимизацией</div>
+    </div>
+
   </div>
 </div>
-
-<!-- ==========================================
-     МИРОВОЙ ДОХОД — КАТАЛОНИЯ
      ========================================== -->
 <div class="form-section province-section" id="world_income_cataluna" data-province="cataluna">
   <div class="section-header">
@@ -2609,6 +2804,59 @@ function toggleIfChecked(checkbox, condId) {
   }
   updateProgress();
 }
+
+// Авторасчёт аренды как дохода
+function calcAlquiler() {
+  const get = (name) => parseFloat(document.querySelector(`[name="${name}"]`)?.value) || 0;
+
+  const ingresos = get('alq_ingresos_totales');
+  const gastos =
+    get('alq_gasto_hipoteca') +
+    get('alq_gasto_reparaciones') +
+    get('alq_gasto_ibi') +
+    get('alq_gasto_comunidad') +
+    get('alq_gasto_seguro') +
+    get('alq_gasto_suministros') +
+    get('alq_gasto_amort_inmueble') +
+    get('alq_gasto_amort_muebles') +
+    get('alq_gasto_gestion') +
+    get('alq_gasto_anteriores');
+
+  const neto = Math.max(0, ingresos - gastos);
+
+  const reduccionRadio = document.querySelector('[name="alq_reduccion"]:checked');
+  const pct = reduccionRadio ? parseInt(reduccionRadio.value) : 0;
+  const final = pct > 0 ? neto * (1 - pct / 100) : neto;
+
+  const fmt = (n) => n.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' €';
+
+  const s = document.getElementById('alq_summary');
+  if (s) s.style.display = 'block';
+
+  const si = document.getElementById('alq_s_ingresos');
+  const sg = document.getElementById('alq_s_gastos');
+  const sn = document.getElementById('alq_s_neto');
+  const sf = document.getElementById('alq_s_final');
+
+  if (si) si.textContent = fmt(ingresos);
+  if (sg) sg.textContent = fmt(gastos);
+  if (sn) sn.textContent = fmt(neto);
+  if (sf) sf.textContent = pct > 0 ? `${fmt(final)} (−${pct}%)` : '— выберите вычет';
+}
+
+// Attach calcAlquiler to all rental expense inputs
+document.addEventListener('DOMContentLoaded', () => {
+  const alqFields = [
+    'alq_ingresos_totales','alq_gasto_hipoteca','alq_gasto_reparaciones',
+    'alq_gasto_ibi','alq_gasto_comunidad','alq_gasto_seguro',
+    'alq_gasto_suministros','alq_gasto_amort_inmueble','alq_gasto_amort_muebles',
+    'alq_gasto_gestion','alq_gasto_anteriores'
+  ];
+  alqFields.forEach(name => {
+    const el = document.querySelector(`[name="${name}"]`);
+    if (el) el.addEventListener('input', calcAlquiler);
+  });
+});
 
 // Show kid cards based on total number entered manually
 function updateKidsFromInputs() {
