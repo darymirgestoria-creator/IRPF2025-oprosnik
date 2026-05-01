@@ -441,6 +441,46 @@
     margin-top: 8px; font-style: italic;
   }
 
+  /* ── SUB-ALQUILER BLOCKS ── */
+  .sub-alquiler-block {
+    margin-top: 12px;
+    padding: 14px 16px;
+    background: rgba(26,39,68,0.05);
+    border-left: 3px solid var(--navy);
+    border-radius: 0;
+  }
+  .sub-alquiler-block .sub-titulo {
+    margin: 0 0 12px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px; font-weight: 800;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--navy);
+  }
+  .sub-alquiler-block .campo { margin-bottom: 12px; }
+  .sub-alquiler-block label {
+    display: block; margin-bottom: 4px;
+    font-size: 13px; font-weight: 600; color: var(--navy);
+  }
+  .sub-alquiler-block .hint {
+    display: block; font-size: 11px;
+    color: var(--gray-500); font-style: italic; margin-top: 2px;
+  }
+  .sub-alquiler-block input[type="number"],
+  .sub-alquiler-block input[type="text"] {
+    width: 100%; max-width: 360px;
+    padding: 8px 10px;
+    border: 0; border-bottom: 2px solid var(--gray-300);
+    font-family: 'Barlow', sans-serif; font-size: 14px;
+    color: var(--navy); background: var(--off-white);
+    outline: none; border-radius: 0;
+  }
+  .sub-alquiler-block input:focus {
+    border-bottom-color: var(--orange); background: white;
+  }
+  .sub-alquiler-block input:invalid:not(:placeholder-shown) {
+    border-bottom-color: #e53e3e;
+  }
+
   /* ── RENTAL INCOME BLOCK ── */
   .alquiler-section-title {
     font-family: 'Barlow Condensed', sans-serif;
@@ -1490,8 +1530,38 @@
       <div class="q-label">Вы младше 40 лет и арендуете основное жильё?</div>
       <div class="q-tip">Вычет 30% от аренды, до 1 237 €/год</div>
       <div class="radio-group inline">
-        <label class="radio-option"><input type="radio" name="mad_alquiler_joven" value="si"> Да</label>
-        <label class="radio-option"><input type="radio" name="mad_alquiler_joven" value="no"> Нет</label>
+        <label class="radio-option"><input type="radio" name="mad_alquiler_joven" value="si" onchange="toggleSubAlquiler('mad_alq', true)"> Да</label>
+        <label class="radio-option"><input type="radio" name="mad_alquiler_joven" value="no" onchange="toggleSubAlquiler('mad_alq', false)"> Нет</label>
+      </div>
+      <div id="sub-mad_alq" class="sub-alquiler-block" style="display:none">
+        <h4 class="sub-titulo">Уточняющие данные по договору аренды</h4>
+        <div class="campo">
+          <label for="mad_alq_inquilinos">Сколько человек указано в договоре аренды как жильцы?
+            <span class="hint">¿Cuántas personas figuran como inquilinos en el contrato?</span>
+          </label>
+          <input type="number" id="mad_alq_inquilinos" name="mad_alq_inquilinos" min="1" step="1" placeholder="1">
+        </div>
+        <div class="campo">
+          <label for="mad_alq_dias">Сколько дней вы проживали в этой квартире в 2025 году?
+            <span class="hint">¿Cuántos días residió en esta vivienda durante 2025?</span>
+          </label>
+          <input type="number" id="mad_alq_dias" name="mad_alq_dias" min="1" max="365" step="1" placeholder="365">
+        </div>
+        <div class="campo">
+          <label for="mad_alq_nie_prop">NIE / DNI владельца жилья
+            <span class="hint">NIE/DNI del propietario de la vivienda</span>
+          </label>
+          <input type="text" id="mad_alq_nie_prop" name="mad_alq_nie_prop"
+                 pattern="^[XYZxyz]?\d{7,8}[A-Za-z]$"
+                 placeholder="12345678A или X1234567B"
+                 title="Формат: 12345678A или X1234567B">
+        </div>
+        <div class="campo">
+          <label for="mad_alq_importe">Общая сумма, оплаченная за аренду в 2025 году (€)
+            <span class="hint">Importe total pagado por alquiler en 2025</span>
+          </label>
+          <input type="number" id="mad_alq_importe" name="mad_alq_importe" min="0" step="0.01" placeholder="0.00">
+        </div>
       </div>
     </div>
 
@@ -1847,8 +1917,78 @@
       <div class="q-label">Вам 35 лет или меньше и вы арендуете основное жильё?</div>
       <div class="q-tip">Вычет 25% от аренды, до 950 €/год</div>
       <div class="radio-group inline">
-        <label class="radio-option"><input type="radio" name="val_alquiler_joven" value="si"> Да</label>
-        <label class="radio-option"><input type="radio" name="val_alquiler_joven" value="no"> Нет</label>
+        <label class="radio-option"><input type="radio" name="val_alquiler_joven" value="si" onchange="toggleSubAlquiler('cv_menor35', true)"> Да</label>
+        <label class="radio-option"><input type="radio" name="val_alquiler_joven" value="no" onchange="toggleSubAlquiler('cv_menor35', false)"> Нет</label>
+      </div>
+      <div id="sub-cv_menor35" class="sub-alquiler-block" style="display:none">
+        <h4 class="sub-titulo">Уточняющие данные по договору аренды</h4>
+        <div class="campo">
+          <label for="cv_menor35_inquilinos">Сколько человек указано в договоре аренды как жильцы?
+            <span class="hint">¿Cuántas personas figuran como inquilinos en el contrato?</span>
+          </label>
+          <input type="number" id="cv_menor35_inquilinos" name="cv_menor35_inquilinos" min="1" step="1" placeholder="1">
+        </div>
+        <div class="campo">
+          <label for="cv_menor35_dias">Сколько дней вы проживали в этой квартире в 2025 году?
+            <span class="hint">¿Cuántos días residió en esta vivienda durante 2025?</span>
+          </label>
+          <input type="number" id="cv_menor35_dias" name="cv_menor35_dias" min="1" max="365" step="1" placeholder="365">
+        </div>
+        <div class="campo">
+          <label for="cv_menor35_nie_prop">NIE / DNI владельца жилья
+            <span class="hint">NIE/DNI del propietario de la vivienda</span>
+          </label>
+          <input type="text" id="cv_menor35_nie_prop" name="cv_menor35_nie_prop"
+                 pattern="^[XYZxyz]?\d{7,8}[A-Za-z]$"
+                 placeholder="12345678A или X1234567B"
+                 title="Формат: 12345678A или X1234567B">
+        </div>
+        <div class="campo">
+          <label for="cv_menor35_importe">Общая сумма, оплаченная за аренду в 2025 году (€)
+            <span class="hint">Importe total pagado por alquiler en 2025</span>
+          </label>
+          <input type="number" id="cv_menor35_importe" name="cv_menor35_importe" min="0" step="0.01" placeholder="0.00">
+        </div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label">Вам 35 лет или больше и вы арендуете основное жильё?</div>
+      <div class="q-hint">¿Tiene 35 años o más y alquila su vivienda habitual?</div>
+      <div class="q-tip">Общий вычет за аренду основного жилья — Comunitat Valenciana, ст. 4.Uno.n Закона 13/1997</div>
+      <div class="radio-group inline">
+        <label class="radio-option"><input type="radio" name="val_alquiler_mayor35" value="si" onchange="toggleSubAlquiler('cv_mayor35', true)"> Да</label>
+        <label class="radio-option"><input type="radio" name="val_alquiler_mayor35" value="no" onchange="toggleSubAlquiler('cv_mayor35', false)"> Нет</label>
+      </div>
+      <div id="sub-cv_mayor35" class="sub-alquiler-block" style="display:none">
+        <h4 class="sub-titulo">Уточняющие данные по договору аренды</h4>
+        <div class="campo">
+          <label for="cv_mayor35_inquilinos">Сколько человек указано в договоре аренды как жильцы?
+            <span class="hint">¿Cuántas personas figuran como inquilinos en el contrato?</span>
+          </label>
+          <input type="number" id="cv_mayor35_inquilinos" name="cv_mayor35_inquilinos" min="1" step="1" placeholder="1">
+        </div>
+        <div class="campo">
+          <label for="cv_mayor35_dias">Сколько дней вы проживали в этой квартире в 2025 году?
+            <span class="hint">¿Cuántos días residió en esta vivienda durante 2025?</span>
+          </label>
+          <input type="number" id="cv_mayor35_dias" name="cv_mayor35_dias" min="1" max="365" step="1" placeholder="365">
+        </div>
+        <div class="campo">
+          <label for="cv_mayor35_nie_prop">NIE / DNI владельца жилья
+            <span class="hint">NIE/DNI del propietario de la vivienda</span>
+          </label>
+          <input type="text" id="cv_mayor35_nie_prop" name="cv_mayor35_nie_prop"
+                 pattern="^[XYZxyz]?\d{7,8}[A-Za-z]$"
+                 placeholder="12345678A или X1234567B"
+                 title="Формат: 12345678A или X1234567B">
+        </div>
+        <div class="campo">
+          <label for="cv_mayor35_importe">Общая сумма, оплаченная за аренду в 2025 году (€)
+            <span class="hint">Importe total pagado por alquiler en 2025</span>
+          </label>
+          <input type="number" id="cv_mayor35_importe" name="cv_mayor35_importe" min="0" step="0.01" placeholder="0.00">
+        </div>
       </div>
     </div>
 
@@ -2321,8 +2461,38 @@
       <div class="q-label">Вы арендуете жильё и вам до 35 лет, или вам 65+, или вы жертва домашнего насилия / терроризма?</div>
       <div class="q-tip">Вычет 15% от аренды, до 1 200–1 500 €/год</div>
       <div class="radio-group inline">
-        <label class="radio-option"><input type="radio" name="and_alquiler" value="si"> Да</label>
-        <label class="radio-option"><input type="radio" name="and_alquiler" value="no"> Нет</label>
+        <label class="radio-option"><input type="radio" name="and_alquiler" value="si" onchange="toggleSubAlquiler('and_alq', true)"> Да</label>
+        <label class="radio-option"><input type="radio" name="and_alquiler" value="no" onchange="toggleSubAlquiler('and_alq', false)"> Нет</label>
+      </div>
+      <div id="sub-and_alq" class="sub-alquiler-block" style="display:none">
+        <h4 class="sub-titulo">Уточняющие данные по договору аренды</h4>
+        <div class="campo">
+          <label for="and_alq_inquilinos">Сколько человек указано в договоре аренды как жильцы?
+            <span class="hint">¿Cuántas personas figuran como inquilinos en el contrato?</span>
+          </label>
+          <input type="number" id="and_alq_inquilinos" name="and_alq_inquilinos" min="1" step="1" placeholder="1">
+        </div>
+        <div class="campo">
+          <label for="and_alq_dias">Сколько дней вы проживали в этой квартире в 2025 году?
+            <span class="hint">¿Cuántos días residió en esta vivienda durante 2025?</span>
+          </label>
+          <input type="number" id="and_alq_dias" name="and_alq_dias" min="1" max="365" step="1" placeholder="365">
+        </div>
+        <div class="campo">
+          <label for="and_alq_nie_prop">NIE / DNI владельца жилья
+            <span class="hint">NIE/DNI del propietario de la vivienda</span>
+          </label>
+          <input type="text" id="and_alq_nie_prop" name="and_alq_nie_prop"
+                 pattern="^[XYZxyz]?\d{7,8}[A-Za-z]$"
+                 placeholder="12345678A или X1234567B"
+                 title="Формат: 12345678A или X1234567B">
+        </div>
+        <div class="campo">
+          <label for="and_alq_importe">Общая сумма, оплаченная за аренду в 2025 году (€)
+            <span class="hint">Importe total pagado por alquiler en 2025</span>
+          </label>
+          <input type="number" id="and_alq_importe" name="and_alq_importe" min="0" step="0.01" placeholder="0.00">
+        </div>
       </div>
     </div>
 
@@ -2623,8 +2793,38 @@
       <div class="q-label">Вам 35 лет или меньше, вы безработный (183+ дней), инвалид 65%+ или вдовец 65+ — и арендуете жильё?</div>
       <div class="q-tip">Вычет 10% от аренды, до 500 €/год</div>
       <div class="radio-group inline">
-        <label class="radio-option"><input type="radio" name="cat_alquiler" value="si"> Да</label>
-        <label class="radio-option"><input type="radio" name="cat_alquiler" value="no"> Нет</label>
+        <label class="radio-option"><input type="radio" name="cat_alquiler" value="si" onchange="toggleSubAlquiler('cat_alq', true)"> Да</label>
+        <label class="radio-option"><input type="radio" name="cat_alquiler" value="no" onchange="toggleSubAlquiler('cat_alq', false)"> Нет</label>
+      </div>
+      <div id="sub-cat_alq" class="sub-alquiler-block" style="display:none">
+        <h4 class="sub-titulo">Уточняющие данные по договору аренды</h4>
+        <div class="campo">
+          <label for="cat_alq_inquilinos">Сколько человек указано в договоре аренды как жильцы?
+            <span class="hint">¿Cuántas personas figuran como inquilinos en el contrato?</span>
+          </label>
+          <input type="number" id="cat_alq_inquilinos" name="cat_alq_inquilinos" min="1" step="1" placeholder="1">
+        </div>
+        <div class="campo">
+          <label for="cat_alq_dias">Сколько дней вы проживали в этой квартире в 2025 году?
+            <span class="hint">¿Cuántos días residió en esta vivienda durante 2025?</span>
+          </label>
+          <input type="number" id="cat_alq_dias" name="cat_alq_dias" min="1" max="365" step="1" placeholder="365">
+        </div>
+        <div class="campo">
+          <label for="cat_alq_nie_prop">NIE / DNI владельца жилья
+            <span class="hint">NIE/DNI del propietario de la vivienda</span>
+          </label>
+          <input type="text" id="cat_alq_nie_prop" name="cat_alq_nie_prop"
+                 pattern="^[XYZxyz]?\d{7,8}[A-Za-z]$"
+                 placeholder="12345678A или X1234567B"
+                 title="Формат: 12345678A или X1234567B">
+        </div>
+        <div class="campo">
+          <label for="cat_alq_importe">Общая сумма, оплаченная за аренду в 2025 году (€)
+            <span class="hint">Importe total pagado por alquiler en 2025</span>
+          </label>
+          <input type="number" id="cat_alq_importe" name="cat_alq_importe" min="0" step="0.01" placeholder="0.00">
+        </div>
       </div>
     </div>
 
@@ -2838,6 +3038,24 @@
 </div><!-- end .main -->
 
 <script>
+/**
+ * Показывает/скрывает блок подвопросов по аренде основного жилья.
+ */
+function toggleSubAlquiler(prefix, mostrar) {
+  const block = document.getElementById('sub-' + prefix);
+  if (!block) return;
+  block.style.display = mostrar ? 'block' : 'none';
+  const inputs = block.querySelectorAll('input');
+  inputs.forEach(input => {
+    if (mostrar) {
+      input.setAttribute('required', 'required');
+    } else {
+      input.removeAttribute('required');
+      input.value = '';
+    }
+  });
+}
+
 function toggleIfChecked(checkbox, condId) {
   const el = document.getElementById(condId);
   if (!el) return;
@@ -2890,6 +3108,12 @@ function calcAlquiler() {
 
 // Attach calcAlquiler to all rental expense inputs
 document.addEventListener('DOMContentLoaded', () => {
+  // Скрываем все блоки подвопросов аренды
+  ['mad_alq', 'cv_menor35', 'cv_mayor35', 'cat_alq', 'and_alq'].forEach(prefix => {
+    const block = document.getElementById('sub-' + prefix);
+    if (block) block.style.display = 'none';
+  });
+
   const alqFields = [
     'alq_ingresos_totales','alq_gasto_hipoteca','alq_gasto_reparaciones',
     'alq_gasto_ibi','alq_gasto_comunidad','alq_gasto_seguro',
