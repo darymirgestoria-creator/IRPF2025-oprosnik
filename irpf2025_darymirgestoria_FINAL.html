@@ -3209,27 +3209,27 @@ document.addEventListener('input', updateProgress);
 
 function submitForm() {
   const data = collectFormData();
-  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwk7X07Fw4Pqwak-R3KmRVuvMUZ5AK9zGmyV64LazdcnmifCKRrav-ABjMLgXtTU7348A/exec';
+  const FORMSPREE_URL = 'https://formspree.io/f/xpqbqpyb';
 
-  // Показываем экран успеха сразу
+  // Отправляем данные в Formspree
+  fetch(FORMSPREE_URL, {
+    method: 'POST',
+    headers: { 
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    },
+    body: JSON.stringify(data)
+  }).then(response => {
+    console.log('Данные отправлены в Formspree');
+  }).catch(err => {
+    console.log('Ошибка:', err);
+  });
+
+  // Показываем экран успеха
   document.querySelectorAll('.form-section, .province-select-section').forEach(s => s.style.display = 'none');
   document.querySelector('.hero').style.display = 'none';
   document.getElementById('successScreen').classList.add('visible');
   window.scrollTo({ top: 0, behavior: 'smooth' });
-
-  // Отправляем данные через no-cors режим
-  fetch(SCRIPT_URL, {
-    method: 'POST',
-    mode: 'no-cors',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data)
-  }).then(() => {
-    console.log('Данные отправлены успешно');
-  }).catch(err => {
-    console.log('Ошибка отправки:', err);
-  });
-
-  console.log('IRPF Form Data:', JSON.stringify(data, null, 2));
 }
 </script>
 </body>
